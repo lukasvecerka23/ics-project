@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.BL.Tests", "ICSProj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder1", "SolutionFolder1", "{3D8B5161-E932-4566-87C5-935B20BB583F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.Common.Tests", "ICSProj.Common.Tests\ICSProj.Common.Tests.csproj", "{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,5 +34,9 @@ Global
 		{1AAD23EB-C6E6-4468-A41C-5B9201455DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AAD23EB-C6E6-4468-A41C-5B9201455DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AAD23EB-C6E6-4468-A41C-5B9201455DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
