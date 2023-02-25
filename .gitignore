@@ -366,3 +366,4 @@ FodyWeavers.xsd
 .DS_Store
 
 *.sqlite
+/src/ICSSolution/ICSProj.DAL/ICSProjDbContext.dgml
