@@ -364,3 +364,5 @@ FodyWeavers.xsd
 # Custom
 .idea/
 .DS_Store
+
+*.sqlite

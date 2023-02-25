@@ -33,7 +33,7 @@ public class ICSProjDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(i => i.Tag)
-                .WithOne(i => i.Activity)
+                .WithMany(i => i.Activities)
                 .OnDelete(DeleteBehavior.SetNull);
 
         });

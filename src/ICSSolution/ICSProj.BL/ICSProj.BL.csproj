@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="CompareNETObjects" Version="4.79.0" />
+      <PackageReference Include="KellermanSoftware.Common" Version="1.15.0" />
+    </ItemGroup>
+
 </Project>
