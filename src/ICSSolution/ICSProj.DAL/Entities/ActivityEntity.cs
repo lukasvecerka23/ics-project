@@ -9,6 +9,12 @@ public record ActivityEntity : IEntity
     
     // Add tag
 
+    public UserEntity? Creator { get; init; }
+
+    public ProjectEntity? Project { get; init; }
+
+    public TagEntity? Tag { get; init; }
+
     public string? Description { get; set; }
 
     public Guid Id { get; set; }

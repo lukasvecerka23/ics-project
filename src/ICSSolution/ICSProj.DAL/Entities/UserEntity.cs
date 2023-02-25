@@ -10,7 +10,8 @@ public record UserEntity : IEntity
 
     public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
     public ICollection<ProjectAssignEntity> ProjectAssigns { get; set; } = new List<ProjectAssignEntity>();
-    public ICollection<TagEntity> Tags { get; set; } = new List<TagEntity>();
+    public ProjectEntity? Project { get; init; }
+    //public ICollection<TagEntity> Tags { get; set; } = new List<TagEntity>();
 
     public required Guid Id { get; set; }
 }
