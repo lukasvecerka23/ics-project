@@ -15,6 +15,10 @@
       <PackageReference Include="CompareNETObjects" Version="4.79.0" />
       <PackageReference Include="KellermanSoftware.Common" Version="1.15.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.1.23111.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.1.23111.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.1.23111.4" />
     </ItemGroup>
 
