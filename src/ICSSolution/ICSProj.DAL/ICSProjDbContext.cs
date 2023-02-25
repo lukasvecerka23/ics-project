@@ -47,7 +47,7 @@ public class ICSProjDbContext : DbContext
             /*entity.HasMany(i => i.)
                 .WithOne(i => i.User)
                 .OnDelete(DeleteBehavior.Cascade);*/
-            
+
             entity.HasMany(i => i.ProjectAssigns)
                 .WithOne(i => i.User)
                 .OnDelete(DeleteBehavior.Cascade);
