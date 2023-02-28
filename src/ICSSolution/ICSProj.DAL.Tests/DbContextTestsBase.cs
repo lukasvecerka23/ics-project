@@ -1,6 +1,7 @@
 using Xunit;
 using Xunit.Abstractions;
 using ICSProj.Common.Tests.Factories;
+using ICSProj.Common.Tests;
 using Microsoft.EntityFrameworkCore;
 
 namespace ICSProj.DAL.Tests;
@@ -9,8 +10,11 @@ public class DbContextTestsBase: IAsyncLifetime
 {
     protected DbContextTestsBase(ITestOutputHelper output)
     {
-        DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!);
-        
+        XUnitTestOutputConverter converter = new(output);
+        Console.SetOut(converter);
+
+        DbContextFactory = new DbContextSQLiteTestingFactory(GetType().FullName!, seedTestingData: true);
+
         ICSProjDbContextSUT = DbContextFactory.CreateDbContext();
     }
 
