@@ -365,4 +365,4 @@ FodyWeavers.xsd
 .idea/
 .DS_Store
 
-*.sqlite
+*.sqlite 
