@@ -44,9 +44,9 @@ public class ICSProjDbContext : DbContext
                 .WithOne(i => i.Creator)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*entity.HasMany(i => i.)
-                .WithOne(i => i.User)
-                .OnDelete(DeleteBehavior.Cascade);*/
+            entity.HasMany(i => i.Tags)
+                .WithOne(i => i.Creator)
+                .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasMany(i => i.ProjectAssigns)
                 .WithOne(i => i.User)
@@ -56,10 +56,6 @@ public class ICSProjDbContext : DbContext
         modelBuilder.Entity<ProjectEntity>(entity => 
         {
             entity.HasMany(i => i.ProjectAssigns)
-                .WithOne(i => i.Project)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            entity.HasMany(i => i.Users)
                 .WithOne(i => i.Project)
                 .OnDelete(DeleteBehavior.Cascade);
 

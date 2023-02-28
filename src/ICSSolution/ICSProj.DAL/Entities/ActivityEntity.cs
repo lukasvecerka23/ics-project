@@ -9,7 +9,7 @@ public record ActivityEntity : IEntity
     
     // Add tag
 
-    public UserEntity? Creator { get; init; }
+    public UserEntity Creator { get; init; }
 
     public ProjectEntity? Project { get; init; }
 

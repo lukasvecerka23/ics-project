@@ -7,7 +7,6 @@ public record TagEntity : IEntity
     public required string Name { get; set; }
 
     public ICollection<ActivityEntity> Activities { get; init; }
-    public ICollection<ProjectEntity> Projects { get; set; } = new List<ProjectEntity>();
-
+    public UserEntity Creator { get; init; }
     public Guid Id { get; set; }
 }
