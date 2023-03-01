@@ -1,14 +1,15 @@
-using System.Globalization;
+using System.Runtime.InteropServices.JavaScript;
 using ICSProj.DAL.Entities;
 using Xunit;
 using Xunit.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using ICSProj.Common.Tests;
 using ICSProj.Common.Tests.Seeds;
+using System.Globalization;
 
 namespace ICSProj.DAL.Tests;
 
-public class DbContextActivityTests: DbContextTestsBase
+public class DbContextActivityTests : DbContextTestsBase
 {
     public DbContextActivityTests(ITestOutputHelper output) : base(output)
     {
@@ -20,7 +21,7 @@ public class DbContextActivityTests: DbContextTestsBase
         var entity = ActivitySeeds.EmptyActivityEntity with
         {
             CreatorId = UserSeeds.UserEntity1.Id,
-            Start = DateTime.Parse("02/27/2023 19:20:55", CultureInfo.InvariantCulture),
+            Start = DateTime.Parse("02/27/2023 18:22:16", CultureInfo.InvariantCulture),
             End = DateTime.Parse("02/27/2023 19:20:55", CultureInfo.InvariantCulture),
             ProjectId = ProjectSeeds.ProjectEntity1.Id,
             TagId = TagSeeds.TagEntity2.Id
@@ -38,16 +39,12 @@ public class DbContextActivityTests: DbContextTestsBase
     }
 
     [Fact]
-    public async Task GetById_User()
+    public async Task GetById_Activity()
     {
-        // act
-        var entity = await ICSProjDbContextSUT.Users
-            .SingleAsync(i => i.Id == UserSeeds.UserEntity1.Id);
+        //Act
+        var entity = await ICSProjDbContextSUT.Activities.SingleAsync(i => i.Id == ActivitySeeds.ActivityEntity2.Id);
 
-        // Assert
-        DeepAssert.Equal(UserSeeds.UserEntity1 with
-        {Activities = Array.Empty<ActivityEntity>(),
-            ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>()}, entity);
-
+        //Assert
+        Assert.Equal(ActivitySeeds.ActivityEntity2, entity);
     }
 }
