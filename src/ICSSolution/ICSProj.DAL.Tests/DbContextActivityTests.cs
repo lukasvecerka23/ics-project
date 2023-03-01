@@ -47,4 +47,39 @@ public class DbContextActivityTests : DbContextTestsBase
         //Assert
         Assert.Equal(ActivitySeeds.ActivityEntity2, entity);
     }
+
+    [Fact]
+    public async Task Update_Activity()
+    {
+        //Arrange
+        var baseEntity = ActivitySeeds.ActivityEntity2;
+        var entity = baseEntity with
+        {
+            Description = baseEntity.Description + "Updated",
+            TagId = TagSeeds.TagEntity2.Id
+        };
+
+        //Act
+        ICSProjDbContextSUT.Activities.Update(entity);
+        await ICSProjDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.Activities.SingleAsync(i => i.Id == entity.Id);
+        Assert.Equal(entity, actualEntity);
+    }
+
+    [Fact]
+    public async Task Delete_Activity()
+    {
+        //Arrange
+        var entityBase = ActivitySeeds.ActivityEntity1;
+
+        //Act
+        ICSProjDbContextSUT.Activities.Remove(entityBase);
+        await ICSProjDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        Assert.False(await ICSProjDbContextSUT.Activities.AnyAsync(i => i.Id == entityBase.Id));
+    }
 }
