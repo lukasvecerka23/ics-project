@@ -40,7 +40,7 @@ public static class ActivitySeeds
         Project = null,
         ProjectId = default,
         Tag = null,
-        TagId = default,
+        TagId = default
     };
 
     public static void Seed(this ModelBuilder modelBuilder)

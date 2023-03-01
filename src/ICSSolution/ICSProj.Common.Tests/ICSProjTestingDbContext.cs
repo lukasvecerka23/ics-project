@@ -24,6 +24,7 @@ public class ICSProjTestingDbContext : ICSProjDbContext
             ProjectSeeds.Seed(modelBuilder);
             ProjectAssignSeeds.Seed(modelBuilder);
             ActivitySeeds.Seed(modelBuilder);
+            TagSeeds.Seed(modelBuilder);
         }
     }
 }
