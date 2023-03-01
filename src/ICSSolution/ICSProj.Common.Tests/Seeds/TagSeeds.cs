@@ -32,8 +32,8 @@ public static class TagSeeds
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TagEntity>().HasData(
-            TagEntity1 with {Activities = Array.Empty<ActivityEntity>()},
-            TagEntity2 with {Activities = Array.Empty<ActivityEntity>()}
+            TagEntity1 with {Creator = null, Activities = Array.Empty<ActivityEntity>()},
+            TagEntity2 with {Creator = null, Activities = Array.Empty<ActivityEntity>()}
         );
     }
 }
