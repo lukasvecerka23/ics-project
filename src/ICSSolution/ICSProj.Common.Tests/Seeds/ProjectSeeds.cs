@@ -10,14 +10,13 @@ public static class ProjectSeeds
 {
     public static readonly ProjectEntity EmptyProjectEntity = new()
     {
-        Id = default, Name = default, Creator = default, CreatorId = default
+        Id = default, Name = default!, CreatorId = default
     };
 
     public static readonly ProjectEntity ProjectEntity1 = new()
     {
         Id = Guid.Parse("a5ac05fd-daae-4109-b5dc-09793b82ab61"),
         Name = "Project 1",
-        Creator = UserSeeds.UserEntity1,
         CreatorId = UserSeeds.UserEntity1.Id
     };
 
