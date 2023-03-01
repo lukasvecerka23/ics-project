@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices.JavaScript;
+using System.Globalization;
 using ICSProj.DAL.Entities;
 using Xunit;
 using Xunit.Abstractions;
@@ -20,10 +20,10 @@ public class DbContextActivityTests: DbContextTestsBase
         var entity = ActivitySeeds.EmptyActivityEntity with
         {
             CreatorId = UserSeeds.UserEntity1.Id,
-            Start = DateTime.Parse("02/27/2023 18:22:16"),
-            End = DateTime.Parse("02/27/2023 19:20:55"),
+            Start = DateTime.Parse("02/27/2023 19:20:55", CultureInfo.InvariantCulture),
+            End = DateTime.Parse("02/27/2023 19:20:55", CultureInfo.InvariantCulture),
             ProjectId = ProjectSeeds.ProjectEntity1.Id,
-            //TagId = TagSeeds.TagEntity2.Id
+            TagId = TagSeeds.TagEntity2.Id
 
         };
 
