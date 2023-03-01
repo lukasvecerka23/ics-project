@@ -53,7 +53,7 @@ public class ICSProjDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-        modelBuilder.Entity<ProjectEntity>(entity => 
+        modelBuilder.Entity<ProjectEntity>(entity =>
         {
             entity.HasMany(i => i.ProjectAssigns)
                 .WithOne(i => i.Project)
@@ -65,13 +65,13 @@ public class ICSProjDbContext : DbContext
 
         });
 
-    // if (_seedDemoData)
+        // if (_seedDemoData)
         // {
-        //     ActivitySeeds.Seed(modelBuilder);
-        //     UserSeeds.Seed(modelBuilder);
-        //     ProjectAssignSeeds.Seed(modelBuilder);
-        //     ProjectSeeds.Seed(modelBuilder);
-        //     TagSeeds.Seed(modelBuilder);
+        //          ActivitySeeds.Seed(modelBuilder);
+        //          UserSeeds.Seed(modelBuilder);
+        //          ProjectAssignSeeds.Seed(modelBuilder);
+        //          ProjectSeeds.Seed(modelBuilder);
+        //          TagSeeds.Seed(modelBuilder);
         // }
     }
 }

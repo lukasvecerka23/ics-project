@@ -10,7 +10,9 @@ public record ProjectEntity : IEntity
 
     public ICollection<ProjectAssignEntity> ProjectAssigns { get; set; } = new List<ProjectAssignEntity>();
 
-    public UserEntity Creator { get; init; }
+    public UserEntity? Creator { get; init; }
+
+    public required Guid CreatorId { get; set; }
 
     public Guid Id { get; set; }
 }
