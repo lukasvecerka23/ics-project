@@ -11,9 +11,7 @@ public static class ProjectAssignSeeds
     public static readonly ProjectAssignEntity EmptyProjectAssignEntity = new()
     {
         Id = default,
-        Project = default,
         ProjectId = default,
-        User = default,
         UserId = default
     };
 

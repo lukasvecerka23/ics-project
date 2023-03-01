@@ -10,7 +10,7 @@ public static class ProjectSeeds
 {
     public static readonly ProjectEntity EmptyProjectEntity = new()
     {
-        Id = default, Name = default, Creator = default, CreatorId = default
+        Id = default, Name = default!, CreatorId = default
     };
 
     public static readonly ProjectEntity ProjectEntity1 = new()

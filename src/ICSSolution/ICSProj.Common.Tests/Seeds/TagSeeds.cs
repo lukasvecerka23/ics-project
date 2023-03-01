@@ -10,7 +10,7 @@ public static class TagSeeds
 {
     public static readonly TagEntity EmptyTagEntity = new()
     {
-        Id = default, Creator = default, CreatorId = default, Name = default!
+        Id = default, CreatorId = default, Name = default!
     };
 
     public static readonly TagEntity TagEntity1 = new()

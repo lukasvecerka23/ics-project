@@ -10,9 +10,8 @@ public static class ActivitySeeds
 {
     public static readonly ActivityEntity EmptyActivityEntity = new()
     {
-        Id = default, Creator = default!, CreatorId = default, Description = default,
-        Start = default, End = default, Project = default, ProjectId = default, Tag = default,
-        TagId = default
+        Id = default, CreatorId = default, Description = default,
+        Start = default, End = default, ProjectId = default, TagId = default
     };
 
     public static readonly ActivityEntity ActivityEntity1 = new()
