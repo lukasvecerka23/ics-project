@@ -52,7 +52,7 @@ public class DbContextActivityTests : DbContextTestsBase
     public async Task Update_Activity()
     {
         //Arrange
-        var baseEntity = ActivitySeeds.ActivityEntity2;
+        var baseEntity = ActivitySeeds.ActivityUpdate;
         var entity = baseEntity with
         {
             Description = baseEntity.Description + "Updated",
@@ -73,7 +73,7 @@ public class DbContextActivityTests : DbContextTestsBase
     public async Task Delete_Activity()
     {
         //Arrange
-        var entityBase = ActivitySeeds.ActivityEntity1;
+        var entityBase = ActivitySeeds.ActivityDelete;
 
         //Act
         ICSProjDbContextSUT.Activities.Remove(entityBase);
@@ -82,4 +82,31 @@ public class DbContextActivityTests : DbContextTestsBase
         //Assert
         Assert.False(await ICSProjDbContextSUT.Activities.AnyAsync(i => i.Id == entityBase.Id));
     }
+
+    [Fact]
+    public async Task DeleteById_Activity()
+    {
+        //Arrange
+        var entityBase = ActivitySeeds.ActivityDelete;
+
+        //Act
+        ICSProjDbContextSUT.Remove(
+            ICSProjDbContextSUT.Activities.Single(i => i.Id == entityBase.Id));
+        await ICSProjDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        Assert.False(await ICSProjDbContextSUT.Activities.AnyAsync(i => i.Id == entityBase.Id));
+    }
+
+    [Fact]
+    public async Task GetAll_Activities()
+    {
+        //Act
+        var entities = await ICSProjDbContextSUT.Activities.ToArrayAsync();
+
+        //Assert
+        Assert.Contains(ActivitySeeds.ActivityEntity1, entities);
+    }
+
+    
 }
