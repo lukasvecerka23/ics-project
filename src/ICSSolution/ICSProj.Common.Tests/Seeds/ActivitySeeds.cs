@@ -1,6 +1,7 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Security.Principal;
 using ICSProj.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,11 +37,17 @@ public static class ActivitySeeds
         TagId = default
     };
 
+    public static readonly ActivityEntity ActivityUpdate = ActivityEntity2 with {Id = Guid.Parse("A61EF52A-F678-4C6D-AD1D-692640278753")};
+    public static readonly ActivityEntity ActivityDelete = ActivityEntity2 with {Id = Guid.Parse("EE694005-F18C-46BF-A098-776147447FA9")};
+
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ActivityEntity>().HasData(
             ActivityEntity1 with {Creator = null, Project = null, Tag = null},
-            ActivityEntity2 with {Creator = null, Project = null, Tag = null}
+            ActivityEntity2 with {Creator = null, Project = null, Tag = null},
+            ActivityUpdate with { Creator = null, Project = null, Tag = null },
+            ActivityDelete with { Creator = null, Project = null, Tag = null }
         );
     }
 }
