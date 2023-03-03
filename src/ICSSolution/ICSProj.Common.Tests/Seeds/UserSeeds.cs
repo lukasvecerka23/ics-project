@@ -29,27 +29,17 @@ public static class UserSeeds
         ImageUrl = null
     };
 
-    public static readonly UserEntity UserEntityDelete = UserEntity1 with
-    {
-        Id = Guid.Parse("1ecd4b98-58f1-4b65-8475-5afa3650adf6"),
-        ProjectAssigns = Array.Empty<ProjectAssignEntity>(),
-        Tags = Array.Empty<TagEntity>()
-    };
+    public static readonly UserEntity UserEntityDelete = UserEntity1 with { Id = Guid.Parse("1ecd4b98-58f1-4b65-8475-5afa3650adf6")};
 
-    public static readonly UserEntity UserEntityUpdate = UserEntity1 with
-    {
-        Id = Guid.Parse("076255e4-0b40-4621-bdb5-c3247172ab92"),
-        ProjectAssigns = Array.Empty<ProjectAssignEntity>(),
-        Tags = Array.Empty<TagEntity>()
-    };
+    public static readonly UserEntity UserEntityUpdate = UserEntity1 with { Id = Guid.Parse("076255e4-0b40-4621-bdb5-c3247172ab92")};
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
             UserEntity1 with {Activities = Array.Empty<ActivityEntity>(), ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>() },
             UserEntity2 with {Activities = Array.Empty<ActivityEntity>(), ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>() },
-            UserEntityUpdate,
-            UserEntityDelete
+            UserEntityUpdate with {Activities = Array.Empty<ActivityEntity>(), ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>() },
+            UserEntityDelete with {Activities = Array.Empty<ActivityEntity>(), ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>() }
         );
     }
 

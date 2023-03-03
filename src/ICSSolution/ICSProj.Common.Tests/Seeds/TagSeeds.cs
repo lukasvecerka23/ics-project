@@ -23,7 +23,7 @@ public static class TagSeeds
     public static readonly TagEntity TagEntity2 = new()
     {
         Id = Guid.Parse("924f20e8-9866-4771-8b45-a47a79a81705"),
-        CreatorId = UserSeeds.UserEntity1.Id,
+        CreatorId = UserSeeds.UserEntity2.Id,
         Name = "Frontend"
     };
 

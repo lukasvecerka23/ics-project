@@ -79,9 +79,8 @@ public class DbContextUserTests : DbContextTestsBase
     [Fact]
     public async Task GetById_IncludingTag_User()
     {
-        var entity = UserSeeds.UserEntity1 with{Activities = new List<ActivityEntity>(), ProjectAssigns = new List<ProjectAssignEntity>(), Tags = new List<TagEntity>()};
+        var entity = UserSeeds.UserEntity1 with {Activities = new List<ActivityEntity>(), ProjectAssigns = new List<ProjectAssignEntity>(), Tags = new List<TagEntity>()};
         entity.Tags.Add(TagSeeds.TagEntity1 with {Creator = entity});
-        entity.Tags.Add(TagSeeds.TagEntity2 with {Creator = entity});
 
         var actual = await ICSProjDbContextSUT.Users.Include(i => i.Tags)
             .SingleAsync(i => i.Id == entity.Id);
