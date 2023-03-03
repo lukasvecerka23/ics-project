@@ -27,11 +27,16 @@ public static class TagSeeds
         Name = "Frontend"
     };
 
+    public static readonly TagEntity TagEntityUpdate = TagEntity2 with { Id = Guid.Parse("0953F3CE-7B1A-48C1-9796-D2BAC7F67868") };
+    public static readonly TagEntity TagEntityDelete = TagEntity2 with { Id = Guid.Parse("5DCA4CEA-B8A8-4C86-A0B3-FFB78FBA1A09") };
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TagEntity>().HasData(
             TagEntity1 with {Creator = null, Activities = Array.Empty<ActivityEntity>()},
-            TagEntity2 with {Creator = null, Activities = Array.Empty<ActivityEntity>()}
+            TagEntity2 with {Creator = null, Activities = Array.Empty<ActivityEntity>()},
+            TagEntityUpdate with {Creator = null, Activities = Array.Empty<ActivityEntity>()},
+            TagEntityDelete with {Creator = null, Activities = Array.Empty<ActivityEntity>()}
         );
     }
 }
