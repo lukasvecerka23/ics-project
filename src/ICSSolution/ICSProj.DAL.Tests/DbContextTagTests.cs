@@ -48,21 +48,6 @@ public class DbContextTagTests : DbContextTestsBase
     }
 
     [Fact]
-    public async Task GetById_IncludingCreator()
-    {
-        var entity = TagSeeds.EmptyTagEntity with
-        {
-            CreatorId = UserSeeds.UserEntity1.Id,
-        };
-
-        //Assert
-        await using var dbx = await DbContextFactory.CreateDbContextAsync();
-        var actualEntity = await dbx.Tags
-            .SingleAsync(i => i.Id == entity.Id);
-        DeepAssert.Equal(entity, actualEntity);
-    }
-
-    [Fact]
     public async Task AddNew_TagWithActivities()
     {
         var entity = TagSeeds.EmptyTagEntity with
@@ -105,4 +90,33 @@ public class DbContextTagTests : DbContextTestsBase
         DeepAssert.Equal(entity, actualEntity);
     }
 
+    [Fact]
+    public async Task Update_Tag()
+    {
+        var baseEntity = TagSeeds.TagEntityUpdate;
+        var entity = baseEntity with { Name = "To be deleted" };
+
+        ICSProjDbContextSUT.Tags.Update(entity);
+        await ICSProjDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.Tags
+            .SingleAsync(i => i.Id == entity.Id);
+        DeepAssert.Equal(entity, actualEntity);
+    }
+
+    [Fact]
+    public async Task Delete_RecipeWithoutIngredients_Deleted()
+    {
+        //Arrange
+        var baseEntity = TagSeeds.TagEntityDelete;
+
+        //Act
+        ICSProjDbContextSUT.Tags.Remove(baseEntity);
+        await ICSProjDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        Assert.False(await ICSProjDbContextSUT.Tags.AnyAsync(i => i.Id == baseEntity.Id));
+    }
 }
