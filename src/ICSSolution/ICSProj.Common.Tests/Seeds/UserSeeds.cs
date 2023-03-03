@@ -8,7 +8,7 @@ namespace ICSProj.Common.Tests.Seeds;
 
 public static class UserSeeds
 {
-    public static readonly UserEntity EmptyUser = new()
+    public static readonly UserEntity EmptyUserEntity = new()
     {
         Id = default, Name = default!, Surname = default!, ImageUrl = default!
     };
@@ -29,20 +29,27 @@ public static class UserSeeds
         ImageUrl = null
     };
 
-    public static readonly UserEntity UserEntityWithNoActivitiesProjectAssignsTags = UserEntity1 with {Id = Guid.Parse("0e6dca36-3874-40d5-a44d-252a1fad1b85"), Activities = Array.Empty<ActivityEntity>(), ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>()};
-
-    static UserSeeds()
+    public static readonly UserEntity UserEntityDelete = UserEntity1 with
     {
-        UserEntity1.ProjectAssigns.Add(ProjectAssignSeeds.ProjectAssignEntity1);
-        UserEntity2.ProjectAssigns.Add(ProjectAssignSeeds.ProjectAssignEntity2);
-    }
+        Id = Guid.Parse("1ecd4b98-58f1-4b65-8475-5afa3650adf6"),
+        ProjectAssigns = Array.Empty<ProjectAssignEntity>(),
+        Tags = Array.Empty<TagEntity>()
+    };
+
+    public static readonly UserEntity UserEntityUpdate = UserEntity1 with
+    {
+        Id = Guid.Parse("076255e4-0b40-4621-bdb5-c3247172ab92"),
+        ProjectAssigns = Array.Empty<ProjectAssignEntity>(),
+        Tags = Array.Empty<TagEntity>()
+    };
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
             UserEntity1 with {Activities = Array.Empty<ActivityEntity>(), ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>() },
             UserEntity2 with {Activities = Array.Empty<ActivityEntity>(), ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Tags = Array.Empty<TagEntity>() },
-            UserEntityWithNoActivitiesProjectAssignsTags
+            UserEntityUpdate,
+            UserEntityDelete
         );
     }
 

@@ -23,7 +23,7 @@ public static class ProjectSeeds
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ProjectEntity>().HasData(
-            ProjectEntity1 with {Creator = null}
+            ProjectEntity1 with {Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()}
         );
     }
 }
