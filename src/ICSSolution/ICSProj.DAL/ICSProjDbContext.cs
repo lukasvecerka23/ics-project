@@ -30,7 +30,7 @@ public class ICSProjDbContext : DbContext
         {
             entity.HasOne(i => i.Project)
                 .WithMany(i => i.Activities)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             entity.HasOne(i => i.Tag)
                 .WithMany(i => i.Activities)
