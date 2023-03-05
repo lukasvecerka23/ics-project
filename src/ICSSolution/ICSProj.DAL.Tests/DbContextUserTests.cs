@@ -64,14 +64,15 @@ public class DbContextUserTests : DbContextTestsBase
     {
         var project = ProjectSeeds.ProjectEntity1 with {Creator = UserSeeds.UserEntity1};
         project.ProjectAssigns.Add(ProjectAssignSeeds.ProjectAssignEntity1 with {User = UserSeeds.UserEntity1, Project = project});
+        var project2 = ProjectSeeds.ProjectEntity2 with {Creator = UserSeeds.UserEntity2};
+        project2.ProjectAssigns.Add(ProjectAssignSeeds.ProjectAssignEntity3 with {User = UserSeeds.UserEntity1, Project = project2});
 
         var entity = UserSeeds.UserEntity1;
         entity.ProjectAssigns.Add(ProjectAssignSeeds.ProjectAssignEntity1 with {User = entity, Project = project});
-
-
+        entity.ProjectAssigns.Add(ProjectAssignSeeds.ProjectAssignEntity3 with {User = entity, Project = project2});
 
         var actual = await ICSProjDbContextSUT.Users.Include(i => i.ProjectAssigns)
-            .ThenInclude(i => i.Project).SingleAsync(i => i.Id == entity.Id);
+            .ThenInclude(i => i.Project).ThenInclude(i => i!.Creator).SingleAsync(i => i.Id == entity.Id);
 
         DeepAssert.Equal(entity, actual);
     }
