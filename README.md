@@ -40,6 +40,17 @@
     - Obsahuje ID tagu, ke kterému může být **aktivita** přiřazena
 - **ProjectAssign**: vazební entita mezi entitami **User** a **Project**
 
+### Testy
+
+- Vytvořili jsme testy na DBContext pro jednotlivé entity
+
+### Wireframe
+
+- odkaz: <URLODKAZ>
+    - poznámka: Pro zakliknutí Kalendáře, Projektu, Tagů nebo Aktivit se musí použijte double-click na myši.
+
+###
+
 ## **Fáze 2**
 
 - In progress
