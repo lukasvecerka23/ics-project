@@ -1,5 +1,5 @@
 # ICS Projekt 2023 - Time Tracker
-## Autoři
+## **Autoři**
 - Lukáš Večerka (xvecer30)
 - Veronika Nevařilová (xnevar00)
 - Alina Penkova (xpenko00)
@@ -7,7 +7,7 @@
 - Jáchym Doležal (xdolez0c)
 
 
-## Fáze 1
+## **Fáze 1**
 
 ### Organizace
 
@@ -22,27 +22,31 @@
 ### Datový model
 
 #### Entity
-- User: jméno, příjmení, URL obrázku,
-    - má vlastní seznam tagů, které může libovolně vytvářet
+- **User**: jméno, příjmení, URL obrázku,
+    - má vlastní **seznam tagů**, které může libovolně vytvářet
     - může vytvořit libovolný počet projektů
-    - může se příhlásit do existujícího projektu
-    - může vytvářet libovolný počet aktivit
-- Tag: jméno
-    - obsahuje seznam aktivit, které jsou spojené daným tagem.
-    - Obsahuje ID uživatele, který daný tag vytvořil
-- Project: jméno
-    - Obsahuje ID uživatele, který daný projekt vytvořil
-    - Obsahuje seznam přihlášených uživatelů
-    - Obsahuje seznam aktivit spojené s daným projektem
-- Activity: popis, začátek, konec
-    - Obsahuje ID uživatele, který daný projekt vytvořil
-    - Obsahuje ID projektu, ke kterému může být aktivita přiřazena
-    - Obsahuje ID tagu, ke kterému může být aktivita přiřazena
-- ProjectAssign: vazební entita mezi entitami User a Project
+    - může se příhlásit do existujícího **projektu**
+    - může vytvářet libovolný počet **aktivit**
+- **Tag**: jméno
+    - obsahuje seznam **aktivit**, které jsou spojené daným **tagem**.
+    - Obsahuje ID uživatele, který daný **tag** vytvořil
+- **Project**: jméno
+    - Obsahuje ID uživatele, který daný **projekt** vytvořil
+    - Obsahuje **seznam** přihlášených uživatelů
+    - Obsahuje **seznam** **aktivit** spojené s daným projektem
+- **Activity**: popis, začátek, konec
+    - Obsahuje ID uživatele, který daný **projekt** vytvořil
+    - Obsahuje ID projektu, ke kterému může být **aktivita** přiřazena
+    - Obsahuje ID tagu, ke kterému může být **aktivita** přiřazena
+- **ProjectAssign**: vazební entita mezi entitami **User** a **Project**
 
-## Fáze 2
+## **Fáze 2**
 
-## Fáze 3
+- In progress
+
+## **Fáze 3**
+
+- In progress
 
 # Vývoj
 
@@ -53,23 +57,23 @@
 
 ## Doporučení
 
-### Testy
+### **Testy**
 
 - testy implementovat na branchi: test/*
 
-### Nové funkcionality
+### **Nové funkcionality**
 
 - branch: feature/*
 
-### Bugfix
+### **Bugfix**
 
 - branch: fix/*
 
-### Konec nové změny
+### **Konec nové změny**
 
 - Pull request z nové branch do Dev
 
-### Konec fáze projektu
+### **Konec fáze projektu**
 
 - Provést Pull Request do branch Main
 - Codereview
