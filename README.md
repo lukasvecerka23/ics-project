@@ -46,7 +46,7 @@
 
 ### Wireframe
 
-- odkaz: <URLODKAZ>
+- odkaz: [WireFrame s Flow sekcí](https://www.figma.com/file/rNclgcEzhsTbxAy5JjYLmt/prototype_2?node-id=0%3A1&t=8RDA6lxnLNI0J51D-0) , [WireFrame - pouze okna](https://www.figma.com/file/CR9VOebRYVmv749cf4yPlV/prototype-1?node-id=0%3A1&t=VXJItfW64tPG6yvp-0)
     - poznámka: Pro zakliknutí Kalendáře, Projektu, Tagů nebo Aktivit se musí použijte double-click na myši.
 
 ###
