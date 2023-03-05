@@ -360,3 +360,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Custom
+.idea/
+.DS_Store
+
+*.sqlite
+/src/ICSSolution/ICSProj.DAL/ICSProjDbContext.dgml
