@@ -22,7 +22,7 @@ public static class ProjectSeeds
 
     public static readonly ProjectEntity ProjectEntity2 = new()
     {
-        Id = Guid.Parse("c5fd46d596cc80f1dd221333fb0f95ad7f7ec452"),
+        Id = Guid.Parse("a78a1eaa-df80-4c4a-9cd1-2e9e4fd40653"),
         Name = "Project 2",
         CreatorId = UserSeeds.UserEntity2.Id
     };
@@ -46,7 +46,6 @@ public static class ProjectSeeds
             ProjectEntity1 with {Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Activities = Array.Empty<ActivityEntity>()},
             ProjectDelete with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Activities = Array.Empty<ActivityEntity>() },
             ProjectUpdate with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Activities = Array.Empty<ActivityEntity>() },
-            ProjectEntity1 with {Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()},
             ProjectEntity2 with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()},
             ProjectEntity3 with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()}
                 );
