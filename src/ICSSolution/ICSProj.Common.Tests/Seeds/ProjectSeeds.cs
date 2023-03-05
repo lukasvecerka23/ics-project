@@ -29,7 +29,7 @@ public static class ProjectSeeds
 
     public static readonly ProjectEntity ProjectEntity3 = new()
     {
-        Id = Guid.Parse("a78a1eaa-df80-4c4a-9cd1-2e9e4fd40653"),
+        Id = Guid.Parse("1cf02870-a793-4368-ac23-8cfbca36dfe2"),
         Name = "Project 3",
         CreatorId = UserSeeds.UserEntity1.Id
     };

@@ -10,7 +10,7 @@ namespace ICSProj.DAL.Tests;
 
 public class DbContextProjectAssignTests : DbContextTestsBase
 {
-    protected DbContextProjectAssignTests(ITestOutputHelper output) : base(output)
+    public DbContextProjectAssignTests(ITestOutputHelper output) : base(output)
     {
     }
 
