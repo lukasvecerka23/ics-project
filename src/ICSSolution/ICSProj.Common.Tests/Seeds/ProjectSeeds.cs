@@ -20,10 +20,26 @@ public static class ProjectSeeds
         CreatorId = UserSeeds.UserEntity1.Id
     };
 
+    public static readonly ProjectEntity ProjectEntity2 = new()
+    {
+        Id = Guid.Parse("a78a1eaa-df80-4c4a-9cd1-2e9e4fd40653"),
+        Name = "Project 2",
+        CreatorId = UserSeeds.UserEntity2.Id
+    };
+
+    public static readonly ProjectEntity ProjectEntity3 = new()
+    {
+        Id = Guid.Parse("a78a1eaa-df80-4c4a-9cd1-2e9e4fd40653"),
+        Name = "Project 3",
+        CreatorId = UserSeeds.UserEntity1.Id
+    };
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ProjectEntity>().HasData(
-            ProjectEntity1 with {Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()}
+            ProjectEntity1 with {Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()},
+            ProjectEntity2 with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()},
+            ProjectEntity3 with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()}
         );
     }
 }
