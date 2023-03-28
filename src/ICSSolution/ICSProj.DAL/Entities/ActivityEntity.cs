@@ -7,8 +7,6 @@ public record ActivityEntity : IEntity
     public required DateTime Start { get; set; }
     public required DateTime End { get; set; }
 
-    // Add tag
-
     public UserEntity? Creator { get; init; }
 
     public ProjectEntity? Project { get; init; }
