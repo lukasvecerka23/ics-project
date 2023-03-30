@@ -5,7 +5,7 @@ using ICSProj.DAL.Mappers;
 
 namespace ICSProj.DAL.UnitOfWork;
 
-public class UnitOfWork: IUnitOfWork
+public sealed class UnitOfWork: IUnitOfWork
 {
     private readonly DbContext _dbContext;
 
@@ -14,7 +14,7 @@ public class UnitOfWork: IUnitOfWork
 
     public IRepository<TEntity> GetRepository<TEntity, TEntityMapper>()
         where TEntity : class, IEntity
-        where TEntityMapper : class, IEntityMapper<TEntity>, new()
+        where TEntityMapper : IEntityMapper<TEntity>, new()
         // TODO: It will work after repository will be implemented with mappers
         => new Repository<TEntity>(_dbContext, new TEntityMapper());
 

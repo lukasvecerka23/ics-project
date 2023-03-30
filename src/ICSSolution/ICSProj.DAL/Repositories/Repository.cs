@@ -2,11 +2,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using ICSProj.DAL.Entities;
-using ICSProj.DAL.Repositories;
 using ICSProj.DAL.Mappers;
 using Microsoft.EntityFrameworkCore;
 
-namespace ICS.DAL.Repositories;
+namespace ICSProj.DAL.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity>
 where TEntity : class, IEntity
