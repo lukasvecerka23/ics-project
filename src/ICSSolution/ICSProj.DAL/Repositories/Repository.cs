@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ICSProj.DAL.Entities;
 using ICSProj.DAL.Repositories;
-// using ICSProj.DAL.Mappers; uncomment after creating the mapper
+using ICSProj.DAL.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace ICS.DAL.Repositories;
@@ -11,19 +11,16 @@ namespace ICS.DAL.Repositories;
 public class Repository<TEntity> : IRepository<TEntity>
 where TEntity : class, IEntity
 {
-    // protected readonly IEntityMapper<TEntity> _entityMapper; //uncomment after creating the mapper
+    protected readonly IEntityMapper<TEntity> _entityMapper;
     protected readonly DbSet<TEntity> _dbSet;
 
 
-// replace Repository args with the following after implementing the mapper:
-// (
-//         DbContext dbContext,
-//         IEntityMapper<TEntity> entityMapper)
     public Repository(
-        DbContext dbContext)
+        DbContext dbContext,
+        IEntityMapper<TEntity> entityMapper)
     {
         _dbSet = dbContext.Set<TEntity>();
-        // _entityMapper = entityMapper; //uncomment after creating the mapper
+        _entityMapper = entityMapper;
     }
 
     public IQueryable<TEntity> Get()
@@ -46,7 +43,7 @@ where TEntity : class, IEntity
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         TEntity existingEntity = await _dbSet.SingleAsync(e => e.Id == entity.Id);
-        // _entityMapper.Map(entity, existingEntity); //uncomment after creating the mapper
+        _entityMapper.MapToExistingEntity(entity, existingEntity);
         return existingEntity;
     }
 
