@@ -15,7 +15,6 @@ public sealed class UnitOfWork: IUnitOfWork
     public IRepository<TEntity> GetRepository<TEntity, TEntityMapper>()
         where TEntity : class, IEntity
         where TEntityMapper : IEntityMapper<TEntity>, new()
-        // TODO: It will work after repository will be implemented with mappers
         => new Repository<TEntity>(_dbContext, new TEntityMapper());
 
     public async Task CommitAsync() => await _dbContext.SaveChangesAsync();
