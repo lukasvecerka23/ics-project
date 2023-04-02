@@ -11,8 +11,6 @@ public record ProjectDetailModel : ModelBase
 
     public List<ProjectAssignDetailModel> ProjectAssigns { get; set; } = new();
 
-    public UserListModel? Creator { get; set; }
-
     public required Guid CreatorId { get; set; }
 
     public static ProjectDetailModel Empty => new()

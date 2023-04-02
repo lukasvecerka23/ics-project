@@ -10,12 +10,6 @@ public record ActivityDetailModel : ModelBase
 
     public string? Description { get; set; }
 
-    public UserListModel? Creator { get; set; }
-
-    public ProjectListModel? Project { get; set; }
-
-    public TagListModel Tag { get; set; }
-
     public required Guid CreatorId { get; set; }
     public Guid? ProjectId { get; set; }
     public required Guid TagId { get; set; }
