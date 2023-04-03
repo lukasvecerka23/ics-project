@@ -27,7 +27,6 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 Start = entity.Start,
                 End = entity.End,
                 CreatorId = entity.CreatorId,
-                TagId = entity.TagId,
                 ProjectId = entity.ProjectId,
                 Description = entity.Description
             };

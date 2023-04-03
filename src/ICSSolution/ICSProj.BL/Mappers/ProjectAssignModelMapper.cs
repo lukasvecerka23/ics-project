@@ -9,7 +9,7 @@ public class ProjectAssignModelMapper :
     IProjectAssignModelMapper
 {
     public override ProjectAssignListModel MapToListModel(ProjectAssignEntity? entity)
-        => entity?.User is null
+        => entity is null
             ? ProjectAssignListModel.Empty
             : new ProjectAssignListModel
             {
@@ -19,7 +19,7 @@ public class ProjectAssignModelMapper :
             };
 
     public override ProjectAssignDetailModel MapToDetailModel(ProjectAssignEntity? entity)
-        => entity?.Ingredient is null
+        => entity is null
             ? ProjectAssignDetailModel.Empty
             : new ProjectAssignDetailModel
             {
@@ -28,7 +28,7 @@ public class ProjectAssignModelMapper :
                 ProjectId = entity.ProjectId
             };
 
-    public ProjectAssignEntity MapToEntity(ProjectAssignDetailModel model)
+    public override ProjectAssignEntity MapToEntity(ProjectAssignDetailModel model)
         => new()
         {
             Id = model.Id,
