@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ICSProj.BL.Models;
 
@@ -7,11 +8,9 @@ public record ProjectDetailModel : ModelBase
 {
     public required string Name { get; set; }
 
-    public List<ActivityDetailModel> Activities { get; set; } = new();
+    public ObservableCollection<ProjectAssignListModel> Activities { get; set; } = new();
 
-    public List<ProjectAssignDetailModel> ProjectAssigns { get; set; } = new();
-
-    public UserListModel? Creator { get; set; }
+    public ObservableCollection<ProjectAssignListModel> ProjectAssigns { get; set; } = new();
 
     public required Guid CreatorId { get; set; }
 
