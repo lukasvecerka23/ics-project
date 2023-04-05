@@ -8,7 +8,7 @@ public record ProjectDetailModel : ModelBase
 {
     public required string Name { get; set; }
 
-    public ObservableCollection<ProjectAssignListModel> Activities { get; set; } = new();
+    public ObservableCollection<ActivityListModel> Activities { get; set; } = new();
 
     public ObservableCollection<ProjectAssignListModel> ProjectAssigns { get; set; } = new();
 
