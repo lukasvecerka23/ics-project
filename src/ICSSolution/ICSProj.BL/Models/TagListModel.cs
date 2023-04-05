@@ -9,6 +9,9 @@ public record TagListModel : ModelBase
 
     public required Guid CreatorId { get; set; }
 
+    //TODO: Pridat barvu k tagu
+    //public string Color { get;}
+
     public static TagListModel Empty => new()
     {
         Id = Guid.Empty,
