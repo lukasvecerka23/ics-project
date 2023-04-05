@@ -39,7 +39,7 @@ public abstract class
         uow.GetRepository<TEntity, TEntityMapper>().Delete(id);
         await uow.CommitAsync().ConfigureAwait(false);
     }
-    
+
     public virtual async Task<TDetailModel> SaveAsync(TDetailModel model)
     {
         TDetailModel result;
@@ -70,8 +70,9 @@ public abstract class
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
 
-        IRepository<TEntity> rep = uow.GetRepository<TEntity, TEntityMapper>();
-        TEntity entity = await rep.Get().SingleOrDefaultAsync(e => e.Id == id);
+        IQueryable<TEntity> query = uow.GetRepository<TEntity, TEntityMapper>().Get();
+
+        TEntity? entity = await query.SingleOrDefaultAsync(e => e.Id == id);
 
         return entity == null ? null : ModelMapper.MapToDetailModel(entity);
     }
