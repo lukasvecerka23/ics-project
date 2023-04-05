@@ -15,7 +15,10 @@ public class ProjectAssignModelMapper :
             {
                 Id = entity.Id,
                 UserId = entity.UserId,
-                ProjectId = entity.ProjectId
+                ProjectId = entity.ProjectId,
+                UserName = entity.User!.Name,
+                UserSurname = entity.User.Surname,
+                ProjectName = entity.Project!.Name
             };
 
     public override ProjectAssignDetailModel MapToDetailModel(ProjectAssignEntity? entity)
@@ -25,7 +28,11 @@ public class ProjectAssignModelMapper :
             {
                 Id = entity.Id,
                 UserId = entity.UserId,
-                ProjectId = entity.ProjectId
+                ProjectId = entity.ProjectId,
+                UserName = entity.User!.Name,
+                UserSurname = entity.User.Surname,
+                UserImageUrl = entity.User.ImageUrl,
+                ProjectName = entity.Project!.Name
             };
 
     public override ProjectAssignEntity MapToEntity(ProjectAssignDetailModel model)

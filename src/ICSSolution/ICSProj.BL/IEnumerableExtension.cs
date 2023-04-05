@@ -6,6 +6,6 @@ namespace ICSProj.BL;
 
 public static class EnumerableExtension
 {
-    public static ObservableCollection<ProjectAssignListModel> ToObservableCollection<T>(this IEnumerable<T> values)
-        => new((IEnumerable<ProjectAssignListModel>)values);
+    public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> values)
+        => new(values);
 }
