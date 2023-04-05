@@ -27,4 +27,9 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ICSProj.BL\ICSProj.BL.csproj" />
+      <ProjectReference Include="..\ICSProj.Common.Tests\ICSProj.Common.Tests.csproj" />
+    </ItemGroup>
+
 </Project>
