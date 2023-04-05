@@ -13,9 +13,12 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             {
                 Id = entity.Id,
                 Start = entity.Start,
-                End = entity.End,
                 CreatorId = entity.CreatorId,
-                Description = entity.Description
+                Description = entity.Description,
+                ProjectId = entity.Project!.Id,
+                TagId = entity.Tag!.Id,
+                ProjectName = entity.Project!.Name,
+                Duration = entity.End - entity.Start
             };
 
     public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
@@ -28,7 +31,10 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 End = entity.End,
                 CreatorId = entity.CreatorId,
                 ProjectId = entity.ProjectId,
-                Description = entity.Description
+                TagId = entity.TagId,
+                ProjectName = entity.Project!.Name,
+                TagName = entity.Tag!.Name,
+                CreatorName = entity.Creator!.Name
             };
 
     public override ActivityEntity MapToEntity(ActivityDetailModel model)
@@ -37,7 +43,6 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             Id = model.Id,
             Start = model.Start,
             End = model.End,
-            Description = model.Description,
             CreatorId = model.CreatorId,
             TagId = model.TagId,
             ProjectId = model.ProjectId

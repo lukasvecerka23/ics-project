@@ -8,9 +8,12 @@ public record TagDetailModel : ModelBase
 {
     public required string Name { get; set; }
 
-    public ObservableCollection<ProjectAssignListModel> Activities { get; init; } = new();
+    public ObservableCollection<ActivityListModel> Activities { get; init; } = new();
 
     public required Guid CreatorId { get; set; }
+
+    //TODO: Pridat barvu k tagu
+    //public string Color { get;}
 
     public static TagDetailModel Empty => new()
     {
