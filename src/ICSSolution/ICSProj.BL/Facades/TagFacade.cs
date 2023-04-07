@@ -1,14 +1,17 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-//
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ICSProj.BL.Mappers;
+using ICSProj.BL.Models;
+using ICSProj.DAL.Entities;
+using ICSProj.DAL.Mappers;
+using ICSProj.DAL.UnitOfWork;
 
 namespace ICSProj.BL.Facades;
-internal class TagFacade
+
+public class TagFacade : FacadeBase<TagEntity, TagListModel, TagDetailModel, TagEntityMapper>
 {
+    private readonly ITagModelMapper _tagModelMapper;
+
+    public TagFacade(IUnitOfWorkFactory unitOfWorkFactory,
+        ITagModelMapper tagModelMapper) : base(unitOfWorkFactory, tagModelMapper) =>
+        _tagModelMapper = tagModelMapper;
+
 }
