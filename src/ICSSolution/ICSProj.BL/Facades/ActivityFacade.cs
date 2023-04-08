@@ -6,6 +6,7 @@ using ICSProj.DAL.UnitOfWork;
 using ICSProj.BL.Facades.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
+using ICSProj.DAL.Repositories;
 
 namespace ICSProj.BL.Facades;
 public class ActivityFacade :
@@ -39,18 +40,22 @@ public class ActivityFacade :
         return conflictingActivity;
     }
 
-    public virtual async Task<List<ActivityListModel>> GetActivitiesInInterval(Guid userId, DateTime startDate, DateTime endDate)
+    public IEnumerable<ActivityListModel> GetActivitiesInInterval(Guid userId, DateTime startDate, DateTime endDate)
     {
-        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        var activities = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get().Where(activity =>
-                        activity.CreatorId == userId &&
-                        ((activity.Start <= startDate && activity.End >= endDate) ||
-                        (activity.Start >= startDate && activity.Start <= endDate) ||
-                        (activity.End >= startDate && activity.End <= endDate) ||
-                        (activity.Start >= startDate && activity.End <= endDate))).ToListAsync().Result;
+        IRepository<ActivityEntity> activityRepository = UnitOfWorkFactory.Create().GetRepository<ActivityEntity, ActivityEntityMapper>();
 
-        return (List<ActivityListModel>)ModelMapper.MapToListModel(activities);
-        
+        var activityEntities = activityRepository.Get();
+
+        var filteredActivities = activityEntities.Where(activity =>
+            activity.CreatorId == userId &&
+            ((activity.Start <= startDate && activity.End >= endDate) ||
+            (activity.Start >= startDate && activity.Start <= endDate) ||
+            (activity.End >= startDate && activity.End <= endDate) ||
+            (activity.Start >= startDate && activity.End <= endDate)));
+
+        List<ActivityEntity> activities = filteredActivities.ToList();
+
+        return ModelMapper.MapToListModel(activities);
     }
-    
+
 }
