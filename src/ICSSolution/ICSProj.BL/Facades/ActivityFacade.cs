@@ -40,6 +40,7 @@ public class ActivityFacade :
         return conflictingActivity;
     }
 
+    // TODO: Add filtering by project and tag
     public IEnumerable<ActivityListModel> GetActivitiesInInterval(Guid userId, DateTime startDate, DateTime endDate)
     {
         IRepository<ActivityEntity> activityRepository = UnitOfWorkFactory.Create().GetRepository<ActivityEntity, ActivityEntityMapper>();
