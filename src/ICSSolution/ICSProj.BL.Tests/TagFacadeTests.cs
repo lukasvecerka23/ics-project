@@ -27,7 +27,7 @@ public sealed class TagFacadeTests : FacadeTestsBase
         var model = new TagDetailModel()
         {
             Name = "Test tag",
-            CreatorId = Guid.Empty //UserSeeds.UserEntity1.Id tohle asi nefunguje spravne
+            CreatorId = UserSeeds.UserEntity1.Id
         };
 
         var test = await _tagFacadeSUT.SaveAsync(model);
@@ -75,7 +75,7 @@ public sealed class TagFacadeTests : FacadeTestsBase
         {
             Id = Guid.Empty,
             Name = "Hokus pokus",
-            CreatorId = UserSeeds.UserEntity1.Id, //questionable, mozna ma byt empty?
+            CreatorId = UserSeeds.UserEntity1.Id
         };
 
         tag = await _tagFacadeSUT.SaveAsync(tag);
