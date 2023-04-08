@@ -104,6 +104,10 @@ public sealed class TagFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-
+    public async Task GetTagsByUser()
+    {
+        var tags = _tagFacadeSUT.GetTagsByUser(TagSeeds.TagEntity1.CreatorId);
+        Assert.Single(tags);
+    }
 
 }
