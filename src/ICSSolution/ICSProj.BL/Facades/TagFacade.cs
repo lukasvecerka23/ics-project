@@ -1,7 +1,9 @@
-﻿using ICSProj.BL.Mappers;
+﻿using System.Diagnostics;
+using ICSProj.BL.Mappers;
 using ICSProj.BL.Models;
 using ICSProj.DAL.Entities;
 using ICSProj.DAL.Mappers;
+using ICSProj.DAL.Repositories;
 using ICSProj.DAL.UnitOfWork;
 
 namespace ICSProj.BL.Facades;
@@ -13,5 +15,17 @@ public class TagFacade : FacadeBase<TagEntity, TagListModel, TagDetailModel, Tag
     public TagFacade(IUnitOfWorkFactory unitOfWorkFactory,
         ITagModelMapper tagModelMapper) : base(unitOfWorkFactory, tagModelMapper) =>
         _tagModelMapper = tagModelMapper;
+
+    public IEnumerable<TagListModel> GetTagsByUser(Guid userId)
+    {
+        IRepository<TagEntity> tagRepository = UnitOfWorkFactory.Create().GetRepository<TagEntity, TagEntityMapper>();
+
+        var tagEntities = tagRepository.Get();
+
+        var tagsByUser = tagEntities.Where(tag => tag.CreatorId == userId);
+        List<TagEntity> tagsByUserList = tagsByUser.ToList();
+
+        return ModelMapper.MapToListModel(tagsByUserList);
+    }
 
 }

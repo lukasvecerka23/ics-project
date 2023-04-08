@@ -102,4 +102,8 @@ public sealed class TagFacadeTests : FacadeTestsBase
         var tagFromDb = await dbxAssert.Tags.SingleAsync(i => i.Id == tag.Id);
         DeepAssert.Equal(tag, TagModelMapper.MapToDetailModel(tagFromDb));
     }
+
+    [Fact]
+
+
 }
