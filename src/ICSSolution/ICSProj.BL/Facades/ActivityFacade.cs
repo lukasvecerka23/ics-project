@@ -40,19 +40,31 @@ public class ActivityFacade :
         return conflictingActivity;
     }
 
-    // TODO: Add filtering by project and tag
-    public IEnumerable<ActivityListModel> GetActivitiesInInterval(Guid userId, DateTime startDate, DateTime endDate)
+    public IEnumerable<ActivityListModel> FilterActivities(Guid userId, DateTime startDate, DateTime endDate, Guid projectId, Guid tagId)
     {
         IRepository<ActivityEntity> activityRepository = UnitOfWorkFactory.Create().GetRepository<ActivityEntity, ActivityEntityMapper>();
 
-        var activityEntities = activityRepository.Get();
+        var filteredActivities = activityRepository.Get();
 
-        var filteredActivities = activityEntities.Where(activity =>
-            activity.CreatorId == userId &&
-            ((activity.Start <= startDate && activity.End >= endDate) ||
-            (activity.Start >= startDate && activity.Start <= endDate) ||
-            (activity.End >= startDate && activity.End <= endDate) ||
-            (activity.Start >= startDate && activity.End <= endDate)));
+        if ((startDate != DateTime.MinValue) && (endDate != DateTime.MinValue))
+        {
+            filteredActivities = filteredActivities.Where(activity =>
+                activity.CreatorId == userId &&
+                ((activity.Start <= startDate && activity.End >= endDate) ||
+                (activity.Start >= startDate && activity.Start <= endDate) ||
+                (activity.End >= startDate && activity.End <= endDate) ||
+                (activity.Start >= startDate && activity.End <= endDate)));
+        }
+        if (projectId != Guid.Empty)
+        {
+            filteredActivities = filteredActivities.Where(activity =>
+                activity.ProjectId == projectId);
+        }
+        if (tagId != Guid.Empty)
+        {
+            filteredActivities = filteredActivities.Where(activity =>
+                activity.TagId == tagId);
+        }
 
         List<ActivityEntity> activities = filteredActivities.ToList();
 
