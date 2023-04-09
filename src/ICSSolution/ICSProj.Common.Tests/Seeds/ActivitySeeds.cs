@@ -22,7 +22,7 @@ public static class ActivitySeeds
         Description = "Working on important thing...",
         Start = new DateTime(2023, 2, 10, 10,0,0),
         End = new DateTime(2023, 2,10,11,0,0),
-        ProjectId = default,
+        ProjectId = ProjectSeeds.ProjectEntity1.Id,
         TagId = default
     };
 
@@ -34,7 +34,7 @@ public static class ActivitySeeds
         Start = new DateTime(2023, 2, 12, 20,0,0),
         End = new DateTime(2023, 2,12,22,0,0),
         ProjectId = default,
-        TagId = default
+        TagId = TagSeeds.TagEntity1.Id,
     };
 
     public static readonly ActivityEntity ActivityEntityDeletedByProject = new()

@@ -104,12 +104,9 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
         var detailedProject = await _projectFacadeSUT.GetAsync(projectID);
 
         //Assert
-        var SeedModel = ProjectModelMapper.MapToListModel(ProjectSeeds.ProjectEntity1);
-        //Assert.Contains(SeedModel, allprojects);
+        var SeedProject = ProjectModelMapper.MapToDetailModel(ProjectSeeds.ProjectEntity1);
 
-        //Act
-
-        //Assert
+        DeepAssert.Equal(SeedProject, detailedProject,"ProjectAssigns","Activities");
     }
 
 }
