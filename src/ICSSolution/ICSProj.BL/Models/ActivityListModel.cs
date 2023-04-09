@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace ICSProj.BL.Models;
 
-namespace ICSProj.BL.Models;
 public record ActivityListModel : ModelBase
 {
     public required Guid? CreatorId { get; set; }
-
     public required Guid? TagId { get; set; }
-
     public required Guid? ProjectId { get; set; }
 
     public required DateTime Start { get; set; }
-
     public string? Description { get; set; }
-
     public required TimeSpan Duration { get; set; }
-
     public string? ProjectName { get; set; }
 
 

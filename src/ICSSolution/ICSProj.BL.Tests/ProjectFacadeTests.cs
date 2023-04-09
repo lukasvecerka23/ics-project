@@ -1,18 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using ICSProj.BL.Facades;
-using ICSProj.BL.Facades.Interfaces;
+﻿using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
 using ICSProj.Common.Tests;
 using ICSProj.Common.Tests.Seeds;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit;
-using ICSProj.DAL.Entities;
 
 namespace ICSProj.BL.Tests;
-
 
 public sealed class ProjectFacadeTests : FacadeTestsBase
 {
@@ -24,7 +18,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task GetAllProjects()
+    public async Task GetAll_ContainSeeded()
     {
         //Act
         var allProjects = await _projectFacadeSut.GetAsync();
@@ -35,7 +29,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task CreateNewProject()
+    public async Task Create_NewProject_DoesNotThrow()
     {
         //Arrange
         var model = new ProjectDetailModel()
@@ -43,6 +37,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
             Id = Guid.NewGuid(),
             Name = "NewProjectTest",
             CreatorId = UserSeeds.UserEntity1.Id,
+            CreatorName = UserSeeds.UserEntity1.Name + " " + UserSeeds.UserEntity1.Surname
         };
 
         //Act
@@ -50,7 +45,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task DeleteProjectCheckDeleted()
+    public async Task Delete_SeededEntity_CheckDeleted()
     {
         //Arrange
         var deletedProjectId = ProjectSeeds.ProjectEntity1.Id;
@@ -66,7 +61,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task DeleteProjectCheckProjectAssigns()
+    public async Task Delete_SeededEntity_CheckProjectAssigns()
     {
         //Arrange
         var deletedProjectId = ProjectSeeds.ProjectEntity1.Id;
@@ -81,7 +76,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task DeleteProjectCheckActivities()
+    public async Task Delete_SeededEntity_CheckActivities()
     {
         //Arrange
         var deletedProjectId = ProjectSeeds.ProjectEntity1.Id;
@@ -96,7 +91,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task GetProjectDetail()
+    public async Task GetById_SeededProject()
     {
         //Arrange
         var projectId = ProjectSeeds.ProjectEntity1.Id;
@@ -106,7 +101,6 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
         //Assert
         var seedProject = ProjectModelMapper.MapToDetailModel(ProjectSeeds.ProjectEntity1);
 
-        DeepAssert.Equal(seedProject, detailedProject,"ProjectAssigns","Activities");
+        DeepAssert.Equal(seedProject, detailedProject,"ProjectAssigns","Activities", "CreatorName");
     }
-
 }

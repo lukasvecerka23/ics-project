@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace ICSProj.DAL.Entities;
 
 public record ProjectEntity : IEntity

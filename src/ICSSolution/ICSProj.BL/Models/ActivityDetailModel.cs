@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ICSProj.BL.Models;
+﻿namespace ICSProj.BL.Models;
 
 public record ActivityDetailModel : ModelBase
 {
@@ -10,15 +7,10 @@ public record ActivityDetailModel : ModelBase
     public Guid? TagId { get; set; }
 
     public required DateTime Start { get; set; }
-
     public string? Description { get; set; }
-
     public required DateTime End { get; set; }
-
     public string? ProjectName { get; set; }
-
     public string? TagName { get; set; }
-
     public string? CreatorName { get; set; }
 
     public static ActivityDetailModel Empty => new()

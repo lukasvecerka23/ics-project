@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ICSProj.BL.Models;
+﻿namespace ICSProj.BL.Models;
 
 public record UserListModel : ModelBase
 {

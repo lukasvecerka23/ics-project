@@ -1,5 +1,3 @@
-// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using ICSProj.BL.Mappers;
 using ICSProj.Common.Tests;
 using ICSProj.Common.Tests.Factories;
@@ -66,5 +64,4 @@ public class FacadeTestsBase: IAsyncLifetime
         await using var dbx = await DbContextFactory.CreateDbContextAsync();
         await dbx.Database.EnsureDeletedAsync();
     }
-
 }

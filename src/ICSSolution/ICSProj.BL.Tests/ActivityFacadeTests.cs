@@ -2,11 +2,7 @@ using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
 using ICSProj.Common.Tests;
 using ICSProj.Common.Tests.Seeds;
-using ICSProj.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,6 +20,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     [Fact]
     public async Task Create_WithNonExistingItem_DoesNotThrow()
     {
+        // Arrange
         var model = new ActivityDetailModel()
         {
             Id = Guid.Empty,
@@ -32,39 +29,48 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
             CreatorId = UserSeeds.UserEntity1.Id
         };
 
+        // Act
         var _ = await _activityFacadeSUT.SaveAsync(model);
     }
 
     [Fact]
     public async Task GetAll_Single_ActivityEntity1()
     {
+        //Act
         var activities = await _activityFacadeSUT.GetAsync();
         var activity = activities.Single(i => i.Id == ActivitySeeds.ActivityEntity1.Id);
 
+        // Assert
         DeepAssert.Equal(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1), activity);
     }
 
     [Fact]
     public async Task GetById_ActivityEntity1()
     {
+        // Act
         var activity = await _activityFacadeSUT.GetAsync(ActivitySeeds.ActivityEntity1.Id);
 
+        // Assert
         DeepAssert.Equal(ActivityModelMapper.MapToDetailModel(ActivitySeeds.ActivityEntity1), activity);
     }
 
     [Fact]
     public async Task GetById_NonExistent()
     {
+        // Act
         var activity = await _activityFacadeSUT.GetAsync(ActivitySeeds.EmptyActivityEntity.Id);
 
+        // Assert
         Assert.Null(activity);
     }
 
     [Fact]
     public async Task ActivityEntity1_DeleteById_Deleted()
     {
+        // Act
         await _activityFacadeSUT.DeleteAsync(ActivitySeeds.ActivityEntity1.Id);
 
+        // Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
         Assert.False(await dbxAssert.Activities.AnyAsync(i => i.Id == ActivitySeeds.ActivityEntity1.Id));
     }
@@ -103,7 +109,6 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
             ProjectId = ProjectSeeds.ProjectEntity2.Id
         };
         activity.Start = new DateTime(2023, 3, 11, 7, 0, 0);
-
 
         //Act
         await _activityFacadeSUT.SaveAsync(activity);

@@ -22,7 +22,8 @@ public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListMode
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                CreatorId = entity.CreatorId
+                CreatorId = entity.CreatorId,
+                CreatorName = entity.Creator?.Name + " " + entity.Creator?.Surname
             };
 
     public override ProjectDetailModel MapToDetailModel(ProjectEntity? entity)
@@ -33,6 +34,7 @@ public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListMode
                 Id = entity.Id,
                 Name = entity.Name,
                 CreatorId = entity.CreatorId,
+                CreatorName = entity.Creator?.Name + " " + entity.Creator?.Surname,
                 Activities = _activityModelMapper.MapToListModel(entity.Activities)
                     .ToObservableCollection(),
                 ProjectAssigns = _projectAssignModelMapper.MapToListModel(entity.ProjectAssigns)

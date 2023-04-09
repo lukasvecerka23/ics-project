@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace ICSProj.BL.Models;
 
 public record TagDetailModel : ModelBase
 {
-    public required string Name { get; set; }
-
-    public ObservableCollection<ActivityListModel> Activities { get; init; } = new();
-
     public required Guid CreatorId { get; set; }
 
-    public string? Color { get; set; }
+    public required string Name { get; set; }
+    public ObservableCollection<ActivityListModel> Activities { get; init; } = new();
 
     public static TagDetailModel Empty => new()
     {
