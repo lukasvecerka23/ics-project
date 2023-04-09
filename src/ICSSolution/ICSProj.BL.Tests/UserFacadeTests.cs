@@ -85,4 +85,34 @@ public sealed class UserFacadeTests: FacadeTestsBase
 
         DeepAssert.Equal(detailModel, returnedModel);
     }
+
+    [Fact]
+    public async Task SeededUserEntity1_Delete_CheckIfAllRelatedTagsDeleted()
+    {
+        await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity1.Id);
+
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+        Assert.False(await dbxAssert.Tags.AnyAsync(i => i.CreatorId == UserSeeds.UserEntity1.Id));
+    }
+
+    [Fact]
+    public async Task SeededUserEntity1_Delete_CheckIfAllRelatedActivitiesDeleted()
+    {
+        await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity1.Id);
+
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+        Assert.False(await dbxAssert.Activities.AnyAsync(i => i.CreatorId == UserSeeds.UserEntity1.Id));
+    }
+
+    [Fact]
+    public async Task SeededUserEntity1_Delete_CheckIfAllRelatedProjectAssignsDeleted()
+    {
+        await _userFacadeSUT.DeleteAsync(UserSeeds.UserEntity1.Id);
+
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+        Assert.False(await dbxAssert.Assigns.AnyAsync(i => i.UserId == UserSeeds.UserEntity1.Id));
+    }
 }
