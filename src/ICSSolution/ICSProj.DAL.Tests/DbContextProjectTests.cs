@@ -1,11 +1,9 @@
-using System.Runtime.InteropServices.JavaScript;
 using ICSProj.DAL.Entities;
 using Xunit;
 using Xunit.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using ICSProj.Common.Tests;
 using ICSProj.Common.Tests.Seeds;
-using System.Globalization;
 
 namespace ICSProj.DAL.Tests;
 
@@ -15,7 +13,6 @@ public class DbContextProjectTests : DbContextTestsBase
     {
     }
 
-    //add new project
     [Fact]
     public async Task Add_Project()
     {
@@ -40,7 +37,6 @@ public class DbContextProjectTests : DbContextTestsBase
 
     }
 
-    //get project by id
     [Fact]
     public async Task GetById_Project()
     {
@@ -51,7 +47,6 @@ public class DbContextProjectTests : DbContextTestsBase
         DeepAssert.Equal(ProjectSeeds.ProjectEntity1, entity);
     }
 
-    //update project update
     [Fact]
     public async Task Update_Project()
     {
@@ -70,7 +65,6 @@ public class DbContextProjectTests : DbContextTestsBase
         DeepAssert.Equal(entity, actualEntity);
     }
 
-    //delete project
     [Fact]
     public async Task Delete_Project()
     {
@@ -85,7 +79,6 @@ public class DbContextProjectTests : DbContextTestsBase
         Assert.False(await ICSProjDbContextSUT.Projects.AnyAsync(i => i.Id == entityBase.Id));
     }
 
-    //delete by id
     [Fact]
     public async Task DeleteById_Project()
     {
@@ -100,5 +93,4 @@ public class DbContextProjectTests : DbContextTestsBase
         //Assert
         Assert.False(await ICSProjDbContextSUT.Projects.AnyAsync(i => i.Id == entityBase.Id));
     }
-
 }

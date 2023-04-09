@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using ICSProj.DAL.Entities;
+﻿using ICSProj.DAL.Entities;
 using Xunit;
 using Xunit.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +16,14 @@ public class DbContextTagTests : DbContextTestsBase
     [Fact]
     public async Task AddNew_Tag()
     {
+        // Arrange
         var entity = TagSeeds.EmptyTagEntity with
         {
             Name = "Sport",
             CreatorId = UserSeeds.UserEntity1.Id
         };
 
+        // Act
         ICSProjDbContextSUT.Tags.Add(entity);
         await ICSProjDbContextSUT.SaveChangesAsync();
 
@@ -32,7 +33,7 @@ public class DbContextTagTests : DbContextTestsBase
             .SingleAsync(i => i.Id == entity.Id);
         DeepAssert.Equal(entity, actualEntity);
     }
-    
+
     [Fact]
     public async Task GetById_Tag()
     {
@@ -50,6 +51,7 @@ public class DbContextTagTests : DbContextTestsBase
     [Fact]
     public async Task AddNew_TagWithActivities()
     {
+        // Arrange
         var entity = TagSeeds.EmptyTagEntity with
         {
             Name = "Aktivita",
@@ -79,6 +81,7 @@ public class DbContextTagTests : DbContextTestsBase
             }
         };
 
+        // Act
         ICSProjDbContextSUT.Tags.Add(entity);
         await ICSProjDbContextSUT.SaveChangesAsync();
 
@@ -94,6 +97,7 @@ public class DbContextTagTests : DbContextTestsBase
 
     public async Task GetById_IncludingActivities_Tag()
     {
+        // Act
         var entity = await ICSProjDbContextSUT.Tags
             .Include(i => i.Activities)
             .SingleAsync(i => i.Id == TagSeeds.TagEntity1.Id);
@@ -105,9 +109,11 @@ public class DbContextTagTests : DbContextTestsBase
     [Fact]
     public async Task Update_Tag()
     {
+        // Arrange
         var baseEntity = TagSeeds.TagEntityUpdate;
         var entity = baseEntity with { Name = "Updated name" };
 
+        // Act
         ICSProjDbContextSUT.Tags.Update(entity);
         await ICSProjDbContextSUT.SaveChangesAsync();
 
