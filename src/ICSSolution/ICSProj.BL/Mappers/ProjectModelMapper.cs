@@ -8,11 +8,12 @@ public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListMode
     private readonly IActivityModelMapper _activityModelMapper;
     private readonly IProjectAssignModelMapper _projectAssignModelMapper;
 
-    public ProjectModelMapper(IActivityModelMapper activityModelMapper) =>
+    public ProjectModelMapper(IActivityModelMapper activityModelMapper,
+        IProjectAssignModelMapper projectAssignModelMapper)
+    {
         _activityModelMapper = activityModelMapper;
-
-    public ProjectModelMapper(IProjectAssignModelMapper projectAssignModelMapper) =>
         _projectAssignModelMapper = projectAssignModelMapper;
+    }
 
     public override ProjectListModel MapToListModel(ProjectEntity? entity)
         => entity is null
