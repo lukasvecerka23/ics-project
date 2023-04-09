@@ -24,7 +24,7 @@ public class TagFacade : FacadeBase<TagEntity, TagListModel, TagDetailModel, Tag
 
         var tagsByUser = tagEntities.Where(tag => tag.CreatorId == userId);
         List<TagEntity> tagsByUserList = await tagsByUser.ToListAsync();
-        
+
         return tagsByUser.Any() ? _tagModelMapper.MapToListModel(tagsByUserList) : null;
     }
 
