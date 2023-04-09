@@ -34,9 +34,8 @@ public static class ActivitySeeds
         Start = new DateTime(2023, 2, 12, 20,0,0),
         End = new DateTime(2023, 2,12,22,0,0),
         ProjectId = default,
-        TagId = TagSeeds.TagEntity1.Id,
+        TagId = TagSeeds.TagEntity2.Id
     };
-
     public static readonly ActivityEntity ActivityEntityDeletedByProject = new()
     {
         Id = Guid.Parse("79168d67-711c-48f2-bbec-a89cf4b831aa"),
@@ -63,3 +62,4 @@ public static class ActivitySeeds
         );
     }
 }
+

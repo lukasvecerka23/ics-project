@@ -188,7 +188,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         DateTime to = new DateTime(2023, 2, 12, 23, 0, 0);
 
         // Act
-        var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity2.Id, from, to, null, TagSeeds.TagEntity1.Id);
+        var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity2.Id, from, to, null, TagSeeds.TagEntity2.Id);
 
         // Assert
         Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity2), activities);

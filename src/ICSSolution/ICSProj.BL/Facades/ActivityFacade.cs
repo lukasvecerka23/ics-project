@@ -49,12 +49,12 @@ public class ActivityFacade :
                 (activity.End >= startDate && activity.End <= endDate) ||
                 (activity.Start >= startDate && activity.End <= endDate)));
         }
-        if (projectId != Guid.Empty)
+        if (projectId != null)
         {
             filteredActivities = filteredActivities.Where(activity =>
                 activity.ProjectId == projectId);
         }
-        if (tagId != Guid.Empty)
+        if (tagId != null)
         {
             filteredActivities = filteredActivities.Where(activity =>
                 activity.TagId == tagId);
