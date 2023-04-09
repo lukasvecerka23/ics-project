@@ -1,7 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-using ICSProj.BL.Facades.Interfaces;
+﻿using ICSProj.BL.Facades.Interfaces;
 using ICSProj.BL.Mappers;
 using ICSProj.BL.Models;
 using ICSProj.DAL.Entities;
@@ -29,8 +26,6 @@ public abstract class
         UnitOfWorkFactory = unitOfWorkFactory;
         ModelMapper = modelMapper;
     }
-
-    //protected virtual string IncludesNavigationPathDetail => string.Empty;
 
     public async Task DeleteAsync(Guid id)
     {
@@ -88,5 +83,4 @@ public abstract class
 
         return ModelMapper.MapToListModel(entities);
     }
-
 }

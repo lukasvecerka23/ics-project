@@ -3,20 +3,17 @@ using ICSProj.BL.Models;
 using ICSProj.DAL.Entities;
 using ICSProj.DAL.Mappers;
 using ICSProj.DAL.UnitOfWork;
-using ICSProj.BL.Facades.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ICSProj.DAL.Repositories;
 
 namespace ICSProj.BL.Facades;
 public class ActivityFacade :
-    FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel, ActivityEntityMapper>, IActivityFacade
+    FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel, ActivityEntityMapper>
 {
-    public ActivityFacade(
-        IUnitOfWorkFactory unitOfWorkFactory,
-        IActivityModelMapper modelMapper)
-        : base(unitOfWorkFactory, modelMapper)
-    {
-    }
+    private readonly IActivityModelMapper _activityModelMapper;
+    public ActivityFacade(IUnitOfWorkFactory unitOfWorkFactory,
+        IActivityModelMapper modelMapper) : base(unitOfWorkFactory, modelMapper) =>
+        _activityModelMapper = modelMapper;
 
     public async Task<bool> HasMoreActivitiesAtTheSameTime(Guid userId, ActivityDetailModel activity)
     {
@@ -62,7 +59,6 @@ public class ActivityFacade :
 
         List<ActivityEntity> activities = await filteredActivities.ToListAsync();
 
-        return ModelMapper.MapToListModel(activities);
+        return _activityModelMapper.MapToListModel(activities);
     }
-
 }

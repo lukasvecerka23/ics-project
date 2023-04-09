@@ -27,5 +27,4 @@ public class TagFacade : FacadeBase<TagEntity, TagListModel, TagDetailModel, Tag
 
         return tagsByUser.Any() ? _tagModelMapper.MapToListModel(tagsByUserList) : null;
     }
-
 }
