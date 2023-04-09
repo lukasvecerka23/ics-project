@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ICSProj.BL.Models;
+﻿namespace ICSProj.BL.Models;
 
 public record ProjectListModel : ModelBase
 {
-    public required string Name { get; set; }
-
     public required Guid CreatorId { get; set; }
+
+    public required string Name { get; set; }
+    public required string CreatorName { get; set; }
 
     public static ProjectListModel Empty => new()
     {
         Id = Guid.Empty,
+        CreatorId = Guid.Empty,
         Name = string.Empty,
-        CreatorId = Guid.Empty
+        CreatorName = string.Empty
     };
 }

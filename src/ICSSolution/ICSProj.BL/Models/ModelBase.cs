@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace ICSProj.BL.Models;
+﻿namespace ICSProj.BL.Models;
 
 public abstract record ModelBase : IModel
 {

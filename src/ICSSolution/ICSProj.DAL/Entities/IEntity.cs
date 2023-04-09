@@ -1,5 +1,3 @@
-using System;
-
 namespace ICSProj.DAL.Entities;
 
 public interface IEntity

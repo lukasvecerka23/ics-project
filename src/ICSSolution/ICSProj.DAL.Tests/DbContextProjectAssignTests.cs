@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
-using ICSProj.DAL.Entities;
 using Xunit;
 using Xunit.Abstractions;
 using Microsoft.EntityFrameworkCore;

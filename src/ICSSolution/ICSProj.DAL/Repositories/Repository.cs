@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using ICSProj.DAL.Entities;
 using ICSProj.DAL.Mappers;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +29,6 @@ where TEntity : class, IEntity
         return await _dbSet.AnyAsync(e => e.Id == entity.Id) && entity.Id != Guid.Empty;
     }
 
-    // check if its ok (now different than in cookbook)
     public async Task<TEntity> InsertAsync(TEntity entity)
     {
         await _dbSet.AddAsync(entity);
@@ -48,5 +44,4 @@ where TEntity : class, IEntity
 
 
     public void Delete(Guid entityId) =>_dbSet.Remove(_dbSet.Single(i => i.Id == entityId));
-
 }

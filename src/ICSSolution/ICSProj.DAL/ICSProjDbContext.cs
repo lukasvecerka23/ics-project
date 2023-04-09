@@ -1,5 +1,4 @@
 using ICSProj.DAL.Entities;
-//using ICSProj.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace ICSProj.DAL;
@@ -64,14 +63,5 @@ public class ICSProjDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
         });
-
-        // if (_seedDemoData)
-        // {
-        //          ActivitySeeds.Seed(modelBuilder);
-        //          UserSeeds.Seed(modelBuilder);
-        //          ProjectAssignSeeds.Seed(modelBuilder);
-        //          ProjectSeeds.Seed(modelBuilder);
-        //          TagSeeds.Seed(modelBuilder);
-        // }
     }
 }

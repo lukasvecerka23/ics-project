@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
-
 namespace ICSProj.DAL.Entities;
 
 public record ActivityEntity : IEntity
