@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace ICSProj.BL.Mappers;
+﻿namespace ICSProj.BL.Mappers;
 
 public abstract class
     ModelMapperBase<TEntity, TListModel, TDetailModel> : IModelMapper<TEntity, TListModel, TDetailModel>

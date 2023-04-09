@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace ICSProj.BL.Mappers;
+﻿namespace ICSProj.BL.Mappers;
 
 public interface IModelMapper<TEntity, out TListModel, TDetailModel>
 {
@@ -11,5 +8,6 @@ public interface IModelMapper<TEntity, out TListModel, TDetailModel>
         => entities.Select(MapToListModel);
 
     TDetailModel MapToDetailModel(TEntity entity);
+
     TEntity MapToEntity(TDetailModel model);
 }
