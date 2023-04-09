@@ -16,22 +16,22 @@ namespace ICSProj.BL.Tests;
 
 public sealed class ProjectFacadeTests : FacadeTestsBase
 {
-    private readonly ProjectFacade _projectFacadeSUT;
+    private readonly ProjectFacade _projectFacadeSut;
 
     public ProjectFacadeTests(ITestOutputHelper output) : base(output)
     {
-        _projectFacadeSUT = new ProjectFacade(UnitOfWorkFactory, ProjectModelMapper);
+        _projectFacadeSut = new ProjectFacade(UnitOfWorkFactory, ProjectModelMapper);
     }
 
     [Fact]
     public async Task GetAllProjects()
     {
         //Act
-        var allprojects = await _projectFacadeSUT.GetAsync();
+        var allProjects = await _projectFacadeSut.GetAsync();
 
         //Assert
-        var SeedModel = ProjectModelMapper.MapToListModel(ProjectSeeds.ProjectEntity1);
-        Assert.Contains(SeedModel, allprojects);
+        var seedModel = ProjectModelMapper.MapToListModel(ProjectSeeds.ProjectEntity1);
+        Assert.Contains(seedModel, allProjects);
     }
 
     [Fact]
@@ -46,17 +46,17 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
         };
 
         //Act
-        var test = await _projectFacadeSUT.SaveAsync(model);
+        var test = await _projectFacadeSut.SaveAsync(model);
     }
 
     [Fact]
     public async Task DeleteProjectCheckDeleted()
     {
         //Arrange
-        var DeletedProjectId = ProjectSeeds.ProjectEntity1.Id;
+        var deletedProjectId = ProjectSeeds.ProjectEntity1.Id;
 
         //Act
-        await _projectFacadeSUT.DeleteAsync(DeletedProjectId);
+        await _projectFacadeSut.DeleteAsync(deletedProjectId);
 
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
@@ -69,10 +69,10 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     public async Task DeleteProjectCheckProjectAssigns()
     {
         //Arrange
-        var DeletedProjectId = ProjectSeeds.ProjectEntity1.Id;
+        var deletedProjectId = ProjectSeeds.ProjectEntity1.Id;
 
         //Act
-        await _projectFacadeSUT.DeleteAsync(DeletedProjectId);
+        await _projectFacadeSut.DeleteAsync(deletedProjectId);
 
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
@@ -84,10 +84,10 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     public async Task DeleteProjectCheckActivities()
     {
         //Arrange
-        var DeletedProjectId = ProjectSeeds.ProjectEntity1.Id;
+        var deletedProjectId = ProjectSeeds.ProjectEntity1.Id;
 
         //Act
-        await _projectFacadeSUT.DeleteAsync(DeletedProjectId);
+        await _projectFacadeSut.DeleteAsync(deletedProjectId);
 
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
@@ -99,14 +99,14 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     public async Task GetProjectDetail()
     {
         //Arrange
-        var projectID = ProjectSeeds.ProjectEntity1.Id;
+        var projectId = ProjectSeeds.ProjectEntity1.Id;
 
-        var detailedProject = await _projectFacadeSUT.GetAsync(projectID);
+        var detailedProject = await _projectFacadeSut.GetAsync(projectId);
 
         //Assert
-        var SeedProject = ProjectModelMapper.MapToDetailModel(ProjectSeeds.ProjectEntity1);
+        var seedProject = ProjectModelMapper.MapToDetailModel(ProjectSeeds.ProjectEntity1);
 
-        DeepAssert.Equal(SeedProject, detailedProject,"ProjectAssigns","Activities");
+        DeepAssert.Equal(seedProject, detailedProject,"ProjectAssigns","Activities");
     }
 
 }

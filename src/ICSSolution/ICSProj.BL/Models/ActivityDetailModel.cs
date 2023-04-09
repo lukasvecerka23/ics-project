@@ -17,8 +17,6 @@ public record ActivityDetailModel : ModelBase
 
     public string? ProjectName { get; set; }
 
-    // public string TagColor { get; set; }
-
     public string? TagName { get; set; }
 
     public string? CreatorName { get; set; }
@@ -32,7 +30,6 @@ public record ActivityDetailModel : ModelBase
         Start = DateTime.Now,
         End = DateTime.Now,
         ProjectName = string.Empty,
-        // TagColor = string.Empty,
         TagName = string.Empty,
         CreatorName = string.Empty
     };

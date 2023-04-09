@@ -18,7 +18,6 @@ public record ActivityListModel : ModelBase
 
     public string? ProjectName { get; set; }
 
-    // public required string TagColor { get; set; }
 
     public static ActivityListModel Empty => new()
     {
@@ -30,6 +29,5 @@ public record ActivityListModel : ModelBase
         Description = string.Empty,
         Duration = TimeSpan.Zero,
         ProjectName = string.Empty
-        // TagColor = string.Empty
     };
 }

@@ -16,7 +16,7 @@ public class TagFacade : FacadeBase<TagEntity, TagListModel, TagDetailModel, Tag
         ITagModelMapper tagModelMapper) : base(unitOfWorkFactory, tagModelMapper) =>
         _tagModelMapper = tagModelMapper;
 
-    public async Task<IEnumerable<TagListModel>> GetTagsByUser(Guid userId)
+    public async Task<IEnumerable<TagListModel>?> GetTagsByUser(Guid userId)
     {
         IRepository<TagEntity> tagRepository = UnitOfWorkFactory.Create().GetRepository<TagEntity, TagEntityMapper>();
 
