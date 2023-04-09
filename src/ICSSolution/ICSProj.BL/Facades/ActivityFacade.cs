@@ -5,7 +5,6 @@ using ICSProj.DAL.Mappers;
 using ICSProj.DAL.UnitOfWork;
 using ICSProj.BL.Facades.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 using ICSProj.DAL.Repositories;
 
 namespace ICSProj.BL.Facades;
@@ -40,7 +39,7 @@ public class ActivityFacade :
         return conflictingActivity;
     }
 
-    public IEnumerable<ActivityListModel> FilterActivities(Guid userId, DateTime startDate, DateTime endDate, Guid projectId, Guid tagId)
+    public async Task<IEnumerable<ActivityListModel>> FilterActivities(Guid userId, DateTime startDate, DateTime endDate, Guid projectId, Guid tagId)
     {
         IRepository<ActivityEntity> activityRepository = UnitOfWorkFactory.Create().GetRepository<ActivityEntity, ActivityEntityMapper>();
 
@@ -66,7 +65,7 @@ public class ActivityFacade :
                 activity.TagId == tagId);
         }
 
-        List<ActivityEntity> activities = filteredActivities.ToList();
+        List<ActivityEntity> activities = await filteredActivities.ToListAsync();
 
         return ModelMapper.MapToListModel(activities);
     }
