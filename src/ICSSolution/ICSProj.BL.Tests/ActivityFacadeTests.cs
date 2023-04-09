@@ -103,7 +103,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
             ProjectId = ProjectSeeds.ProjectEntity2.Id
         };
         activity.Start = new DateTime(2023, 3, 11, 7, 0, 0);
-        
+
 
         //Act
         await _activityFacadeSUT.SaveAsync(activity);
@@ -112,5 +112,85 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
         var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.Id);
         DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));
+    }
+
+    [Fact]
+    public async Task CheckForConflictingActivity_True()
+    {
+        // Arrange
+        var activity = new ActivityDetailModel()
+        {
+            Description = "Activity 1",
+            Start = new DateTime(2023, 2, 10, 10, 20, 0),
+            End = new DateTime(2023, 2, 10, 11, 0, 0),
+            CreatorId = UserSeeds.UserEntity1.Id
+        };
+
+        // Act
+        var conflictingActivity = await _activityFacadeSUT.HasMoreActivitiesAtTheSameTime(UserSeeds.UserEntity1.Id, activity);
+
+        // Assert
+        Assert.True(conflictingActivity);
+    }
+
+    [Fact]
+    public async Task CheckForConflictingActivity_False()
+    {
+        // Arrange
+        var activity = new ActivityDetailModel()
+        {
+            Description = "Activity 1",
+            Start = new DateTime(2023, 2, 10, 9, 0, 0),
+            End = new DateTime(2023, 2, 10, 9, 50, 0),
+            CreatorId = UserSeeds.UserEntity1.Id
+        };
+
+        // Act
+        var conflictingActivity = await _activityFacadeSUT.HasMoreActivitiesAtTheSameTime(UserSeeds.UserEntity1.Id, activity);
+
+        // Assert
+        Assert.False(conflictingActivity);
+    }
+
+    [Fact]
+    public async Task FilterByUserIdDateFromDateTo_ActivityEntity2()
+    {
+        // Arrange
+        DateTime from = new DateTime(2023, 2, 12, 8, 0, 0);
+        DateTime to = new DateTime(2023, 2, 12, 23, 0, 0);
+
+        // Act
+        var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity2.Id, from, to, null, null);
+
+        // Assert
+        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity2), activities);
+    }
+
+    [Fact]
+    public async Task FilterByUserIdDateFromDateToProjectId_ActivityEntity1()
+    {
+        // Arrange
+        DateTime from = new DateTime(2023, 2, 10, 8, 0, 0);
+        DateTime to = new DateTime(2023, 2, 10, 23, 0, 0);
+
+        // Act
+        var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity1.Id, from, to, ProjectSeeds.ProjectEntity1.Id, null);
+
+        // Assert
+        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1), activities);
+    }
+
+    [Fact]
+    public async Task FilterByUserIdDateFromDateToTagId_ActivityEntity2()
+    {
+        // Arrange
+        DateTime from = new DateTime(2023, 2, 12, 8, 0, 0);
+        DateTime to = new DateTime(2023, 2, 12, 23, 0, 0);
+
+        // Act
+        var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity2.Id, from, to, null, TagSeeds.TagEntity1.Id);
+
+        // Assert
+        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity2), activities);
     }
 }

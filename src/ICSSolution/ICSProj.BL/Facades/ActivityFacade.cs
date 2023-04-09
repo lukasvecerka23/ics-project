@@ -18,28 +18,23 @@ public class ActivityFacade :
     {
     }
 
-    public async Task<bool> HasMoreActivitiesAtTheSameTime(Guid userId, Guid activityId)
+    public async Task<bool> HasMoreActivitiesAtTheSameTime(Guid userId, ActivityDetailModel activity)
     {
         var uow = UnitOfWorkFactory.Create();
         var dbSetActivities = uow.GetRepository<ActivityEntity, ActivityEntityMapper>().Get();
-
-        var activity = await dbSetActivities.SingleOrDefaultAsync(x => x.Id == activityId);
-        if (activity is null)
-        {
-            throw new ArgumentException("Activity with given ID doesnt exist");
-        }
+        var activityEntity = ModelMapper.MapToEntity(activity);
 
         bool conflictingActivity = await dbSetActivities.AnyAsync(
             x => x.CreatorId == userId && (
-                 (activity.Start <= x.Start && activity.End >= x.End) ||
-                 (activity.Start >= x.Start && activity.Start <= x.End) ||
-                 (activity.End >= x.Start && activity.End <= x.End)     ||
-                 (activity.Start >= x.Start && activity.End <= x.End)));
+                 (activityEntity.Start <= x.Start && activityEntity.End >= x.End) ||
+                 (activityEntity.Start >= x.Start && activityEntity.Start <= x.End) ||
+                 (activityEntity.End >= x.Start && activityEntity.End <= x.End)     ||
+                 (activityEntity.Start >= x.Start && activityEntity.End <= x.End)));
 
         return conflictingActivity;
     }
 
-    public async Task<IEnumerable<ActivityListModel>> FilterActivities(Guid userId, DateTime startDate, DateTime endDate, Guid projectId, Guid tagId)
+    public async Task<IEnumerable<ActivityListModel>> FilterActivities(Guid userId, DateTime startDate, DateTime endDate, Guid? projectId, Guid? tagId)
     {
         IRepository<ActivityEntity> activityRepository = UnitOfWorkFactory.Create().GetRepository<ActivityEntity, ActivityEntityMapper>();
 
