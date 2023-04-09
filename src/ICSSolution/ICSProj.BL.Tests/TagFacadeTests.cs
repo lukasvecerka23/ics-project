@@ -110,4 +110,21 @@ public sealed class TagFacadeTests : FacadeTestsBase
         Assert.Single(tags);
     }
 
+    [Fact]
+    public async Task GetAllSeededTags_ContainsSeededTag()
+    {
+        var listModel = TagModelMapper.MapToListModel(TagSeeds.TagEntity2);
+
+        var returnedModel = await _tagFacadeSUT.GetTagsByUser(TagSeeds.TagEntity2.CreatorId);
+
+        Assert.Contains(listModel, returnedModel);
+    }
+
+    [Fact]
+    public async Task GetTagByUser_NoTag()
+    {
+        var listModel = await _tagFacadeSUT.GetTagsByUser(UserSeeds.UserEntity3.Id);
+        Assert.Null(listModel);
+    }
+    
 }

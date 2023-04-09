@@ -29,6 +29,14 @@ public static class UserSeeds
         ImageUrl = null
     };
 
+    public static readonly UserEntity UserEntity3 = new()
+    {
+        Id = Guid.Parse("ce754f9c-f59b-40da-b2f2-30eb6a48645c"),
+        Name = "Jmeno",
+        Surname = "Prijmeni",
+        ImageUrl = null
+    };
+
     public static readonly UserEntity UserEntityDelete = UserEntity1 with { Id = Guid.Parse("1ecd4b98-58f1-4b65-8475-5afa3650adf6")};
 
     public static readonly UserEntity UserEntityUpdate = UserEntity1 with { Id = Guid.Parse("076255e4-0b40-4621-bdb5-c3247172ab92")};
