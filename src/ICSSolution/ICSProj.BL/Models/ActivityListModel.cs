@@ -16,7 +16,7 @@ public record ActivityListModel : ModelBase
 
     public required TimeSpan Duration { get; set; }
 
-    public required string ProjectName { get; set; }
+    public string? ProjectName { get; set; }
 
     // public required string TagColor { get; set; }
 

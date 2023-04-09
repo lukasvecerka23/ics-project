@@ -42,7 +42,7 @@ where TEntity : class, IEntity
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         TEntity existingEntity = await _dbSet.SingleAsync(e => e.Id == entity.Id);
-        _entityMapper.MapToExistingEntity(entity, existingEntity);
+        _entityMapper.MapToExistingEntity(existingEntity, entity);
         return existingEntity;
     }
 

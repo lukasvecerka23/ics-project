@@ -11,6 +11,8 @@ public record ActivityDetailModel : ModelBase
 
     public required DateTime Start { get; set; }
 
+    public string? Description { get; set; }
+
     public required DateTime End { get; set; }
 
     public string? ProjectName { get; set; }

@@ -12,5 +12,5 @@ public class UnitOfWorkFactory: IUnitOfWorkFactory
     public UnitOfWorkFactory(IDbContextFactory<ICSProjDbContext> dbContextFactory) =>
         _dbContextFactory = dbContextFactory;
 
-    public IUnitOfWork Crete() => new UnitOfWork(_dbContextFactory.CreateDbContext());
+    public IUnitOfWork Create() => new UnitOfWork(_dbContextFactory.CreateDbContext());
 }

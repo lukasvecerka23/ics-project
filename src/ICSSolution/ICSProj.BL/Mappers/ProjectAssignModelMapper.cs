@@ -17,7 +17,7 @@ public class ProjectAssignModelMapper :
                 UserId = entity.UserId,
                 ProjectId = entity.ProjectId,
                 UserName = entity.User!.Name,
-                UserSurname = entity.User.Surname,
+                UserSurname = entity.User!.Surname,
                 ProjectName = entity.Project!.Name
             };
 

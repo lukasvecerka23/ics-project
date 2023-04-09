@@ -22,7 +22,7 @@ public static class ActivitySeeds
         Description = "Working on important thing...",
         Start = new DateTime(2023, 2, 10, 10,0,0),
         End = new DateTime(2023, 2,10,11,0,0),
-        ProjectId = default,
+        ProjectId = ProjectSeeds.ProjectEntity1.Id,
         TagId = default
     };
 
@@ -34,6 +34,16 @@ public static class ActivitySeeds
         Start = new DateTime(2023, 2, 12, 20,0,0),
         End = new DateTime(2023, 2,12,22,0,0),
         ProjectId = default,
+        TagId = TagSeeds.TagEntity2.Id
+    };
+    public static readonly ActivityEntity ActivityEntityDeletedByProject = new()
+    {
+        Id = Guid.Parse("79168d67-711c-48f2-bbec-a89cf4b831aa"),
+        CreatorId = UserSeeds.UserEntity2.Id,
+        Description = "Working on something important",
+        Start = new DateTime(2023, 4, 9, 16, 20, 0, 0),
+        End = new DateTime(2023, 4, 11, 10, 10, 0, 0),
+        ProjectId = ProjectSeeds.ProjectEntity1.Id,
         TagId = default
     };
 
@@ -47,7 +57,9 @@ public static class ActivitySeeds
             ActivityEntity1 with {Creator = null, Project = null, Tag = null},
             ActivityEntity2 with {Creator = null, Project = null, Tag = null},
             ActivityUpdate with { Creator = null, Project = null, Tag = null },
-            ActivityDelete with { Creator = null, Project = null, Tag = null }
+            ActivityDelete with { Creator = null, Project = null, Tag = null },
+            ActivityEntityDeletedByProject with {Creator = null, Project = null, Tag = null}
         );
     }
 }
+
