@@ -53,7 +53,26 @@
 
 ## **Fáze 2**
 
-- In progress
+- Oprava výhrad z první fáze
+
+### Modely, Model mappery
+
+- Dle wireframů rozhodnutí, které atributy chceme uchovávat v modelech
+- Namapování entit z datové vrstvy do modelů na byznysové vrstvě
+
+### Fasády
+
+- Vytvoření bázové fasády pro zajištění CRUD operací nad databází
+- Zjištění byznysových požadavků
+- Filtrování aktivit podle data, projektu, tagu atd.
+- Kontrola konfliktních aktivit
+- Získaní tagů podle ID uživatele
+- Zajištění napojení přihlášení do projektu pro detail projektu a detail uživatele
+
+### Testy fasád
+
+- Otestování funkčnosti jednotlivých byznysových požadavků
+
 
 ## **Fáze 3**
 
