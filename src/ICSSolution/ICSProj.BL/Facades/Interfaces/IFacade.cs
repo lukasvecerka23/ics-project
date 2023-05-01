@@ -1,7 +1,7 @@
 using ICSProj.DAL.Entities;
 using ICSProj.BL.Models;
 
-namespace ICSProj.BL.Facades.Interfaces;
+namespace ICSProj.BL.Facades;
 
 public interface IFacade<TEntity, TListModel, TDetailModel>
     where TEntity: class, IEntity
