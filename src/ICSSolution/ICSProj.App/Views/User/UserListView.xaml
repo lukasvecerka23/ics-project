@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ICSProj.App.Views"
+             xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+             xmlns:vm="clr-namespace:ICSProj.App.ViewModels.User"
+             x:DataType="vm:UserListViewModel"
+             x:Class="ICSProj.App.Views.User.UserListView">
+    <VerticalStackLayout>
+        <Label Text="User List" />
+        <CollectionView ItemsSource="{Binding Users}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Name}" />
+                        <Label Text="{Binding Surname}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</views:ContentPageBase>
