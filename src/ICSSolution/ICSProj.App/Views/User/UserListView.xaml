@@ -7,19 +7,31 @@
              xmlns:vm="clr-namespace:ICSProj.App.ViewModels.User"
              x:DataType="vm:UserListViewModel"
              x:Class="ICSProj.App.Views.User.UserListView">
-    <VerticalStackLayout>
-        <Label Text="User List" />
-        <CollectionView ItemsSource="{Binding Users}">
+    <Grid RowDefinitions="*,Auto">
+        <CollectionView Grid.Row="0"
+                        x:Name="UserList"
+                        ItemsLayout="HorizontalList"
+                        ItemsSource="{Binding Users}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:UserListModel">
-                    <StackLayout>
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding Name}" TextColor="White"/>
-                            <Label Text="{Binding Surname}" TextColor="White"/>
-                        </HorizontalStackLayout>
-                    </StackLayout>
+                    <Grid WidthRequest="150"
+                          HeightRequest="150"
+                          Margin="5"
+                          RowDefinitions="*,Auto"
+                          BackgroundColor="Aqua">
+                        <Image Grid.Row="0"
+                               Aspect="AspectFill"
+                               Source="{Binding ImageUrl}" />
+                        <Label Grid.Row="1"
+                               Text="{Binding Name}"
+                               HorizontalOptions="Center"
+                               FontSize="14" />
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+        <Button Grid.Row="1"
+                Text="Add New User"
+                Clicked="DisplayPopup" />
+    </Grid>
 </views:ContentPageBase>
