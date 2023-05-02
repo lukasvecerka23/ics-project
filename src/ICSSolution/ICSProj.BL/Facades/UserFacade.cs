@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ICSProj.BL.Facades;
 
-public class UserFacade: FacadeBase<UserEntity, UserListModel, UserDetailModel, UserEntityMapper>
+public class UserFacade: FacadeBase<UserEntity, UserListModel, UserDetailModel, UserEntityMapper>, IUserFacade
 {
     private readonly IUserModelMapper _userModelMapper;
 

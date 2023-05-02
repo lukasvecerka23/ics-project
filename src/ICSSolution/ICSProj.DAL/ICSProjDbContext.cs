@@ -1,5 +1,5 @@
 using ICSProj.DAL.Entities;
-using ICSProj.Common.Tests.Seeds;
+using ICSProj.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace ICSProj.DAL;

@@ -5,13 +5,14 @@ namespace ICSProj.App.ViewModels;
 
 public class ViewModelBase: ObservableRecipient, IViewModel
 {
-    private bool _isRefreshRequired;
+    private bool _isRefreshRequired = true;
 
     protected readonly IMessengerService MessengerService;
 
     protected ViewModelBase(IMessengerService messengerService) : base(messengerService.Messenger)
     {
         MessengerService = messengerService;
+        IsActive = true;
     }
 
     public async Task OnAppearingAsync()

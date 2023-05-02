@@ -11,10 +11,12 @@
         <Label Text="User List" />
         <CollectionView ItemsSource="{Binding Users}">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="m:UserListModel">
                     <StackLayout>
-                        <Label Text="{Binding Name}" />
-                        <Label Text="{Binding Surname}" />
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding Name}" TextColor="White"/>
+                            <Label Text="{Binding Surname}" TextColor="White"/>
+                        </HorizontalStackLayout>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

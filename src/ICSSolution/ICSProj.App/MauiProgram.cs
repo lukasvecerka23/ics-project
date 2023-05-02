@@ -19,15 +19,15 @@ public static class MauiProgram
             });
 
         builder.Services
-            .AddAppServices()
             .AddDALServices()
+            .AddAppServices()
             .AddBLServices();
 
 
         var app = builder.Build();
 
         app.Services.GetRequiredService<IDbMigrator>().Migrate();
-        RegisterRouting(app.Services.GetRequiredService<INavigationService>());
+        // RegisterRouting(app.Services.GetRequiredService<INavigationService>());
 
         return app;
     }
