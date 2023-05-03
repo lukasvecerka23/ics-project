@@ -42,6 +42,7 @@
         <Button Grid.Row="2"
                 Text="Add User"
                 HorizontalOptions="End"
-                Command="{Binding AddUserCommand}" />
+                Command="{Binding AddUserCommand}"
+                Clicked="ClosePopup"/>
     </Grid>
 </toolkit:Popup>

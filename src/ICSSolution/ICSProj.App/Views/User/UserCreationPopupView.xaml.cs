@@ -9,6 +9,9 @@ public partial class UserCreationPopupView : Popup
         InitializeComponent();
     }
 
-
+    private void ClosePopup(object sender, EventArgs e)
+    {
+        Close();
+    }
 }
 
