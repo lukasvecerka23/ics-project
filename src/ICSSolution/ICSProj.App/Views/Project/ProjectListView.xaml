@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ICSProj.App.Views"
+             xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+             xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+             x:DataType="vm:ProjectListViewModel"
+             x:Name="ProjectListViewRoot"
              x:Class="ICSProj.App.Views.Project.ProjectListView">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
-</ContentPage>
+    <Grid RowDefinitions="*,Auto">
+        <CollectionView Grid.Row="0"
+                        x:Name="ProjectList"
+                        ItemsLayout="HorizontalList"
+                        ItemsSource="{Binding Projects}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ProjectListModel">
+                    <!-- <Frame WidthRequest="150" -->
+                    <!--        HeightRequest="150" -->
+                    <!--        IsClippedToBounds="True"> -->
+                    <!--     <Frame.GestureRecognizers> -->
+                    <!--         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}" -->
+                    <!--                               CommandParameter="{Binding Id}"/> -->
+                    <!--     </Frame.GestureRecognizers> -->
+
+                        <Grid WidthRequest="150"
+                              HeightRequest="150"
+                              Margin="5"
+                              RowDefinitions="*,Auto"
+                              BackgroundColor="Aqua">
+                            <!-- <Image Grid.Row="0" -->
+                            <!--        Aspect="AspectFill" -->
+                            <!--        Source="{Binding ImageUrl}" /> -->
+                            <Label Grid.Row="1"
+                                   Text="{Binding Name}"
+                                   HorizontalOptions="Center"
+                                   FontSize="14" />
+                            <Label Grid.Row="1"
+                                   Text="{Binding CreatorName}"
+                                   HorizontalOptions="Center"
+                                   FontSize="14" />
+                        </Grid>
+                    <!-- </Frame> -->
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!-- <Button Grid.Row="1" -->
+        <!--         Text="Add New User" -->
+        <!--         Clicked="DisplayPopup" /> -->
+    </Grid>
+</views:ContentPageBase>
