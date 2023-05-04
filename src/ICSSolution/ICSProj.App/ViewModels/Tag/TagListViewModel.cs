@@ -10,6 +10,8 @@ public partial class TagListViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
 
+    public IEnumerable<TagListModel> Tags { get; set; } = null!;
+
     public TagListViewModel(
         ITagFacade tagFacade,
         INavigationService navigationService,
@@ -20,8 +22,6 @@ public partial class TagListViewModel : ViewModelBase
         _navigationService = navigationService;
         _loginService = loginService;
     }
-
-    public IEnumerable<TagListModel> Tags { get; set; } = null!;
 
     protected override async Task LoadDataAsync()
     {

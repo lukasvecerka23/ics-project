@@ -3,6 +3,7 @@ using ICSProj.App.ViewModels;
 using ICSProj.App.Views.Activity;
 using ICSProj.App.Views.Project;
 using ICSProj.App.Views.User;
+using ICSProj.App.Views.Tag;
 
 namespace ICSProj.App.Services;
 
@@ -13,7 +14,9 @@ public class NavigationService: INavigationService
     {
         new("//users", typeof(UserListView), typeof(UserListViewModel)),
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
-        new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel))
+        new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
+        new("//tags", typeof(TagListView), typeof(TagListViewModel)),
+        //new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
