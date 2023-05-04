@@ -1,9 +1,13 @@
-﻿namespace ICSProj.App.Shells;
+﻿using ICSProj.App.Services;
 
-public partial class AppShell : Shell
+namespace ICSProj.App.Shells;
+
+public partial class AppShell
 {
-    public AppShell()
+    private readonly INavigationService navigationService;
+    public AppShell(INavigationService navigationService)
     {
+        this.navigationService = navigationService;
         InitializeComponent();
     }
 }

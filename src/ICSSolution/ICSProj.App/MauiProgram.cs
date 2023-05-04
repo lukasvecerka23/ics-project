@@ -19,10 +19,9 @@ public static class MauiProgram
             });
 
         builder.Services
-            .AddAppServices()
             .AddDALServices()
-            .AddBLServices();
-
+            .AddBLServices()
+            .AddAppServices();
 
         var app = builder.Build();
 

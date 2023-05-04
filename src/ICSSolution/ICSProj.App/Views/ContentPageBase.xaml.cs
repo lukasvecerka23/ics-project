@@ -12,5 +12,11 @@ public partial class ContentPageBase
 
         BindingContext = ViewModel = viewModel;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await ViewModel.OnAppearingAsync();
+    }
 }
 

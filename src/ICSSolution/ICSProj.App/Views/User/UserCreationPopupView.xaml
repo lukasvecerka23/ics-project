@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+                xmlns:models="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                x:DataType="vm:UserListViewModel"
+                x:Class="ICSProj.App.Views.User.UserCreationPopupView">
+    <Grid Padding="20"
+          RowDefinitions="Auto, Auto, Auto">
+        <Label Grid.Row="0"
+               Text="Create a new user"
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <Grid Grid.Row="1"
+              RowDefinitions="Auto, Auto, Auto"
+              ColumnDefinitions="Auto, *">
+            <Label Grid.Row="0"
+                   Text="First Name:"
+                   VerticalOptions="Center" />
+            <Entry Grid.Row="0"
+                   Grid.Column="1"
+                   Text="{Binding User.Name}"
+                   Placeholder="Enter first name" />
+            <Label Grid.Row="1"
+                   Text="Last Name:"
+                   VerticalOptions="Center" />
+            <Entry Grid.Row="1"
+                   Grid.Column="1"
+                   Text="{Binding User.Surname}"
+                   Placeholder="Enter last name" />
+            <Label Grid.Row="2"
+                   Text="ImageUrl:"
+                   VerticalOptions="Center" />
+            <Entry Grid.Row="2"
+                   Grid.Column="1"
+                   Text="{Binding User.ImageUrl}"
+                   Placeholder="Enter last name" />
+        </Grid>
+        <Button Grid.Row="2"
+                Text="Add User"
+                HorizontalOptions="End"
+                Command="{Binding AddUserCommand}"
+                Clicked="ClosePopup"/>
+    </Grid>
+</toolkit:Popup>
