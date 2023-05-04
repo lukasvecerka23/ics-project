@@ -1,19 +1,11 @@
-// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ICSProj.App.ViewModels;
 
 namespace ICSProj.App.Views.Tag;
 
-public partial class TagListView : ContentPage
+public partial class TagListView
 {
-    public TagListView()
+    public TagListView(TagListViewModel viewModel) : base(viewModel)
     {
         InitializeComponent();
     }
 }
-

@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Input;
 using ICSProj.App.Services;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
@@ -28,5 +29,12 @@ public partial class TagListViewModel : ViewModelBase
         await base.LoadDataAsync();
         var tags = await _tagFacade.GetAsync();
         Tags = tags.Where(tag => tag.CreatorId == _loginService.CurrentUserId);
+    }
+
+    [RelayCommand]
+    private async Task GoToDetailAsync(Guid id)
+    {
+        await _navigationService.GoToAsync<TagDetailViewModel>(
+            new Dictionary<string, object?> { [nameof(TagDetailViewModel.Id)] = id });
     }
 }
