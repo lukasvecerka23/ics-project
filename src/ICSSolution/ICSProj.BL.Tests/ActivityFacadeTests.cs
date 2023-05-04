@@ -131,11 +131,10 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
             CreatorId = UserSeeds.UserEntity1.Id
         };
 
-        // Act
-        var conflictingActivity = await _activityFacadeSUT.HasMoreActivitiesAtTheSameTime(UserSeeds.UserEntity1.Id, activity);
-
         // Assert
-        Assert.True(conflictingActivity);
+
+        await Assert.ThrowsAsync<Exception>(async () =>
+        await _activityFacadeSUT.SaveAsync(UserSeeds.UserEntity1.Id, activity));
     }
 
     [Fact]
@@ -151,10 +150,10 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         };
 
         // Act
-        var conflictingActivity = await _activityFacadeSUT.HasMoreActivitiesAtTheSameTime(UserSeeds.UserEntity1.Id, activity);
+        var conflictingActivity = await _activityFacadeSUT.SaveAsync(UserSeeds.UserEntity1.Id, activity);
 
         // Assert
-        Assert.False(conflictingActivity);
+        DeepAssert.Equals(conflictingActivity, activity);
     }
 
     [Fact]
