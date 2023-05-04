@@ -8,7 +8,7 @@ using ICSProj.DAL.Repositories;
 
 namespace ICSProj.BL.Facades;
 public class ActivityFacade :
-    FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel, ActivityEntityMapper>
+    FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel, ActivityEntityMapper>, IActivityFacade
 {
     private readonly IActivityModelMapper _activityModelMapper;
     public ActivityFacade(IUnitOfWorkFactory unitOfWorkFactory,

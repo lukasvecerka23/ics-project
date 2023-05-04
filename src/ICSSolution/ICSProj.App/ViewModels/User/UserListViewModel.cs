@@ -3,30 +3,32 @@ using ICSProj.App.Services;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
 
-namespace ICSProj.App.ViewModels.User;
+namespace ICSProj.App.ViewModels;
 
 public partial class UserListViewModel : ViewModelBase
 {
     private readonly IUserFacade _userFacade;
-    // private readonly INavigationService _navigationService;
+    private readonly INavigationService _navigationService;
+    private readonly ILoginService _loginService;
 
     public IEnumerable<UserListModel> Users { get; set; } = null!;
     public UserDetailModel User { get; set; } = UserDetailModel.Empty;
 
     public UserListViewModel(
         IUserFacade userFacade,
-        // INavigationService navigationService,
+        INavigationService navigationService,
+        ILoginService loginService,
         IMessengerService messengerService) : base(messengerService)
     {
         _userFacade = userFacade;
-        // _navigationService = navigationService;
+        _navigationService = navigationService;
+        _loginService = loginService;
     }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
         Users = await _userFacade.GetAsync();
-        Console.WriteLine(Users);
     }
 
     [RelayCommand]
@@ -35,6 +37,13 @@ public partial class UserListViewModel : ViewModelBase
         await _userFacade.SaveAsync(User);
         User = UserDetailModel.Empty;
         await LoadDataAsync();
+    }
+
+    [RelayCommand]
+    private async Task GoToActivitiesAsync(Guid userId)
+    {
+        _loginService.CurrentUserId = userId;
+        await _navigationService.GoToAsync<ActivityListViewModel>();
     }
 
 

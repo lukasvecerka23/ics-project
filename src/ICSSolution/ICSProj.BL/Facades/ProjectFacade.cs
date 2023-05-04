@@ -8,7 +8,7 @@ using ICSProj.DAL.Repositories;
 
 namespace ICSProj.BL.Facades;
 
-public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, ProjectDetailModel, ProjectEntityMapper>
+public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, ProjectDetailModel, ProjectEntityMapper>, IProjectFacade
 {
 
     private readonly IProjectModelMapper _projectModelMapper;

@@ -1,6 +1,4 @@
 ﻿using ICSProj.App.Shells;
-using ICSProj.App.Views.User;
-using ICSProj.App.ViewModels.User;
 
 namespace ICSProj.App;
 
@@ -10,6 +8,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new UserListView(serviceProvider.GetRequiredService<UserListViewModel>());
+        MainPage = serviceProvider.GetRequiredService<AppShell>();
     }
 }

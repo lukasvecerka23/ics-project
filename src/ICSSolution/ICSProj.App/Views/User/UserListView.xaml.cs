@@ -1,5 +1,5 @@
 using CommunityToolkit.Maui.Views;
-using ICSProj.App.ViewModels.User;
+using ICSProj.App.ViewModels;
 
 namespace ICSProj.App.Views.User;
 

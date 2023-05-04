@@ -20,14 +20,13 @@ public static class MauiProgram
 
         builder.Services
             .AddDALServices()
-            .AddAppServices()
-            .AddBLServices();
-
+            .AddBLServices()
+            .AddAppServices();
 
         var app = builder.Build();
 
         app.Services.GetRequiredService<IDbMigrator>().Migrate();
-        // RegisterRouting(app.Services.GetRequiredService<INavigationService>());
+        RegisterRouting(app.Services.GetRequiredService<INavigationService>());
 
         return app;
     }
