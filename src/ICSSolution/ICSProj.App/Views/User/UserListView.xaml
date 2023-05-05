@@ -8,41 +8,61 @@
              x:DataType="vm:UserListViewModel"
              x:Name="UserListViewRoot"
              x:Class="ICSProj.App.Views.User.UserListView">
-    <Grid RowDefinitions="*,Auto">
-        <CollectionView Grid.Row="0"
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <Label Grid.Row="0"
+               Text="Výběr uživatele"
+               FontSize="40"
+               Margin="30"
+               HorizontalOptions="Center" />
+        
+        <CollectionView Grid.Row="1"
                         x:Name="UserList"
-                        ItemsLayout="HorizontalList"
+                        ItemsLayout="VerticalList"
                         ItemsSource="{Binding Users}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:UserListModel">
-                    <Frame WidthRequest="150"
-                           HeightRequest="150"
-                           IsClippedToBounds="True">
+                    <Frame Grid.Column="0"
+                        Margin="5"
+                        IsClippedToBounds="True"
+                        BackgroundColor="#CC6767"
+                        HeightRequest="100"
+                        WidthRequest="350"
+                        CornerRadius="50">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
-                                                  CommandParameter="{Binding Id}"/>
+                                      CommandParameter="{Binding Id}"/>
                         </Frame.GestureRecognizers>
-
-                        <Grid WidthRequest="150"
-                              HeightRequest="150"
-                              Margin="5"
-                              RowDefinitions="*,Auto"
-                              BackgroundColor="Aqua">
+                        <Grid RowDefinitions="*,Auto">
                             <Image Grid.Row="0"
-                                   Aspect="AspectFill"
-                                   Source="{Binding ImageUrl}" />
+                        Aspect="AspectFill"
+                        Source="{Binding ImageUrl}" />
                             <Label Grid.Row="1"
-                                   Text="{Binding Name}"
-                                   HorizontalOptions="Center"
-                                   FontSize="14" />
+                        Text="{Binding Name}"
+                        HorizontalOptions="Center"
+                        FontSize="14"
+                        TextColor="White"/>
                         </Grid>
                     </Frame>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row="1"
-                Text="Add New User"
+        <Button Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="#CC6767"
+                WidthRequest="80"
+                HeightRequest="80"
+                CornerRadius="40"
+                Margin="10"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                TextColor="White"
+                Text="+"
+                FontSize="95"
+                Padding="0,0,0,5"
                 Clicked="DisplayPopup" />
     </Grid>
 </views:ContentPageBase>
+
