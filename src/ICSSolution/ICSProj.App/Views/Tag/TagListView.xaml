@@ -23,7 +23,7 @@
                     <Frame>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={x:Reference TagListViewRoot}, Path=BindingContext.GoToDetailCommand}"
-                                                  CommandParameter="{Binding Id}" />
+                                                  CommandParameter="{Binding Id}"/>
                         </Frame.GestureRecognizers>
                         <Grid RowDefinitions="*, *">
                             <BoxView Grid.Row="0" Grid.RowSpan="2"

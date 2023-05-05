@@ -32,6 +32,13 @@ public partial class ProjectListViewModel: ViewModelBase
     }
 
     [RelayCommand]
+    private async Task GoToDetailAsync(Guid id)
+    {
+        await _navigationService.GoToAsync<ProjectDetailViewModel>(
+            new Dictionary<string, object?> { [nameof(ProjectDetailViewModel.Id)] = id });
+    }
+
+    [RelayCommand]
     private async Task ShowMenuPopupAsync()
     {
         await _navigationService.ShowPopupAsync(new MenuPopupView());
