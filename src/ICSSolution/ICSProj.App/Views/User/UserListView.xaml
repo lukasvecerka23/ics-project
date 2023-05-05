@@ -14,7 +14,8 @@
         <Label Grid.Row="0"
                Text="Výběr uživatele"
                FontSize="40"
-               FontFamily="Poppins"
+               FontFamily="PoppinsLight"
+               TextColor="#CC6767"
                Margin="30"
                HorizontalOptions="Center" />
 
@@ -36,16 +37,22 @@
                         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
                                       CommandParameter="{Binding Id}"/>
                     </Frame.GestureRecognizers>
-                    <Grid RowDefinitions="*,Auto">
-                        <Image Grid.Row="0"
-                        Aspect="AspectFill"
-                        Source="{Binding ImageUrl}" />
-                        <Label Grid.Row="1"
+                    <Grid ColumnDefinitions="*,*">
+                            <Frame CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Grid.Column="0" Margin="-5,0,0,0" HorizontalOptions="Start">
+                            <Image
+                               HorizontalOptions="Fill" VerticalOptions="Fill"
+                               Aspect="AspectFill"
+                               WidthRequest="80" HeightRequest="80"
+                               Source="{Binding ImageUrl, TargetNullValue='user_placeholder.jpg'}"/>
+                        </Frame>
+                        <Label Grid.Column="1"
                         Text="{Binding Name}"
-                        HorizontalOptions="Center"
-                        FontSize="25"
-                        FontFamily="Poppins"
-                        TextColor="White"/>
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        FontSize="30"
+                        FontFamily="PoppinsExtraLight"
+                        TextColor="White"
+                        Margin="-15,0,0,0"/>
                     </Grid>
                 </Frame>
 
@@ -64,8 +71,8 @@
                 TextColor="White"
                 Text="+"
                 FontSize="95"
-                FontFamily="Poppins"
-                Padding="0,0,0,5"
+                FontFamily="PoppinsExtraLight"
+                Padding="0,0,0,-13"
                 Clicked="DisplayPopup" />
     </Grid>
 </views:ContentPageBase>
