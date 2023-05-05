@@ -14,40 +14,43 @@
         <Label Grid.Row="0"
                Text="Výběr uživatele"
                FontSize="40"
+               FontFamily="Poppins"
                Margin="30"
                HorizontalOptions="Center" />
-        
+
+
         <CollectionView Grid.Row="1"
                         x:Name="UserList"
-                        ItemsLayout="VerticalList"
+                        ItemsLayout="VerticalGrid, 2"
                         ItemsSource="{Binding Users}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="m:UserListModel">
-                    <Frame Grid.Column="0"
-                        Margin="5"
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="m:UserListModel">
+                <Frame Grid.Column="0"
+                        Margin="8"
                         IsClippedToBounds="True"
                         BackgroundColor="#CC6767"
                         HeightRequest="100"
                         WidthRequest="350"
                         CornerRadius="50">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
                                       CommandParameter="{Binding Id}"/>
-                        </Frame.GestureRecognizers>
-                        <Grid RowDefinitions="*,Auto">
-                            <Image Grid.Row="0"
+                    </Frame.GestureRecognizers>
+                    <Grid RowDefinitions="*,Auto">
+                        <Image Grid.Row="0"
                         Aspect="AspectFill"
                         Source="{Binding ImageUrl}" />
-                            <Label Grid.Row="1"
+                        <Label Grid.Row="1"
                         Text="{Binding Name}"
                         HorizontalOptions="Center"
-                        FontSize="14"
+                        FontSize="25"
+                        FontFamily="Poppins"
                         TextColor="White"/>
-                        </Grid>
-                    </Frame>
+                    </Grid>
+                </Frame>
 
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
         </CollectionView>
         <Button Grid.Row="2"
                 Grid.Column="0"
@@ -61,6 +64,7 @@
                 TextColor="White"
                 Text="+"
                 FontSize="95"
+                FontFamily="Poppins"
                 Padding="0,0,0,5"
                 Clicked="DisplayPopup" />
     </Grid>
