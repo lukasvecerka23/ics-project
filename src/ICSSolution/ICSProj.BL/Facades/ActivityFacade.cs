@@ -31,6 +31,37 @@ public class ActivityFacade :
         return conflictingActivity;
     }
 
+    public async Task<ActivityDetailModel> SaveAsync(Guid userId, ActivityDetailModel activity)
+    {
+        if (await HasMoreActivitiesAtTheSameTime(userId, activity) == true)
+        {
+            throw new Exception("There are conflicting activities");
+        }
+
+        ActivityDetailModel result;
+
+        ActivityEntity entity = ModelMapper.MapToEntity(activity);
+
+        IUnitOfWork uow = UnitOfWorkFactory.Create();
+        IRepository<ActivityEntity> repository = uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
+
+        if (await repository.ExistsAsync(entity))
+        {
+            ActivityEntity updatedEntity = await repository.UpdateAsync(entity);
+            result = ModelMapper.MapToDetailModel(updatedEntity);
+        }
+        else
+        {
+            entity.Id = Guid.NewGuid();
+            ActivityEntity insertedEntity = await repository.InsertAsync(entity);
+            result = ModelMapper.MapToDetailModel(insertedEntity);
+        }
+
+        await uow.CommitAsync();
+
+        return result;
+    }
+
     public async Task<IEnumerable<ActivityListModel>> FilterActivities(Guid userId, DateTime startDate, DateTime endDate, Guid? projectId, Guid? tagId)
     {
         IRepository<ActivityEntity> activityRepository = UnitOfWorkFactory.Create().GetRepository<ActivityEntity, ActivityEntityMapper>();

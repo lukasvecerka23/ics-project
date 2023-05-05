@@ -15,20 +15,29 @@
                         ItemsSource="{Binding Activities}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ActivityListModel">
-                    <Grid WidthRequest="150"
-                          HeightRequest="150"
-                          Margin="5"
-                          RowDefinitions="*,Auto"
-                          BackgroundColor="Aqua">
-                            <Label Grid.Row="0"
-                                   Text="{Binding Description}"
-                                   HorizontalOptions="Center"
-                                   FontSize="14"/>
-                            <Label Grid.Row="1"
-                                   Text="{Binding Duration}"
-                                   HorizontalOptions="Center"
-                                   FontSize="14" />
+                    <Frame WidthRequest="150"
+                           HeightRequest="150"
+                           IsClippedToBounds="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                                  CommandParameter="{Binding Id}"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid WidthRequest="150"
+                              HeightRequest="150"
+                              Margin="5"
+                              RowDefinitions="*,Auto"
+                              BackgroundColor="Aqua">
+                                <Label Grid.Row="0"
+                                       Text="{Binding Description}"
+                                       HorizontalOptions="Center"
+                                       FontSize="14"/>
+                                <Label Grid.Row="1"
+                                       Text="{Binding Duration}"
+                                       HorizontalOptions="Center"
+                                       FontSize="14" />
                         </Grid>
+                    </Frame>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>

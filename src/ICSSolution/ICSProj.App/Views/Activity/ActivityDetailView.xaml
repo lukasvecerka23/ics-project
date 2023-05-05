@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICSProj.App.Views;assembly=ICSProj.App"
+                       xmlns:vm="clr-namespace:ICSProj.App.ViewModels;assembly=ICSProj.App"
+                       x:Class="ICSProj.App.Views.Activity.ActivityDetailView"
+                       x:DataType="vm:ActivityDetailViewModel">
+    <Grid RowDefinitions="*,Auto">
+        <Label Grid.Row="0" Text="{Binding Activity.Description}" TextColor="White" FontSize="20"/>
+        <Button Grid.Row="1" Text="Delete" Command="{Binding DeleteCommand}"/>
+    </Grid>
+</views:ContentPageBase>

@@ -101,7 +101,6 @@
 
     <ItemGroup>
       <Folder Include="Messages\" />
-      <Folder Include="Messages\" />
     </ItemGroup>
 
 </Project>
