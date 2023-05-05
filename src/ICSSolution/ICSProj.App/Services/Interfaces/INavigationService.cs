@@ -15,4 +15,6 @@ public interface INavigationService
 
     Task GoToAsync<TViewModel>()
         where TViewModel : IViewModel;
+
+    bool SendBackButtonPressed();
 }

@@ -13,8 +13,12 @@ public class NavigationService: INavigationService
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
         new("//users", typeof(UserListView), typeof(UserListViewModel)),
+
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
+        new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
+
         new("//tags", typeof(TagListView), typeof(TagListViewModel)),
         //new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel))
     };
@@ -42,4 +46,7 @@ public class NavigationService: INavigationService
     private string GetRouteByViewModel<TViewModel>()
         where TViewModel : IViewModel
         => Routes.First(route => route.ViewModelType == typeof(TViewModel)).Route;
+
+    public bool SendBackButtonPressed()
+        => Shell.Current.SendBackButtonPressed();
 }
