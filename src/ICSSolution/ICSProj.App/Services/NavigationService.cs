@@ -1,4 +1,5 @@
 using ICSProj.App.Models;
+using CommunityToolkit.Maui.Views;
 using ICSProj.App.ViewModels;
 using ICSProj.App.Views.Activity;
 using ICSProj.App.Views.Project;
@@ -13,10 +14,15 @@ public class NavigationService: INavigationService
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
         new("//users", typeof(UserListView), typeof(UserListViewModel)),
+
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
+        new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
+        new("//projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
+
         new("//tags", typeof(TagListView), typeof(TagListViewModel)),
-        //new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel))
+        new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
@@ -30,6 +36,7 @@ public class NavigationService: INavigationService
         where TViewModel : IViewModel
     {
         var route = GetRouteByViewModel<TViewModel>();
+        Console.WriteLine(route);
         await Shell.Current.GoToAsync(route, parameters);
     }
 
@@ -42,4 +49,12 @@ public class NavigationService: INavigationService
     private string GetRouteByViewModel<TViewModel>()
         where TViewModel : IViewModel
         => Routes.First(route => route.ViewModelType == typeof(TViewModel)).Route;
+
+    public bool SendBackButtonPressed()
+        => Shell.Current.SendBackButtonPressed();
+
+    public async Task ShowPopupAsync(Popup showPopup)
+    {
+        await Shell.Current.ShowPopupAsync(showPopup);
+    }
 }

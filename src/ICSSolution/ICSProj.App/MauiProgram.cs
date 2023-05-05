@@ -36,6 +36,8 @@ public static class MauiProgram
     {
         foreach (var route in navigationService.Routes)
         {
+            Console.WriteLine(route.Route);
+            Console.WriteLine(route.ViewType);
             Routing.RegisterRoute(route.Route, route.ViewType);
         }
     }

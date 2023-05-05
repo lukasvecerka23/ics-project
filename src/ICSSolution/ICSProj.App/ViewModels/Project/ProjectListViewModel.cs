@@ -1,10 +1,12 @@
+using CommunityToolkit.Mvvm.Input;
 using ICSProj.App.Services;
+using ICSProj.App.Views.Popups;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
 
 namespace ICSProj.App.ViewModels;
 
-public class ProjectListViewModel: ViewModelBase
+public partial class ProjectListViewModel: ViewModelBase
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
@@ -27,5 +29,18 @@ public class ProjectListViewModel: ViewModelBase
     {
         await base.LoadDataAsync();
         Projects = await _projectFacade.GetAsync();
+    }
+
+    [RelayCommand]
+    private async Task GoToDetailAsync(Guid id)
+    {
+        await _navigationService.GoToAsync<ProjectDetailViewModel>(
+            new Dictionary<string, object?> { [nameof(ProjectDetailViewModel.Id)] = id });
+    }
+
+    [RelayCommand]
+    private async Task ShowMenuPopupAsync()
+    {
+        await _navigationService.ShowPopupAsync(new MenuPopupView());
     }
 }

@@ -15,13 +15,13 @@
                         ItemsSource="{Binding Projects}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ProjectListModel">
-                    <!-- <Frame WidthRequest="150" -->
-                    <!--        HeightRequest="150" -->
-                    <!--        IsClippedToBounds="True"> -->
-                    <!--     <Frame.GestureRecognizers> -->
-                    <!--         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}" -->
-                    <!--                               CommandParameter="{Binding Id}"/> -->
-                    <!--     </Frame.GestureRecognizers> -->
+                    <Frame WidthRequest="150"
+                           HeightRequest="150"
+                           IsClippedToBounds="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                                  CommandParameter="{Binding Id}"/>
+                        </Frame.GestureRecognizers>
 
                         <Grid WidthRequest="150"
                               HeightRequest="150"
@@ -40,7 +40,7 @@
                                    HorizontalOptions="Center"
                                    FontSize="14" />
                         </Grid>
-                    <!-- </Frame> -->
+                    </Frame>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -48,5 +48,16 @@
         <!-- <Button Grid.Row="1" -->
         <!--         Text="Add New User" -->
         <!--         Clicked="DisplayPopup" /> -->
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            VerticalOptions="End"
+            HorizontalOptions="Start"
+            BackgroundColor="Orange"
+            Text="Menu"
+            x:Name="MenuButton"
+            TextColor="Black"
+            FontSize="40"
+            Command="{Binding ShowMenuPopupCommand}" />
     </Grid>
 </views:ContentPageBase>
