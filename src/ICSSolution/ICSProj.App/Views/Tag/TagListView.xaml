@@ -40,5 +40,16 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            VerticalOptions="End"
+            HorizontalOptions="Start"
+            BackgroundColor="Orange"
+            Text="Menu"
+            x:Name="MenuButton"
+            TextColor="Black"
+            FontSize="40"
+            Command="{Binding ShowMenuPopupCommand}" />
     </Grid>
 </views:ContentPageBase>

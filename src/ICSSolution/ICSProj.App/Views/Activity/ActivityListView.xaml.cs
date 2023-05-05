@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Views;
+using ICSProj.App.Services;
 using ICSProj.App.ViewModels;
 using ICSProj.App.Views.Popups;
 
@@ -11,10 +12,10 @@ public partial class ActivityListView
         InitializeComponent();
     }
 
-    public void DisplayPopup(object sender, EventArgs e)
-    {
-        var userCreationPopup = new MenuPopupView();
-        this.ShowPopupAsync(userCreationPopup);
-    }
+    // public void DisplayPopup(object sender, EventArgs e)
+    // {
+    //     var menuPopup = new MenuPopupView(BindingContext);
+    //     this.ShowPopupAsync(menuPopup);
+    // }
 }
 

@@ -46,12 +46,12 @@ public partial class UserListViewModel : ViewModelBase
         await _navigationService.GoToAsync<ActivityListViewModel>();
     }
 
-    [RelayCommand]
-    private async Task GoToTagsAsync(Guid userId)
-    {
-        _loginService.CurrentUserId = userId;
-        await _navigationService.GoToAsync<TagListViewModel>();
-    }
+    // [RelayCommand]
+    // private async Task GoToTagsAsync(Guid userId)
+    // {
+    //     _loginService.CurrentUserId = userId;
+    //     await _navigationService.GoToAsync<TagListViewModel>();
+    // }
 
 
 

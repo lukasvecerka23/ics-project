@@ -53,8 +53,8 @@
                 x:Name="MenuButton"
                 TextColor="Black"
                 FontSize="40"
-                Clicked="DisplayPopup" />
+                Command="{Binding ShowMenuPopupCommand}" />
     </Grid>
-    
+
 
 </views:ContentPageBase>

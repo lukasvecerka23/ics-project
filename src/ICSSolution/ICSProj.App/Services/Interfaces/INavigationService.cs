@@ -1,4 +1,5 @@
 using ICSProj.App.ViewModels;
+using CommunityToolkit.Maui.Views;
 using ICSProj.App.Models;
 
 namespace ICSProj.App.Services;
@@ -17,4 +18,6 @@ public interface INavigationService
         where TViewModel : IViewModel;
 
     bool SendBackButtonPressed();
+
+    Task ShowPopupAsync(Popup showPopup);
 }

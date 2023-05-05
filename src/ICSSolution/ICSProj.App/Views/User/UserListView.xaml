@@ -19,7 +19,7 @@
                            HeightRequest="150"
                            IsClippedToBounds="True">
                         <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToTagsCommand}"
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
                                                   CommandParameter="{Binding Id}"/>
                         </Frame.GestureRecognizers>
 
