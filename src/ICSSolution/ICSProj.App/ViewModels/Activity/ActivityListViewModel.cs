@@ -10,16 +10,26 @@ namespace ICSProj.App.ViewModels;
 public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDeleteMessage>
 {
     private readonly IActivityFacade _activityFacade;
+    private readonly ITagFacade _tagFacade;
+    private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
-
+    private string tagName = null;
+    private string projectName = null;
+    private DateTime start = DateTime.MinValue;
+    private DateTime end = DateTime.MaxValue;
+    
     public ActivityListViewModel(
         IActivityFacade activityFacade,
+        ITagFacade tagFacade,
+        IProjectFacade projectFacade,
         INavigationService navigationService,
         ILoginService loginService,
         IMessengerService messengerService) : base(messengerService)
     {
         _activityFacade = activityFacade;
+        _tagFacade = tagFacade;
+        _projectFacade = projectFacade;
         _navigationService = navigationService;
         _loginService = loginService;
     }
@@ -29,8 +39,13 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        var activities = await _activityFacade.GetAsync();
-        Activities = activities.Where(activity => activity.CreatorId == _loginService.CurrentUserId);
+        var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
+        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == tagName)?.Id;
+
+        var projectsByUser = await _projectFacade.GetAsync();
+        var projectId = projectsByUser?.FirstOrDefault(project => project.Name == projectName)?.Id;
+
+        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, start, end, projectId, tagId);
     }
 
     [RelayCommand]
