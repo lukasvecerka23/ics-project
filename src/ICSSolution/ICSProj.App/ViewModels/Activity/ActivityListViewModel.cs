@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using ICSProj.App.Messages;
 using ICSProj.App.Services;
+using ICSProj.App.Views.Popups;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
 
@@ -56,6 +57,12 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     public async void Receive(ActivityDeleteMessage message)
     {
         await LoadDataAsync();
+    }
+
+    [RelayCommand]
+    private async Task ShowMenuPopupAsync()
+    {
+        await _navigationService.ShowPopupAsync(new MenuPopupView());
     }
 
 }

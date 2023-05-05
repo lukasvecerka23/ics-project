@@ -14,19 +14,19 @@ public partial class MenuPopupViewModel
 
 
     [RelayCommand]
-    private async Task GoToActivitiesAsync(Guid userId)
+    private async Task GoToActivitiesAsync()
     {
         await _navigationService.GoToAsync<ActivityListViewModel>();
     }
 
     [RelayCommand]
-    private async Task GoToTagsAsync(Guid userId)
+    private async Task GoToTagsAsync()
     {
         await _navigationService.GoToAsync<TagListViewModel>();
     }
 
     [RelayCommand]
-    private async Task GoToProjectsAsync(Guid userId)
+    private async Task GoToProjectsAsync()
     {
         await _navigationService.GoToAsync<ProjectListViewModel>();
     }

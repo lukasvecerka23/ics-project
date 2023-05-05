@@ -1,4 +1,5 @@
 using ICSProj.App.Models;
+using CommunityToolkit.Maui.Views;
 using ICSProj.App.ViewModels;
 using ICSProj.App.Views.Activity;
 using ICSProj.App.Views.Project;
@@ -28,6 +29,7 @@ public class NavigationService: INavigationService
     {
         var route = GetRouteByViewModel<TViewModel>();
         Console.WriteLine(route);
+        Console.WriteLine(Shell.Current);
         await Shell.Current.GoToAsync(route);
     }
     public async Task GoToAsync<TViewModel>(IDictionary<string, object?> parameters)
@@ -49,4 +51,9 @@ public class NavigationService: INavigationService
 
     public bool SendBackButtonPressed()
         => Shell.Current.SendBackButtonPressed();
+
+    public async Task ShowPopupAsync(Popup showPopup)
+    {
+        await Shell.Current.ShowPopupAsync(showPopup);
+    }
 }
