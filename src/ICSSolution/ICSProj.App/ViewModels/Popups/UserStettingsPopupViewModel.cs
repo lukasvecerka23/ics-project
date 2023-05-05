@@ -11,4 +11,11 @@ public partial class UserSettingsPopupViewModel
     {
         _navigationService = navigationService;
     }
+
+    [RelayCommand]
+    private async Task GoToUserList()
+    {
+        await _navigationService.GoToAsync<UserListViewModel>();
+    }
+
 }

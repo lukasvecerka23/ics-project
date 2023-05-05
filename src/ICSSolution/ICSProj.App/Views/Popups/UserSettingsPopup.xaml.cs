@@ -11,7 +11,7 @@ public partial class UserSettingsPopupView : Popup
 
         InitializeComponent();
 
-        //BindingContext = new MenuPopupViewModel(new NavigationService());
+        BindingContext = new UserSettingsPopupViewModel(new NavigationService());
     }
 
     private void ClosePopup(object sender, EventArgs e)
