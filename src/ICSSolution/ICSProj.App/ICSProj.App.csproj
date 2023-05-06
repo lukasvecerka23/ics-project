@@ -77,6 +77,9 @@
       <MauiXaml Update="Views\Tag\TagDetailView.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Views\User\UserProfileView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -92,6 +95,9 @@
       </Compile>
       <Compile Update="Views\Tag\TagDetailView.xaml.cs">
         <DependentUpon>TagDetailView.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\User\UserProfileView.xaml.cs">
+        <DependentUpon>UserProfileView.xaml</DependentUpon>
       </Compile>
     </ItemGroup>
 

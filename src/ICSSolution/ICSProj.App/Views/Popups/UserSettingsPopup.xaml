@@ -11,6 +11,7 @@
         <Button
             Grid.Row="0"
             BackgroundColor="Orange"
+            Command="{Binding GoToUserProfileCommand}"
             Clicked="ClosePopup"
             Text="Settings"
             FontSize="18"

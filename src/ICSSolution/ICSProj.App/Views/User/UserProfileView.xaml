@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICSProj.App.Views"
+                       xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                       xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+                       x:DataType="vm:UserProfileViewModel"
+                       x:Class="ICSProj.App.Views.User.UserProfileView"
+                       x:Name="UserProfileViewRoot">
+    <Grid
+        RowDefinitions="150,*,*,*">
+        <Label
+            Grid.Row="0"
+            Text="Profile Picture"
+            TextColor="White"
+            BackgroundColor="Black"
+            FontSize="50"
+            FontAttributes="Bold"
+            VerticalTextAlignment="Center"
+            HorizontalOptions="Center"/>
+        <Label
+            Grid.Row="1"
+            BackgroundColor="Black"
+            Text="Change User Profile Picture"
+            TextColor="White"
+            FontSize="35"
+            FontAttributes="Bold"
+            VerticalTextAlignment="Center"
+            HorizontalOptions="Center"/>
+        <Label
+            Grid.Row="2"
+            BackgroundColor="Black"
+            Text="User Name"
+            TextColor="White"
+            FontSize="50"
+            FontAttributes="Bold"
+            VerticalTextAlignment="Center"
+            HorizontalOptions="Center"/>
+        <Label
+            Grid.Row="3"
+            BackgroundColor="Black"
+            Text="Delete User"
+            TextColor="White"
+            FontSize="50"
+            FontAttributes="Bold"
+            VerticalTextAlignment="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
+    </views:ContentPageBase>

@@ -22,6 +22,7 @@ public class NavigationService: INavigationService
 
         new("//tags", typeof(TagListView), typeof(TagListViewModel)),
         //new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel))
+        new("//user/detail", typeof(UserProfileView), typeof(UserProfileViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()
