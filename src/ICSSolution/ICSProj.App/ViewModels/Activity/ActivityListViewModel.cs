@@ -11,31 +11,25 @@ namespace ICSProj.App.ViewModels;
 public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDeleteMessage>
 {
     private readonly IActivityFacade _activityFacade;
-    private readonly ITagFacade _tagFacade;
-    private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
-    public string TagName { get; set; }
+    public TagListModel Tag { get; set; }
     public ProjectAssignListModel Project  { get; set; }
     public DateTime Start { get; set; } = DateTime.Today;
     public DateTime End  { get; set; } = DateTime.Today;
 
     public ActivityListViewModel(
         IActivityFacade activityFacade,
-        ITagFacade tagFacade,
-        IProjectFacade projectFacade,
         INavigationService navigationService,
         ILoginService loginService,
         IMessengerService messengerService) : base(messengerService)
     {
         _activityFacade = activityFacade;
-        _tagFacade = tagFacade;
-        _projectFacade = projectFacade;
         _navigationService = navigationService;
         _loginService = loginService;
-        Tags = _tagFacade.GetTagsByUser(_loginService.CurrentUserId).Result;
+        Tags = _loginService.CurrentUser.Tags;
         Projects = _loginService.CurrentUser.ProjectAssigns;
     }
 
@@ -73,10 +67,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     [RelayCommand]
     private async Task FilterAsync()
     {
-        var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
-        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == TagName)?.Id;
-
-        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, Project.ProjectId, tagId);
+        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, Project.ProjectId, Tag.Id);
     }
 
 }
