@@ -33,6 +33,11 @@ public partial class UserProfileViewModel : ViewModelBase
         User = await _userFacade.GetAsync(_loginService.CurrentUserId);
     }
 
+    public async Task GetBackToUserList()
+    {
+        await _navigationService.GoToAsync<UserListViewModel>();
+    }
+
     [RelayCommand]
     private async Task DeleteAsync()
     {
@@ -43,12 +48,20 @@ public partial class UserProfileViewModel : ViewModelBase
             _navigationService.SendBackButtonPressed();
         }
 
-        await _navigationService.GoToAsync<UserListViewModel>();
+        //TODO move it to OnButtonClicked method
+        
     }
 
     [RelayCommand]
     private async Task GoToUserListAsync()
     {
         await _navigationService.GoToAsync<UserListViewModel>();
+    }
+
+    [RelayCommand]
+    private async Task SaveChangesAsync()
+    {
+        await _userFacade.SaveAsync(User);
+        MessengerService.Send(new UserEditMessage(){UserId = _loginService.CurrentUserId});
     }
 }

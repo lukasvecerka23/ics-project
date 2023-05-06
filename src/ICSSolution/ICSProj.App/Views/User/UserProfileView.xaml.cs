@@ -7,13 +7,16 @@ namespace ICSProj.App.Views.User;
 
 public partial class UserProfileView
 {
+    private readonly UserProfileViewModel _viewModel;
+
 	public UserProfileView(UserProfileViewModel viewModel): base(viewModel)
 	{
 		InitializeComponent();
+        _viewModel = viewModel;
 	}
 
-    private void Clicked(object sender, EventArgs e)
+    async void OnClickedButton(object sender, EventArgs e)
     {
-        
+        await _viewModel.GetBackToUserList();
     }
 }

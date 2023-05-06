@@ -9,51 +9,95 @@
                        x:Name="UserProfileViewRoot">
     <Grid
         RowDefinitions="150,*,*,*,*">
-        <Label
+        <Image
             Grid.Row="0"
-            Text="{Binding User.ImageUrl}"
-            TextColor="White"
+            Source="{Binding User.ImageUrl, TargetNullValue='user_placeholder.jpg'}"
             BackgroundColor="Black"
-            FontSize="50"
-            FontAttributes="Bold"
-            VerticalTextAlignment="Center"
+            Aspect="AspectFill"
+            WidthRequest="80" HeightRequest="80"
             HorizontalOptions="Center"/>
-        <Label
+        <Entry
             Grid.Row="1"
             BackgroundColor="Black"
-            Text="Change User Profile Picture"
             TextColor="White"
             FontSize="35"
+            Text="{Binding User.ImageUrl}"
             FontAttributes="Bold"
-            VerticalTextAlignment="Center"
+            VerticalOptions="Center"
             HorizontalOptions="Center"/>
-        <Label
-            Grid.Row="2"
-            BackgroundColor="Black"
-            Text="{Binding User.Name}"
-            TextColor="White"
-            FontSize="50"
-            FontAttributes="Bold"
-            VerticalTextAlignment="Center"
-            HorizontalOptions="Center"/>
-        <Label
-            Grid.Row="3"
-            BackgroundColor="Black"
-            Text="{Binding User.Surname}"
-            TextColor="White"
-            FontSize="50"
-            FontAttributes="Bold"
-            VerticalTextAlignment="Center"
-            HorizontalOptions="Center"
-            />
-        <Button
+        <Grid Grid.Row="2"
+              RowDefinitions="Auto"
+              ColumnDefinitions="*,400"
+              HorizontalOptions="Center">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="Black"
+                Text="Name:"
+                TextColor="White"
+                FontSize="50"
+                FontAttributes="Bold"
+                VerticalTextAlignment="Center"></Label>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="Black"
+                Text="{Binding User.Name}"
+                TextColor="White"
+                FontSize="50"
+                FontAttributes="Bold"
+                VerticalTextAlignment="Center"
+                HorizontalOptions="Center"/>
+        </Grid>
+        <Grid Grid.Row="3"
+              RowDefinitions="Auto"
+              ColumnDefinitions="*,400"
+              HorizontalOptions="Center">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="Black"
+                Text="Surname:"
+                TextColor="White"
+                FontSize="50"
+                FontAttributes="Bold"
+                VerticalTextAlignment="Center"></Label>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="Black"
+                Text="{Binding User.Surname}"
+                TextColor="White"
+                FontSize="50"
+                FontAttributes="Bold"
+                VerticalTextAlignment="Center"
+                HorizontalOptions="Center"/>
+        </Grid>
+        <Grid Grid.Row="4"
+              RowDefinitions="Auto"
+              ColumnDefinitions="*,400"
+              HorizontalOptions="Center">
+            <Button
             Grid.Row="4"
+            Grid.Column="0"
             BackgroundColor="Black"
             Text="Delete User"
             TextColor="White"
             FontSize="50"
             FontAttributes="Bold"
             Command="{Binding DeleteCommand}"
+            Clicked="OnClickedButton"
             HorizontalOptions="Center"/>
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                BackgroundColor="Black"
+                Text="save changes"
+                TextColor="White"
+                FontSize="50"
+                FontAttributes="Bold"
+                Command="{Binding SaveChangesCommand}"
+                HorizontalOptions="Center"/>
+        </Grid>
     </Grid>
     </views:ContentPageBase>

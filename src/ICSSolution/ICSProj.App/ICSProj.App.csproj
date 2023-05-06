@@ -53,6 +53,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="Resources\Images\user_placeholder.jpg" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
         <PackageReference Include="Fody" Version="6.7.0">

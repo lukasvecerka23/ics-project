@@ -1,11 +1,13 @@
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using ICSProj.App.Messages;
 using ICSProj.App.Services;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
 
 namespace ICSProj.App.ViewModels;
 
-public partial class UserListViewModel : ViewModelBase
+public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessage>, IRecipient<UserDeleteMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
@@ -53,7 +55,15 @@ public partial class UserListViewModel : ViewModelBase
     //     await _navigationService.GoToAsync<TagListViewModel>();
     // }
 
+    public async void Receive(UserEditMessage message)
+    {
+        await LoadDataAsync();
+    }
 
+    public async void Receive(UserDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
 
     // TODO: Add command for deleting user
     // TODO: Add command for creating new user
