@@ -8,9 +8,8 @@
              x:DataType="vm:UserListViewModel"
              x:Name="UserListViewRoot"
              x:Class="ICSProj.App.Views.User.UserListView">
-
+    
     <Grid RowDefinitions="Auto, *, Auto">
-
         <Label Grid.Row="0"
                Text="Výběr uživatele"
                FontSize="40"
@@ -26,14 +25,14 @@
                         ItemsSource="{Binding Users}">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="m:UserListModel">
-                <Frame Grid.Column="0"
+                    <Frame Grid.Column="0"
                         Margin="8"
                         IsClippedToBounds="True"
                         BackgroundColor="#CC6767"
                         HeightRequest="100"
                         WidthRequest="350"
                         CornerRadius="50">
-                    <Frame.GestureRecognizers>
+                        <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
                                       CommandParameter="{Binding Id}"/>
                     </Frame.GestureRecognizers>

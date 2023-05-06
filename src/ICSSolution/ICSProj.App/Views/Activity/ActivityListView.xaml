@@ -8,8 +8,98 @@
                        x:DataType="vm:ActivityListViewModel"
                        x:Class="ICSProj.App.Views.Activity.ActivityListView"
                        x:Name="ActivityListViewRoot">
-    <Grid RowDefinitions="*,Auto">
-        <CollectionView Grid.Row="0"
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+            <Label Grid.Column="0" Text="Aktivity"
+               FontSize="40"
+               FontFamily="PoppinsLight"
+               TextColor="#CC6767"
+               Margin="30"
+               HorizontalOptions="Start"  />
+            <Frame Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="30" HorizontalOptions="End">
+                <Image
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                    Aspect="AspectFill"
+                    WidthRequest="80" HeightRequest="80"
+                    Source="user_placeholder.jpg"/>
+            </Frame>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="0"
+                StrokeShape="RoundRectangle 25,25,25,25"
+                Background="#CC6767"
+                Padding="16,8"
+                HorizontalOptions="Center">
+                <Label Text=" Od: "
+                    TextColor="White"
+                    FontFamily="PoppinsExtraLight"
+                    HorizontalOptions="Start"
+                    FontSize="20"
+                    FontAttributes="Bold" />
+            </Border>
+            <Border
+                Grid.Column="1"
+                StrokeShape="RoundRectangle 25,25,25,25"
+                Background="#CC6767"
+                Padding="16,8"
+                HorizontalOptions="Center">
+                <DatePicker
+                    Date="{Binding Start}"
+                    />
+            </Border>
+            <Border
+                Grid.Column="2"
+                StrokeShape="RoundRectangle 20,20,20,20"
+                Background="#CC6767"
+                Padding="16,8"
+                HorizontalOptions="Center">
+                <Label Text=" Do:"
+                    TextColor="White"
+                    FontFamily="PoppinsExtraLight"
+                    FontSize="20"
+                    FontAttributes="Bold" />
+            </Border>
+            <Border
+                Grid.Column="4"
+                StrokeShape="RoundRectangle 20,20,20,20"
+                Background="#CC6767"
+                Padding="16,8"
+                HorizontalOptions="Center">
+                <Label Text=" Projekt:"
+                    TextColor="White"
+                    FontFamily="PoppinsExtraLight"
+                    FontSize="20"
+                    FontAttributes="Bold" />
+            </Border>
+            <Border
+                Grid.Column="6"
+                StrokeShape="RoundRectangle 20,20,20,20"
+                Background="#CC6767"
+                Padding="16,8"
+                HorizontalOptions="Center">
+                <Label Text=" Tag:"
+                    TextColor="White"
+                    FontFamily="PoppinsExtraLight"
+                    FontSize="20"
+                    FontAttributes="Bold" />
+            </Border>
+        </Grid>
+        <CollectionView Grid.Row="2"
                         x:Name="ActivityList"
                         ItemsLayout="HorizontalList"
                         ItemsSource="{Binding Activities}">
@@ -28,11 +118,11 @@
                               Margin="5"
                               RowDefinitions="*,Auto"
                               BackgroundColor="Aqua">
-                                <Label Grid.Row="0"
+                            <Label Grid.Row="0"
                                        Text="{Binding Description}"
                                        HorizontalOptions="Center"
                                        FontSize="14"/>
-                                <Label Grid.Row="1"
+                            <Label Grid.Row="1"
                                        Text="{Binding Duration}"
                                        HorizontalOptions="Center"
                                        FontSize="14" />
@@ -44,7 +134,7 @@
 
         </CollectionView>
         <Button
-                Grid.Row="1"
+                Grid.Row="3"
                 Grid.Column="0"
                 VerticalOptions="End"
                 HorizontalOptions="Start"
@@ -55,6 +145,4 @@
                 FontSize="40"
                 Command="{Binding ShowMenuPopupCommand}" />
     </Grid>
-
-
 </views:ContentPageBase>
