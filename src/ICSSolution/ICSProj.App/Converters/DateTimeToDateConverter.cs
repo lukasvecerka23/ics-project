@@ -3,9 +3,9 @@ using System.Globalization;
 
 namespace ICSProj.App.Converters;
 
-public class DateTimeToDateConverter : BaseConverterOneWay<DateTime, DateTime>
+public class DateTimeToDateConverter : BaseConverterOneWay<DateTime, DateOnly>
 {
-    public override DateTime ConvertFrom(DateTime value, CultureInfo? culture)
-        => value.Date;
-    public override DateTime DefaultConvertReturnValue { get; set; } = DateTime.MinValue;
+    public override DateOnly ConvertFrom(DateTime value, CultureInfo? culture)
+        => DateOnly.FromDateTime(value);
+    public override DateOnly DefaultConvertReturnValue { get; set; } = DateOnly.MinValue;
 }
