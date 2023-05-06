@@ -15,8 +15,8 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private readonly ILoginService _loginService;
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
-    public TagListModel Tag { get; set; }
-    public ProjectAssignListModel Project  { get; set; }
+    public TagListModel Tag { get; set; } = null!;
+    public ProjectAssignListModel Project  { get; set; } = null!;
     public DateTime Start { get; set; } = DateTime.Today;
     public DateTime End  { get; set; } = DateTime.Today;
 
@@ -29,8 +29,6 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         _activityFacade = activityFacade;
         _navigationService = navigationService;
         _loginService = loginService;
-        Tags = _loginService.CurrentUser.Tags;
-        Projects = _loginService.CurrentUser.ProjectAssigns;
     }
 
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
@@ -40,6 +38,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         await base.LoadDataAsync();
 
         Activities = _activityFacade.GetAsync().Result.Where(activity => activity.CreatorId == _loginService.CurrentUserId);
+        RefreshFilter();
     }
 
     [RelayCommand]
@@ -67,7 +66,21 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     [RelayCommand]
     private async Task FilterAsync()
     {
+        Console.WriteLine(Project.ProjectId);
+        Console.WriteLine(Tag.Id);
         Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, Project.ProjectId, Tag.Id);
+        RefreshFilter();
+    }
+
+    private void RefreshFilter()
+    {
+        Tags = _loginService.CurrentUser.Tags;
+        Console.WriteLine(Tags.Count());
+        Projects = _loginService.CurrentUser.ProjectAssigns;
+        Tag = null;
+        Project = null;
+        End = DateTime.Today;
+        Start = DateTime.Today;
     }
 
 }

@@ -12,6 +12,8 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:ProjectNameToStringConverter x:Key="ProjectNameToStringConverter" />
+            <converters:TagNameToStringConverter x:Key="TagNameToStringConverter" />
+            <converters:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

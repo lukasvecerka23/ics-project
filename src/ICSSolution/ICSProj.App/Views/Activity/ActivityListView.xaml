@@ -9,14 +9,33 @@
                        x:Class="ICSProj.App.Views.Activity.ActivityListView"
                        x:Name="ActivityListViewRoot">
     <Grid RowDefinitions="Auto,Auto,Auto, *, Auto">
-        <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+        <Grid Grid.Row="0" ColumnDefinitions="*,150,100">
             <Label Grid.Column="0" Text="Aktivity"
                FontSize="40"
                FontFamily="PoppinsLight"
                TextColor="#CC6767"
                Margin="30,15,30,30"
                HorizontalOptions="Start"  />
-            <ImageButton Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="10" HorizontalOptions="End"
+            <Border
+                Grid.Column="1"
+                StrokeShape="RoundRectangle 20,20,20,20"
+                Background="#CC6767"
+                Padding="16,8"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                VerticalOptions="End">
+                <Button Grid.Column="8"
+                    Margin="0,-10,0,0"
+                    Text="Filtrovat"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="20"
+                    FontFamily="PoppinsLight"
+                    TextColor="White"
+                    BorderWidth="0"
+                    BackgroundColor="Transparent"/>
+            </Border>
+            <ImageButton Grid.Column="2" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="10" HorizontalOptions="End"
                     x:Name="UserSettingsButton"
                     Source="user_placeholder.jpg"
                     Command="{Binding ShowUserSettingsCommand}"/>
@@ -34,7 +53,7 @@
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Border
@@ -89,6 +108,11 @@
                     FontAttributes="Bold" />
             </Border>
             <Border
+                Grid.Column="5"
+                HorizontalOptions="Start">
+            <Picker Grid.Column="3" ItemsSource="{Binding Projects }" ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}" SelectedItem="{Binding Project}"></Picker>
+            </Border>
+            <Border
                 Grid.Column="6"
                 StrokeShape="RoundRectangle 20,20,20,20"
                 Background="#CC6767"
@@ -100,6 +124,12 @@
                     FontSize="17"
                     FontAttributes="Bold" />
             </Border>
+            <Border
+                Grid.Column="7"
+                HorizontalOptions="Start">
+                <Picker Grid.Column="2"  ItemsSource="{Binding Tags}"  ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}" SelectedItem="{Binding Tag}"></Picker>
+            </Border>
+
         </Grid>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -196,7 +226,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0"
-                                Text="{Binding Start}"
+                                Text="{Binding Start,Converter={StaticResource DateTimeToDateConverter}}"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
                                 FontSize="20"
