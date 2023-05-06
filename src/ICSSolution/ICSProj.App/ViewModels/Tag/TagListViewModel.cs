@@ -57,6 +57,7 @@ public partial class TagListViewModel : ViewModelBase
         MessengerService.Send(new TagEditMessage { TagId = Tag.Id });
 
         await LoadDataAsync();
+        Tag = TagDetailModel.Empty;
 
         navigationService.SendBackButtonPressed();
     }
