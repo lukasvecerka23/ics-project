@@ -68,7 +68,6 @@
                 HorizontalOptions="End" VerticalOptions="Start"
                 Text="Add new tag"
                 Clicked="DisplayPopup"
-                FontSize="14"
-                Style="{StaticResource PrimaryButtonStyle}" />
+                FontSize="14"/>
     </Grid>
 </views:ContentPageBase>

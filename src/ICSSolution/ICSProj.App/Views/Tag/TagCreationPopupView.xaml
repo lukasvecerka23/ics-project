@@ -25,10 +25,10 @@
                    Text="{Binding Tag.Name}"
                    Placeholder="Enter tag name" />
         </Grid>
-        <!-- <Button Grid.Row="2" -->
-        <!--         Text="Add Tag" -->
-        <!--         HorizontalOptions="End" -->
-        <!--         Command="{Binding AddTagCommand}" -->
-        <!--         Clicked="ClosePopup"/> -->
+        <Button Grid.Row="2"
+                Text="Add Tag"
+                HorizontalOptions="End"
+                Command="{Binding AddTagCommand}"
+                Clicked="ClosePopup"/>
     </Grid>
 </toolkit:Popup>
