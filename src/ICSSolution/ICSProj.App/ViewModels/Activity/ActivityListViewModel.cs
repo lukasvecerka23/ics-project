@@ -19,7 +19,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private string projectName = null;
     private DateTime start = DateTime.MinValue;
     private DateTime end = DateTime.MaxValue;
-    
+
     public ActivityListViewModel(
         IActivityFacade activityFacade,
         ITagFacade tagFacade,
@@ -40,6 +40,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+        Console.WriteLine(_loginService.CurrentUserId);
         var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
         var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == tagName)?.Id;
 
@@ -47,6 +48,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         var projectId = projectsByUser?.FirstOrDefault(project => project.Name == projectName)?.Id;
 
         Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, start, end, projectId, tagId);
+        Console.WriteLine(Activities.Count());
     }
 
     [RelayCommand]

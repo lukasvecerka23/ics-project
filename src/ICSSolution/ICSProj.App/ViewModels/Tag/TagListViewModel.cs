@@ -14,6 +14,8 @@ public partial class TagListViewModel : ViewModelBase
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
 
+    public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
+
     public TagListViewModel(
         ITagFacade tagFacade,
         INavigationService navigationService,

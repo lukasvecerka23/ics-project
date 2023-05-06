@@ -68,14 +68,15 @@ public class ActivityFacade :
 
         var filteredActivities = activityRepository.Get();
 
+        filteredActivities = filteredActivities.Where(activity => activity.CreatorId == userId);
+
         if ((startDate != DateTime.MinValue) && (endDate != DateTime.MinValue))
         {
             filteredActivities = filteredActivities.Where(activity =>
-                activity.CreatorId == userId &&
-                ((activity.Start <= startDate && activity.End >= endDate) ||
-                (activity.Start >= startDate && activity.Start <= endDate) ||
-                (activity.End >= startDate && activity.End <= endDate) ||
-                (activity.Start >= startDate && activity.End <= endDate)));
+                (activity.Start <= startDate && activity.End >= endDate) ||
+                 (activity.Start >= startDate && activity.Start <= endDate) ||
+                 (activity.End >= startDate && activity.End <= endDate) ||
+                 (activity.Start >= startDate && activity.End <= endDate));
         }
         if (projectId != null)
         {
