@@ -16,7 +16,6 @@
                TextColor="White"
                FontFamily="PoppinsLight"
                FontSize="18"
-               FontAttributes="Bold"
                HorizontalOptions="Center" />
         <Grid Grid.Row="1"
               RowDefinitions="Auto, Auto, Auto"
@@ -54,7 +53,7 @@
                    Placeholder="např. https://image.com/picture.jpg"/>
         </Grid>
         <Button Grid.Row="2"
-                Text="Add User"
+                Text="Vytvořit"
                 HorizontalOptions="End"
                 Margin="0,20,0,0"
                 BackgroundColor="#C25454"

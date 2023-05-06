@@ -38,18 +38,8 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-<<<<<<< HEAD
-        var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
-        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == TagName)?.Id;
-
-        var projectsByUser = await _projectFacade.GetAsync();
-        var projectId = projectsByUser?.FirstOrDefault(project => project.Name == ProjectName)?.Id;
-
-        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, projectId, tagId);
-=======
 
         Activities = _activityFacade.GetAsync().Result.Where(activity => activity.CreatorId == _loginService.CurrentUserId);
->>>>>>> feature/add-view-models
     }
 
     [RelayCommand]

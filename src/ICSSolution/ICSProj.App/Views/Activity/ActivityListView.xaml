@@ -235,14 +235,16 @@
                                 FontFamily="PoppinsLight"
                                 TextColor="Black"
                                 Margin="0,0,0,0"/>
-                            <Label Grid.Column="5"
-                                Text="Detail"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                FontSize="20"
-                                FontFamily="PoppinsLight"
-                                TextColor="#CC6767"
-                                Margin="-15,0,0,0"/>
+                            <Button Grid.Column="5"
+                                    Margin="-15,-4,0,0"
+                                    Text="Detail"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    FontSize="20"
+                                    FontFamily="PoppinsLight"
+                                    TextColor="#CC6767"
+                                    BorderWidth="0"
+                                    BackgroundColor="Transparent"/>
                         </Grid>
                     </Border>
 
