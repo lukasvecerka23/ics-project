@@ -54,6 +54,17 @@
                 TextColor="Black"
                 FontSize="40"
                 Command="{Binding ShowMenuPopupCommand}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            BackgroundColor="Orange"
+            Text="Settings"
+            x:Name="UserSettingsButton"
+            TextColor="Black"
+            FontSize="40"
+            Command="{Binding ShowUserSettingsCommand}" />
     </Grid>
 
 

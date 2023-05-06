@@ -44,4 +44,10 @@ public partial class TagListViewModel : ViewModelBase
     {
         await _navigationService.ShowPopupAsync(new MenuPopupView());
     }
+
+    [RelayCommand]
+    private async Task ShowUserSettingsAsync()
+    {
+        await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
+    }
 }
