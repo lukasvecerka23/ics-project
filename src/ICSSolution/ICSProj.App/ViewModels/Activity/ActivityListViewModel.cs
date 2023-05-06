@@ -40,7 +40,6 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Console.WriteLine(_loginService.CurrentUserId);
         var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
         var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == tagName)?.Id;
 
