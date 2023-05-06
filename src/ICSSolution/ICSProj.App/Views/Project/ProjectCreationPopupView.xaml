@@ -18,7 +18,7 @@
               RowDefinitions="Auto, Auto, Auto"
               ColumnDefinitions="Auto, *">
             <Label Grid.Row="0"
-                   Text="Tag name:"
+                   Text="Project Name:"
                    VerticalOptions="Center" />
             <Entry Grid.Row="0"
                    Grid.Column="1"

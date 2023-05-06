@@ -15,30 +15,29 @@
                         ItemsSource="{Binding Projects}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ProjectListModel">
-                    <Frame WidthRequest="150"
-                           HeightRequest="150"
+                    <Frame WidthRequest="300"
+                           HeightRequest="300"
                            IsClippedToBounds="True">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
                                                   CommandParameter="{Binding Id}"/>
                         </Frame.GestureRecognizers>
-
                         <Grid WidthRequest="150"
-                              HeightRequest="150"
-                              Margin="5"
-                              RowDefinitions="*,Auto"
-                              BackgroundColor="Aqua">
-                            <!-- <Image Grid.Row="0" -->
-                            <!--        Aspect="AspectFill" -->
-                            <!--        Source="{Binding ImageUrl}" /> -->
-                            <Label Grid.Row="1"
+                              HeightRequest="200"
+                              RowDefinitions="*,*"
+                              BackgroundColor="White">
+                            <Label Grid.Row="0"
                                    Text="{Binding Name}"
+                                   TextColor="Black"
                                    HorizontalOptions="Center"
-                                   FontSize="14" />
+                                   VerticalOptions="Center"
+                                   FontSize="25" />
                             <Label Grid.Row="1"
-                                   Text="{Binding CreatorName}"
+                                   Text="UserName Todo"
                                    HorizontalOptions="Center"
-                                   FontSize="14" />
+                                   VerticalOptions="Center"
+                                   TextColor="Black"
+                                   FontSize="25" />
                         </Grid>
                     </Frame>
 
@@ -76,5 +75,24 @@
                 Text="Add new project"
                 Clicked="DisplayPopup"
                 FontSize="14"/>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalOptions="Center"
+            RowDefinitions="*,*"
+        >
+            <Label
+                Grid.Row="0"
+                Text="Show User Projects">
+
+            </Label>
+            <Switch x:Name="ToggleUserProjects" Grid.Row="1"
+                    HorizontalOptions="Center"
+                    OnColor="White"
+                    ThumbColor="Orange"
+                    IsToggled="False"
+                    Toggled="OnToggled"
+            />
+        </Grid>
     </Grid>
 </views:ContentPageBase>

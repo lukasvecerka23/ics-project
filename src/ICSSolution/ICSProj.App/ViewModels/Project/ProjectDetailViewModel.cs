@@ -13,22 +13,36 @@ namespace ICSProj.App.ViewModels;
 public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectEditMessage>
 {
     private readonly IProjectFacade projectFacade;
+    private readonly IActivityFacade activityFacade;
     private readonly INavigationService navigationService;
     private readonly IAlertService alertService;
+    private readonly ILoginService _loginService;
+   
 
     public Guid Id { get; set; }
     public ProjectDetailModel? Project { get; private set; }
+    public IEnumerable<ActivityListModel>? Activities { get; set; }
+
+    public string ButtonName
+    {
+        get; set;
+    }
 
     public ProjectDetailViewModel(
         IProjectFacade projectFacade,
+        IActivityFacade activityFacade,
         INavigationService navigationService,
+        ILoginService loginService,
         IMessengerService MessengerService,
         IAlertService alertService)
         : base(MessengerService)
     {
         this.projectFacade = projectFacade;
+        this.activityFacade = activityFacade;
         this.navigationService = navigationService;
         this.alertService = alertService;
+        _loginService = loginService;
+
     }
 
     protected override async Task LoadDataAsync()
@@ -36,22 +50,50 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         await base.LoadDataAsync();
 
         Project = await projectFacade.GetAsync(Id);
+        Activities = await activityFacade.GetAsync();
+        if (Project?.CreatorId == _loginService.CurrentUserId)
+        {
+            ButtonName = "Delete Project";
+        }
+        else
+        {
+            ButtonName = "Leave Project";
+        }
     }
 
+
     [RelayCommand]
-    private async Task DeleteAsync()
+    private async Task DeleteProjectAsync()
     {
-        if (Project is not null)
+        if (Project?.CreatorId == _loginService.CurrentUserId)
         {
-            try
+            if (Project is not null)
             {
-                await projectFacade.DeleteAsync(Project.Id);
-                MessengerService.Send(new ProjectDeleteMessage());
+                try
+                {
+                    await projectFacade.DeleteAsync(Project.Id);
+                    
+                }
+                catch (InvalidOperationException)
+                {
+                    await alertService.DisplayAsync("Projekt", "Chyba");
+                }
             }
-            catch (InvalidOperationException)
+        }
+        else
+        {
+            if (Project is not null)
             {
-                await alertService.DisplayAsync("Projekt", "Chyba");
+                // find userId that matches Id in projectassigns Project.ProjectAssigns.First().UserId and delete it from collection
+                Project.ProjectAssigns
+                    .Remove(Project.ProjectAssigns.FirstOrDefault(
+                        item => item.UserId == _loginService.CurrentUserId));
+
+                await projectFacade.SaveAsync(Project);
+
             }
+            MessengerService.Send(new ProjectDeleteMessage());
+            await navigationService.GoToAsync<ProjectListViewModel>();
         }
     }
 
