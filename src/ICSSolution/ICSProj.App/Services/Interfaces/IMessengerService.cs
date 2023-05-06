@@ -8,4 +8,5 @@ public interface IMessengerService
 
     void Send<TMessage>(TMessage message)
         where TMessage : class;
+
 }

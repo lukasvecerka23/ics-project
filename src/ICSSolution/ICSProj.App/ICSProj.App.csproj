@@ -53,6 +53,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="Resources\Images\user_placeholder.jpg" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
         <PackageReference Include="Fody" Version="6.7.0">
@@ -71,11 +75,15 @@
       <MauiXaml Update="Views\Popups\MenuPopup.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Views\Popups\UserSettingsPopup.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Views\Tag\TagDetailView.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
-
-
+      <MauiXaml Update="Views\User\UserProfileView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -86,11 +94,15 @@
       <Compile Update="Views\Popups\MenuPopup.xaml.cs">
         <DependentUpon>MenuPopup.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\Popups\UserSettingsPopup.xaml.cs">
+        <DependentUpon>UserSettingsPopup.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Views\Tag\TagDetailView.xaml.cs">
         <DependentUpon>TagDetailView.xaml</DependentUpon>
       </Compile>
-
-
+      <Compile Update="Views\User\UserProfileView.xaml.cs">
+        <DependentUpon>UserProfileView.xaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

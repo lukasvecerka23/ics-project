@@ -15,10 +15,10 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
-    private string tagName = null;
-    private string projectName = null;
-    private DateTime start = DateTime.MinValue;
-    private DateTime end = DateTime.MaxValue;
+    public string TagName = null;
+    public string ProjectName = null;
+    public DateTime Start = DateTime.MinValue;
+    public DateTime End = DateTime.MaxValue;
     
     public ActivityListViewModel(
         IActivityFacade activityFacade,
@@ -41,12 +41,12 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     {
         await base.LoadDataAsync();
         var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
-        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == tagName)?.Id;
+        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == TagName)?.Id;
 
         var projectsByUser = await _projectFacade.GetAsync();
-        var projectId = projectsByUser?.FirstOrDefault(project => project.Name == projectName)?.Id;
+        var projectId = projectsByUser?.FirstOrDefault(project => project.Name == ProjectName)?.Id;
 
-        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, start, end, projectId, tagId);
+        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, projectId, tagId);
     }
 
     [RelayCommand]
@@ -63,6 +63,12 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private async Task ShowMenuPopupAsync()
     {
         await _navigationService.ShowPopupAsync(new MenuPopupView());
+    }
+
+    [RelayCommand]
+    private async Task ShowUserSettingsAsync()
+    {
+        await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
     }
 
 }

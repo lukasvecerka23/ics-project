@@ -13,6 +13,7 @@ public partial class TagListViewModel : ViewModelBase
     private readonly ILoginService _loginService;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
+    public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
 
     public TagListViewModel(
         ITagFacade tagFacade,
@@ -43,5 +44,11 @@ public partial class TagListViewModel : ViewModelBase
     private async Task ShowMenuPopupAsync()
     {
         await _navigationService.ShowPopupAsync(new MenuPopupView());
+    }
+
+    [RelayCommand]
+    private async Task ShowUserSettingsAsync()
+    {
+        await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
     }
 }

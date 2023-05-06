@@ -8,34 +8,32 @@
                        x:DataType="vm:ActivityListViewModel"
                        x:Class="ICSProj.App.Views.Activity.ActivityListView"
                        x:Name="ActivityListViewRoot">
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,Auto,Auto, *, Auto">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
             <Label Grid.Column="0" Text="Aktivity"
                FontSize="40"
                FontFamily="PoppinsLight"
                TextColor="#CC6767"
-               Margin="30"
+               Margin="30,15,30,30"
                HorizontalOptions="Start"  />
-            <Frame Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="30" HorizontalOptions="End">
-                <Image
-                    HorizontalOptions="Fill" VerticalOptions="Fill"
-                    Aspect="AspectFill"
-                    WidthRequest="80" HeightRequest="80"
-                    Source="user_placeholder.jpg"/>
-            </Frame>
+            <ImageButton Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="10" HorizontalOptions="End"
+                    x:Name="UserSettingsButton"
+                    Source="user_placeholder.jpg"
+                    Command="{Binding ShowUserSettingsCommand}"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="10">
+            
             <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="85" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -49,17 +47,14 @@
                     TextColor="White"
                     FontFamily="PoppinsExtraLight"
                     HorizontalOptions="Start"
-                    FontSize="20"
+                    FontSize="17"
                     FontAttributes="Bold" />
             </Border>
             <Border
                 Grid.Column="1"
-                StrokeShape="RoundRectangle 25,25,25,25"
-                Background="#CC6767"
-                Padding="16,8"
-                HorizontalOptions="Center">
+                HorizontalOptions="Start">
                 <DatePicker
-                    Date="{Binding Start}"
+                    Date="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.Start}"
                     />
             </Border>
             <Border
@@ -71,8 +66,15 @@
                 <Label Text=" Do:"
                     TextColor="White"
                     FontFamily="PoppinsExtraLight"
-                    FontSize="20"
+                    FontSize="17"
                     FontAttributes="Bold" />
+            </Border>
+            <Border
+                Grid.Column="3"
+                HorizontalOptions="Start">
+                <DatePicker
+                    Date="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.End}"
+                    />
             </Border>
             <Border
                 Grid.Column="4"
@@ -83,7 +85,7 @@
                 <Label Text=" Projekt:"
                     TextColor="White"
                     FontFamily="PoppinsExtraLight"
-                    FontSize="20"
+                    FontSize="17"
                     FontAttributes="Bold" />
             </Border>
             <Border
@@ -95,54 +97,192 @@
                 <Label Text=" Tag:"
                     TextColor="White"
                     FontFamily="PoppinsExtraLight"
-                    FontSize="20"
+                    FontSize="17"
                     FontAttributes="Bold" />
             </Border>
         </Grid>
-        <CollectionView Grid.Row="2"
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="0"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label Text="Datum"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="17" />
+            </Border>
+            <Border
+                Grid.Column="1"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label Text="Popis"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="17" />
+            </Border>
+            <Border
+                Grid.Column="2"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label Text="Doba trvání"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="17" />
+            </Border>
+            <Border
+                Grid.Column="3"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label Text="Projekt"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="17" />
+            </Border>
+            <Border
+                Grid.Column="4"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label Text="Tag"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="17" />
+            </Border>
+        </Grid>
+
+        <CollectionView Grid.Row="3"
+            Margin="0,-5,0,0"
                         x:Name="ActivityList"
-                        ItemsLayout="HorizontalList"
+                        ItemsLayout="VerticalGrid"
                         ItemsSource="{Binding Activities}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ActivityListModel">
-                    <Frame WidthRequest="150"
-                           HeightRequest="150"
-                           IsClippedToBounds="True">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
-                                                  CommandParameter="{Binding Id}"/>
-                        </Frame.GestureRecognizers>
-
-                        <Grid WidthRequest="150"
-                              HeightRequest="150"
-                              Margin="5"
-                              RowDefinitions="*,Auto"
-                              BackgroundColor="Aqua">
-                            <Label Grid.Row="0"
-                                       Text="{Binding Description}"
-                                       HorizontalOptions="Center"
-                                       FontSize="14"/>
-                            <Label Grid.Row="1"
-                                       Text="{Binding Duration}"
-                                       HorizontalOptions="Center"
-                                       FontSize="14" />
+                    <Border
+                        Stroke="#CC6767"
+                        Grid.Column="0"
+                        StrokeShape="RoundRectangle 30,30,30,30"
+                        StrokeThickness="2"
+                        Margin="8"
+                        Background="White"
+                        HeightRequest="40"
+                        WidthRequest="750"
+                        HorizontalOptions="Center">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
+                                      CommandParameter="{Binding Id}"/>
+                        </Border.GestureRecognizers>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                Text="{Binding Start}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Label Grid.Column="1"
+                                Text="{Binding Description, StringFormat='{0:S15}'}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Label Grid.Column="2"
+                                Text="{Binding Duration}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Label Grid.Column="3"
+                                Text="{Binding ProjectName}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Label Grid.Column="4"
+                                Text="{Binding TagId}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Label Grid.Column="5"
+                                Text="Detail"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="#CC6767"
+                                Margin="-15,0,0,0"/>
                         </Grid>
-                    </Frame>
+                    </Border>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
-        <Button
-                Grid.Row="3"
+
+        <Frame Grid.Row="4"
+               Margin="0"
+               IsClippedToBounds="True"
+               BackgroundColor="#EE7676"
+               VerticalOptions="End"
+               HeightRequest="70"
+               CornerRadius="0">
+        </Frame>
+        <ImageButton Grid.Row="4"
+                Source="menu.jpg"
                 Grid.Column="0"
-                VerticalOptions="End"
+                BackgroundColor="Transparent"
+                WidthRequest="60"
+                HeightRequest="60"
+                Margin="10,5,5,5"
                 HorizontalOptions="Start"
-                BackgroundColor="Orange"
-                Text="Menu"
-                x:Name="MenuButton"
-                TextColor="Black"
-                FontSize="40"
+                VerticalOptions="End"
+                Padding="0,0,0,0"
                 Command="{Binding ShowMenuPopupCommand}" />
+        <Button Grid.Row="4"
+                Grid.Column="1"
+                BackgroundColor="#CC6767"
+                WidthRequest="60"
+                HeightRequest="60"
+                CornerRadius="30"
+                Margin="0,0,10,5"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                TextColor="White"
+                Text="+"
+                FontSize="80"
+                FontFamily="PoppinsExtraLight"
+                Padding="0,0,0,-13" />
+
     </Grid>
 </views:ContentPageBase>

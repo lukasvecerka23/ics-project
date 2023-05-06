@@ -8,30 +8,38 @@
                 x:Name="MenuPopupRoot"
                 x:Class="ICSProj.App.Views.Popups.MenuPopupView">
     <Grid
-          RowDefinitions="100, Auto, *">
+          HeightRequest="150"
+          WidthRequest="400"
+          RowDefinitions="50, 50, 50" BackgroundColor="#CC6767">
         <Button Grid.Row="0"
-                BackgroundColor="Orange"
                 Command="{Binding GoToActivitiesCommand}"
                 Clicked="ClosePopup"
-               Text="Activities"
+               Text="Aktivity"
                FontSize="18"
-               FontAttributes="Bold"
+               WidthRequest="400"
+               FontFamily="PoppinsLight"
+               BackgroundColor="#CC6767"
+               BorderWidth="0"
                HorizontalOptions="Center" />
         <Button Grid.Row="1"
-                BackgroundColor="Orange"
                 Command="{Binding GoToProjectsCommand}"
                 Clicked="ClosePopup"
-                Text="Projects"
+                Text="Projekty"
                 FontSize="18"
-                FontAttributes="Bold"
+                WidthRequest="400"
+                FontFamily="PoppinsLight"
+                BackgroundColor="#CC6767"
+                BorderWidth="0"
                 HorizontalOptions="Center" />
         <Button Grid.Row="2"
-                BackgroundColor="Orange"
                 Command="{Binding GoToTagsCommand}"
                 Clicked="ClosePopup"
-                Text="Tags"
+                Text="Tagy"
                 FontSize="18"
-                FontAttributes="Bold"
+                WidthRequest="400"
+                FontFamily="PoppinsLight"
+                BackgroundColor="#CC6767"
+                BorderWidth="0"
                 HorizontalOptions="Center" />
     </Grid>
 </toolkit:Popup>
