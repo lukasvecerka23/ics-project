@@ -85,16 +85,16 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
             if (Project is not null)
             {
                 // find userId that matches Id in projectassigns Project.ProjectAssigns.First().UserId and delete it from collection
-                Project.ProjectAssigns
-                    .Remove(Project.ProjectAssigns.FirstOrDefault(
-                        item => item.UserId == _loginService.CurrentUserId));
 
-                await projectFacade.SaveAsync(Project);
+                // finds project assign user id that corresponds to user
+                //Project.ProjectAssigns.FirstOrDefault(item => item.UserId == _loginService.CurrentUserId));
+                // Todo delete projectssign user id from the collection and save on DB
 
             }
-            MessengerService.Send(new ProjectDeleteMessage());
-            await navigationService.GoToAsync<ProjectListViewModel>();
+
         }
+        MessengerService.Send(new ProjectDeleteMessage());
+        navigationService.SendBackButtonPressed();
     }
 
     public async void Receive(ProjectEditMessage message)
