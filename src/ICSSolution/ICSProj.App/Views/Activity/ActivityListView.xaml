@@ -12,7 +12,7 @@
         <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*" HeightRequest="100">
             <DatePicker Grid.Column="0" Date="{Binding Start}"/>
             <DatePicker Grid.Column="1" Date="{Binding End}"></DatePicker>
-            <Picker Grid.Column="2"  ItemsSource="{Binding Tags}"  SelectedItem="{Binding TagName}"></Picker>
+            <Picker Grid.Column="2"  ItemsSource="{Binding Tags}"  SelectedItem="{Binding Tag}"></Picker>
             <Picker Grid.Column="3" ItemsSource="{Binding Projects }" ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}" SelectedItem="{Binding Project}"></Picker>
             <Button Grid.Column="4" Text="Filter" Command="{Binding FilterCommand}"></Button>
         </Grid>
