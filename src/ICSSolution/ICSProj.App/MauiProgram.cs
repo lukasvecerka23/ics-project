@@ -17,7 +17,6 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("Poppins-ExtraLight.ttf", "PoppinsExtraLight");
-                fonts.AddFont("Poppins-Light.ttf", "PoppinsLight");
             });
 
         builder.Services
@@ -37,8 +36,6 @@ public static class MauiProgram
     {
         foreach (var route in navigationService.Routes)
         {
-            Console.WriteLine(route.Route);
-            Console.WriteLine(route.ViewType);
             Routing.RegisterRoute(route.Route, route.ViewType);
         }
     }

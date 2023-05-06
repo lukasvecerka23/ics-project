@@ -14,28 +14,28 @@ public class NavigationService: INavigationService
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
         new("//users", typeof(UserListView), typeof(UserListViewModel)),
+        new("//user/detail", typeof(UserProfileView), typeof(UserProfileViewModel)),
 
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
         new("//projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
+
         new("//tags", typeof(TagListView), typeof(TagListViewModel)),
-        new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel)),
-        new("//user/detail", typeof(UserProfileView), typeof(UserProfileViewModel)),
+        new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
         where TViewModel : IViewModel
     {
         var route = GetRouteByViewModel<TViewModel>();
-        Console.WriteLine(route);
         await Shell.Current.GoToAsync(route);
     }
     public async Task GoToAsync<TViewModel>(IDictionary<string, object?> parameters)
         where TViewModel : IViewModel
     {
         var route = GetRouteByViewModel<TViewModel>();
-        Console.WriteLine(route);
         await Shell.Current.GoToAsync(route, parameters);
     }
 

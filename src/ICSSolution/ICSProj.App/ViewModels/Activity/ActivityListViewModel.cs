@@ -11,28 +11,26 @@ namespace ICSProj.App.ViewModels;
 public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDeleteMessage>
 {
     private readonly IActivityFacade _activityFacade;
-    private readonly ITagFacade _tagFacade;
-    private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
-    public string TagName = null;
-    public string ProjectName = null;
-    public DateTime Start = DateTime.MinValue;
-    public DateTime End = DateTime.MaxValue;
-    
+    public IEnumerable<TagListModel> Tags { get; set; } = null!;
+    public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
+    public TagListModel Tag { get; set; }
+    public ProjectAssignListModel Project  { get; set; }
+    public DateTime Start { get; set; } = DateTime.Today;
+    public DateTime End  { get; set; } = DateTime.Today;
+
     public ActivityListViewModel(
         IActivityFacade activityFacade,
-        ITagFacade tagFacade,
-        IProjectFacade projectFacade,
         INavigationService navigationService,
         ILoginService loginService,
         IMessengerService messengerService) : base(messengerService)
     {
         _activityFacade = activityFacade;
-        _tagFacade = tagFacade;
-        _projectFacade = projectFacade;
         _navigationService = navigationService;
         _loginService = loginService;
+        Tags = _loginService.CurrentUser.Tags;
+        Projects = _loginService.CurrentUser.ProjectAssigns;
     }
 
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
@@ -40,6 +38,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+<<<<<<< HEAD
         var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
         var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == TagName)?.Id;
 
@@ -47,6 +46,10 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         var projectId = projectsByUser?.FirstOrDefault(project => project.Name == ProjectName)?.Id;
 
         Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, projectId, tagId);
+=======
+
+        Activities = _activityFacade.GetAsync().Result.Where(activity => activity.CreatorId == _loginService.CurrentUserId);
+>>>>>>> feature/add-view-models
     }
 
     [RelayCommand]
@@ -69,6 +72,12 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private async Task ShowUserSettingsAsync()
     {
         await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
+    }
+
+    [RelayCommand]
+    private async Task FilterAsync()
+    {
+        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, Project.ProjectId, Tag.Id);
     }
 
 }

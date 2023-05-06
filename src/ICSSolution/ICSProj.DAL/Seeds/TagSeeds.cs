@@ -17,6 +17,7 @@ public static class TagSeeds
     {
         Id = Guid.Parse("b599fe5d-67e0-4848-a61d-f772acabbe59"),
         CreatorId = UserSeeds.UserEntity1.Id,
+        Creator = UserSeeds.UserEntity1,
         Name = "Backend"
     };
 
@@ -24,6 +25,7 @@ public static class TagSeeds
     {
         Id = Guid.Parse("924f20e8-9866-4771-8b45-a47a79a81705"),
         CreatorId = UserSeeds.UserEntity2.Id,
+        Creator = UserSeeds.UserEntity2,
         Name = "Frontend"
     };
 

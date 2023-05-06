@@ -18,5 +18,11 @@ public partial class ContentPageBase
         base.OnAppearing();
         await ViewModel.OnAppearingAsync();
     }
+
+    protected override async void OnDisappearing()
+    {
+        base.OnDisappearing();
+        await ViewModel.OnDisappearingAsync();
+    }
 }
 

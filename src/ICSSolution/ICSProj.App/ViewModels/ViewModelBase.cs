@@ -25,6 +25,12 @@ public class ViewModelBase: ObservableRecipient, IViewModel
         }
     }
 
+    public async Task OnDisappearingAsync()
+    {
+        _isRefreshRequired = true;
+        await Task.CompletedTask;
+    }
+
     protected virtual Task LoadDataAsync()
     {
         return Task.CompletedTask;

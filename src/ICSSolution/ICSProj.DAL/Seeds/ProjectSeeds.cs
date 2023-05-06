@@ -17,21 +17,24 @@ public static class ProjectSeeds
     {
         Id = Guid.Parse("2a6901cd-7519-43ee-a43c-f7e017498910"),
         Name = "Project 1",
-        CreatorId = UserSeeds.UserEntity1.Id
+        CreatorId = UserSeeds.UserEntity1.Id,
+        Creator = UserSeeds.UserEntity1
     };
 
     public static readonly ProjectEntity ProjectEntity2 = new()
     {
         Id = Guid.Parse("a78a1eaa-df80-4c4a-9cd1-2e9e4fd40653"),
         Name = "Project 2",
-        CreatorId = UserSeeds.UserEntity2.Id
+        CreatorId = UserSeeds.UserEntity2.Id,
+        Creator = UserSeeds.UserEntity2
     };
 
     public static readonly ProjectEntity ProjectEntity3 = new()
     {
         Id = Guid.Parse("1cf02870-a793-4368-ac23-8cfbca36dfe2"),
         Name = "Project 3",
-        CreatorId = UserSeeds.UserEntity1.Id
+        CreatorId = UserSeeds.UserEntity1.Id,
+        Creator = UserSeeds.UserEntity1
     };
 
     public static readonly ProjectEntity ProjectDelete =

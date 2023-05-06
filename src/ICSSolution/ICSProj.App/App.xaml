@@ -1,6 +1,7 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ICSProj.App.Converters;assembly=ICSProj.App"
              xmlns:local="clr-namespace:ICSProj.App"
              x:Class="ICSProj.App.App">
     <Application.Resources>
@@ -9,6 +10,8 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <converters:ProjectNameToStringConverter x:Key="ProjectNameToStringConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

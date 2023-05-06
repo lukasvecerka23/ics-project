@@ -6,9 +6,13 @@ namespace ICSProj.BL.Mappers;
 public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDetailModel>, IUserModelMapper
 {
     private readonly IProjectAssignModelMapper _projectAssignModelMapper;
+    private readonly ITagModelMapper _tagModelMapper;
 
-    public UserModelMapper(IProjectAssignModelMapper projectAssignModelMapper) =>
+    public UserModelMapper(IProjectAssignModelMapper projectAssignModelMapper, ITagModelMapper tagModelMapper)
+    {
         _projectAssignModelMapper = projectAssignModelMapper;
+        _tagModelMapper = tagModelMapper;
+    }
 
     public override UserListModel MapToListModel(UserEntity? entity)
         => entity is null
@@ -32,6 +36,8 @@ public class UserModelMapper : ModelMapperBase<UserEntity, UserListModel, UserDe
                 ImageUrl = entity.ImageUrl,
                 ProjectAssigns = _projectAssignModelMapper.MapToListModel(entity.ProjectAssigns)
                     .ToObservableCollection(),
+                Tags = _tagModelMapper.MapToListModel(entity.Tags)
+                    .ToObservableCollection()
             };
 
     public override UserEntity MapToEntity(UserDetailModel model)

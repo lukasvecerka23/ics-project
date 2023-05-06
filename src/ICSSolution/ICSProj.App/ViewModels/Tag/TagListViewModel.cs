@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.Input;
+using ICSProj.App.Messages;
 using ICSProj.App.Services;
 using ICSProj.App.Views.Popups;
 using ICSProj.BL.Facades;
@@ -8,47 +9,78 @@ namespace ICSProj.App.ViewModels;
 
 public partial class TagListViewModel : ViewModelBase
 {
-    private readonly ITagFacade _tagFacade;
-    private readonly INavigationService _navigationService;
-    private readonly ILoginService _loginService;
+    private readonly ITagFacade tagFacade;
+    private readonly INavigationService navigationService;
+    private readonly ILoginService loginService;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
+    public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
+
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
 
     public TagListViewModel(
         ITagFacade tagFacade,
         INavigationService navigationService,
         ILoginService loginService,
-        IMessengerService messengerService) : base(messengerService)
+        IMessengerService MessengerService) : base(MessengerService)
     {
-        _tagFacade = tagFacade;
-        _navigationService = navigationService;
-        _loginService = loginService;
+        this.tagFacade = tagFacade;
+        this.navigationService = navigationService;
+        this.loginService = loginService;
     }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        var tags = await _tagFacade.GetAsync();
-        Tags = tags.Where(tag => tag.CreatorId == _loginService.CurrentUserId);
+        var tags = await tagFacade.GetAsync();
+        Tags = tags.Where(tag => tag.CreatorId == loginService.CurrentUserId);
+    }
+
+    [RelayCommand]
+    private async Task GoToCreateAsync()
+    {
+        await navigationService.GoToAsync("/edit");
     }
 
     [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
     {
-        await _navigationService.GoToAsync<TagDetailViewModel>(
+        await navigationService.GoToAsync<TagDetailViewModel>(
             new Dictionary<string, object?> { [nameof(TagDetailViewModel.Id)] = id });
+    }
+
+    [RelayCommand]
+    private async Task AddTagAsync()
+    {
+        Tag.CreatorId = loginService.CurrentUserId;
+        await tagFacade.SaveAsync(Tag);
+
+        MessengerService.Send(new TagEditMessage { TagId = Tag.Id });
+
+        await LoadDataAsync();
+
+        navigationService.SendBackButtonPressed();
     }
 
     [RelayCommand]
     private async Task ShowMenuPopupAsync()
     {
-        await _navigationService.ShowPopupAsync(new MenuPopupView());
+        await navigationService.ShowPopupAsync(new MenuPopupView());
+    }
+
+    public async void Receive(TagEditMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(TagDeleteMessage message)
+    {
+        await LoadDataAsync();
     }
 
     [RelayCommand]
     private async Task ShowUserSettingsAsync()
     {
-        await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
+        await navigationService.ShowPopupAsync(new UserSettingsPopupView());
     }
 }

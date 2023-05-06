@@ -9,7 +9,13 @@
                 x:Name="TagListViewRoot"
                 x:DataType="vm:TagListViewModel">
 
-
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Tags}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal"
+                                 HorizontalItemSpacing="10" VerticalItemSpacing="10"
+                                 Span="2" />
+            </CollectionView.ItemsLayout>
 
     <Grid RowDefinitions="Auto,Auto,Auto, *">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
@@ -114,6 +120,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+<<<<<<< HEAD
 
         <Frame
                Grid.Row="3"
@@ -152,4 +159,35 @@
                 FontFamily="PoppinsExtraLight"
                 Padding="0,0,0,-13" />
         </Grid>
+=======
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            VerticalOptions="End"
+            HorizontalOptions="Start"
+            BackgroundColor="Orange"
+            Text="Menu"
+            x:Name="MenuButton"
+            TextColor="Black"
+            FontSize="40"
+            Command="{Binding ShowMenuPopupCommand}" />
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            BackgroundColor="Orange"
+            Text="Settings"
+            x:Name="UserSettingsButton"
+            TextColor="Black"
+            FontSize="40"
+            Command="{Binding ShowUserSettingsCommand}" />
+        <Button Grid.Row="1"
+                Grid.Column="0"
+                HorizontalOptions="End" VerticalOptions="Start"
+                Text="Add new tag"
+                Clicked="DisplayPopup"
+                FontSize="14"/>
+    </Grid>
+>>>>>>> feature/add-view-models
 </views:ContentPageBase>
