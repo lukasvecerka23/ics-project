@@ -16,7 +16,11 @@ public record ActivityListModel : ModelBase
     {
         Id = Guid.Empty,
         CreatorId = Guid.Empty,
+        TagId = Guid.Empty,
+        ProjectId = Guid.Empty,
         Start = DateTime.Now,
         Duration = TimeSpan.Zero,
+        ProjectName = string.Empty,
+        Description = string.Empty
     };
 }

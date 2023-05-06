@@ -5,6 +5,8 @@ using ICSProj.DAL.Mappers;
 using ICSProj.DAL.Repositories;
 using ICSProj.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using System.Collections;
 
 namespace ICSProj.BL.Facades;
 
@@ -39,6 +41,8 @@ public abstract class
     public virtual async Task<TDetailModel> SaveAsync(TDetailModel model)
     {
         TDetailModel result;
+
+        GuardCollectionsAreNotSet(model);
 
         TEntity entity = ModelMapper.MapToEntity(model);
 
@@ -98,5 +102,29 @@ public abstract class
         List<TEntity> entities = await query.ToListAsync();
 
         return ModelMapper.MapToListModel(entities);
+    }
+
+    /// <summary>
+    /// This Guard ensures that there is a clear understanding of current infrastructure limitations.
+    /// This version of BL/DAL infrastructure does not support insertion or update of adjacent entities.
+    /// WARN: Does not guard navigation properties.
+    /// </summary>
+    /// <param name="model">Model to be inserted or updated</param>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static void GuardCollectionsAreNotSet(TDetailModel model)
+    {
+        IEnumerable<PropertyInfo> collectionProperties = model
+            .GetType()
+            .GetProperties()
+            .Where(i => typeof(ICollection).IsAssignableFrom(i.PropertyType));
+
+        foreach (PropertyInfo collectionProperty in collectionProperties)
+        {
+            if (collectionProperty.GetValue(model) is ICollection { Count: > 0 })
+            {
+                throw new InvalidOperationException(
+                    "Current BL and DAL infrastructure disallows insert or update of models with adjacent collections.");
+            }
+        }
     }
 }
