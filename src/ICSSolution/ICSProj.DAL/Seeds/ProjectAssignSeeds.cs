@@ -19,21 +19,27 @@ public static class ProjectAssignSeeds
     {
         Id = Guid.Parse("59bd31de-35d2-43d8-b975-45881a69184c"),
         ProjectId = ProjectSeeds.ProjectEntity1.Id,
-        UserId = UserSeeds.UserEntity1.Id
+        Project = ProjectSeeds.ProjectEntity1,
+        UserId = UserSeeds.UserEntity1.Id,
+        User = UserSeeds.UserEntity1
     };
 
     public static readonly ProjectAssignEntity ProjectAssignEntity2 = new()
     {
         Id = Guid.Parse("74425785-f74e-4437-a854-c6f664ef2273"),
         ProjectId = ProjectSeeds.ProjectEntity1.Id,
-        UserId = UserSeeds.UserEntity2.Id
+        Project = ProjectSeeds.ProjectEntity1,
+        UserId = UserSeeds.UserEntity2.Id,
+        User = UserSeeds.UserEntity2
     };
 
     public static readonly ProjectAssignEntity ProjectAssignEntity3 = new()
     {
         Id = Guid.Parse("307efe6b-a6e8-4fc8-b74d-169b03ca88b4"),
         ProjectId = ProjectSeeds.ProjectEntity2.Id,
-        UserId = UserSeeds.UserEntity1.Id
+        Project = ProjectSeeds.ProjectEntity2,
+        UserId = UserSeeds.UserEntity1.Id,
+        User = UserSeeds.UserEntity1
     };
 
     public static readonly ProjectAssignEntity ProjectAssignEntityDelete = ProjectAssignEntity2 with { Id = Guid.Parse("e70ce064-0bf7-4c57-a39b-1e07097eb087") };

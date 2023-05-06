@@ -30,14 +30,12 @@ public class NavigationService: INavigationService
         where TViewModel : IViewModel
     {
         var route = GetRouteByViewModel<TViewModel>();
-        Console.WriteLine(route);
         await Shell.Current.GoToAsync(route);
     }
     public async Task GoToAsync<TViewModel>(IDictionary<string, object?> parameters)
         where TViewModel : IViewModel
     {
         var route = GetRouteByViewModel<TViewModel>();
-        Console.WriteLine(route);
         await Shell.Current.GoToAsync(route, parameters);
     }
 

@@ -93,4 +93,13 @@ public class ActivityFacade :
 
         return _activityModelMapper.MapToListModel(activities);
     }
+
+    protected override List<string> IncludesNavigationPathDetail =>
+        new()
+        {
+            $"{nameof(ActivityEntity.Project)}",
+            $"{nameof(ActivityEntity.Tag)}",
+            $"{nameof(ActivityEntity.Creator)}"
+        };
+
 }

@@ -26,6 +26,8 @@ public abstract class
         ModelMapper = modelMapper;
     }
 
+    protected virtual List<string> IncludesNavigationPathDetail => new();
+
     public async Task DeleteAsync(Guid id)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
@@ -66,6 +68,14 @@ public abstract class
 
         IQueryable<TEntity> query = uow.GetRepository<TEntity, TEntityMapper>().Get();
 
+        if (IncludesNavigationPathDetail.Any())
+        {
+            foreach (string include in IncludesNavigationPathDetail)
+            {
+                query = string.IsNullOrWhiteSpace(include) ? query : query.Include(include);
+            }
+        }
+
         TEntity? entity = await query.SingleOrDefaultAsync(e => e.Id == id);
 
         return entity == null ? null : ModelMapper.MapToDetailModel(entity);
@@ -75,10 +85,17 @@ public abstract class
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
 
-        List<TEntity> entities = await uow
-            .GetRepository<TEntity, TEntityMapper>()
-            .Get()
-            .ToListAsync();
+        IQueryable<TEntity> query = uow.GetRepository<TEntity, TEntityMapper>().Get();
+
+        if (IncludesNavigationPathDetail.Any())
+        {
+            foreach (string include in IncludesNavigationPathDetail)
+            {
+                query = string.IsNullOrWhiteSpace(include) ? query : query.Include(include);
+            }
+        }
+
+        List<TEntity> entities = await query.ToListAsync();
 
         return ModelMapper.MapToListModel(entities);
     }

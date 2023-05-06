@@ -8,8 +8,15 @@
                        x:DataType="vm:ActivityListViewModel"
                        x:Class="ICSProj.App.Views.Activity.ActivityListView"
                        x:Name="ActivityListViewRoot">
-    <Grid RowDefinitions="*,Auto">
-        <CollectionView Grid.Row="0"
+    <Grid RowDefinitions="*,*,*">
+        <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*" HeightRequest="100">
+            <DatePicker Grid.Column="0" Date="{Binding Start}"/>
+            <DatePicker Grid.Column="1" Date="{Binding End}"></DatePicker>
+            <Picker Grid.Column="2"  ItemsSource="{Binding Tags}"  SelectedItem="{Binding TagName}"></Picker>
+            <Picker Grid.Column="3" ItemsSource="{Binding Projects }" ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}" SelectedItem="{Binding Project}"></Picker>
+            <Button Grid.Column="4" Text="Filter" Command="{Binding FilterCommand}"></Button>
+        </Grid>
+        <CollectionView Grid.Row="1"
                         x:Name="ActivityList"
                         ItemsLayout="HorizontalList"
                         ItemsSource="{Binding Activities}">
@@ -29,7 +36,7 @@
                               RowDefinitions="*,Auto"
                               BackgroundColor="Aqua">
                                 <Label Grid.Row="0"
-                                       Text="{Binding Description}"
+                                       Text="{Binding ProjectName}"
                                        HorizontalOptions="Center"
                                        FontSize="14"/>
                                 <Label Grid.Row="1"
@@ -44,7 +51,7 @@
 
         </CollectionView>
         <Button
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="0"
                 VerticalOptions="End"
                 HorizontalOptions="Start"

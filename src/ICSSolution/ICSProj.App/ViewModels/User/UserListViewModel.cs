@@ -45,7 +45,8 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessa
     private async Task GoToActivitiesAsync(Guid userId)
     {
         _loginService.CurrentUserId = userId;
-        Console.WriteLine(userId);
+        var user = await _userFacade.GetAsync(userId);
+        _loginService.CurrentUser = user;
         await _navigationService.GoToAsync<ActivityListViewModel>();
     }
 

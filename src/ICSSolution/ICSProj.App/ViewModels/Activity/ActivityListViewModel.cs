@@ -15,10 +15,12 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
-    private string tagName = null;
-    private string projectName = null;
-    private DateTime start = DateTime.MinValue;
-    private DateTime end = DateTime.MaxValue;
+    public IEnumerable<TagListModel> Tags { get; set; } = null!;
+    public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
+    public string TagName { get; set; }
+    public ProjectAssignListModel Project  { get; set; }
+    public DateTime Start { get; set; } = DateTime.Today;
+    public DateTime End  { get; set; } = DateTime.Today;
 
     public ActivityListViewModel(
         IActivityFacade activityFacade,
@@ -33,6 +35,8 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         _projectFacade = projectFacade;
         _navigationService = navigationService;
         _loginService = loginService;
+        Tags = _tagFacade.GetTagsByUser(_loginService.CurrentUserId).Result;
+        Projects = _loginService.CurrentUser.ProjectAssigns;
     }
 
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
@@ -40,15 +44,8 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Console.WriteLine(_loginService.CurrentUserId);
-        var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
-        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == tagName)?.Id;
 
-        var projectsByUser = await _projectFacade.GetAsync();
-        var projectId = projectsByUser?.FirstOrDefault(project => project.Name == projectName)?.Id;
-
-        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, start, end, projectId, tagId);
-        Console.WriteLine(Activities.Count());
+        Activities = _activityFacade.GetAsync().Result.Where(activity => activity.CreatorId == _loginService.CurrentUserId);
     }
 
     [RelayCommand]
@@ -71,6 +68,15 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private async Task ShowUserSettingsAsync()
     {
         await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
+    }
+
+    [RelayCommand]
+    private async Task FilterAsync()
+    {
+        var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
+        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == TagName)?.Id;
+
+        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, Project.ProjectId, tagId);
     }
 
 }
