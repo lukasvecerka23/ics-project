@@ -51,7 +51,6 @@ public partial class TagListViewModel : ViewModelBase
     [RelayCommand]
     private async Task AddTagAsync()
     {
-        Console.WriteLine("test");
         Tag.CreatorId = loginService.CurrentUserId;
         await tagFacade.SaveAsync(Tag);
 

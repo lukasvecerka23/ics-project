@@ -70,5 +70,11 @@
             TextColor="Black"
             FontSize="40"
             Command="{Binding ShowUserSettingsCommand}" />
+        <Button Grid.Row="1"
+                Grid.Column="0"
+                HorizontalOptions="End" VerticalOptions="Start"
+                Text="Add new project"
+                Clicked="DisplayPopup"
+                FontSize="14"/>
     </Grid>
 </views:ContentPageBase>
