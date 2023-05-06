@@ -8,10 +8,10 @@
                        x:Class="ICSProj.App.Views.User.UserProfileView"
                        x:Name="UserProfileViewRoot">
     <Grid
-        RowDefinitions="150,*,*,*">
+        RowDefinitions="150,*,*,*,*">
         <Label
             Grid.Row="0"
-            Text="Profile Picture"
+            Text="{Binding User.ImageUrl}"
             TextColor="White"
             BackgroundColor="Black"
             FontSize="50"
@@ -30,7 +30,7 @@
         <Label
             Grid.Row="2"
             BackgroundColor="Black"
-            Text="User Name"
+            Text="{Binding User.Name}"
             TextColor="White"
             FontSize="50"
             FontAttributes="Bold"
@@ -39,11 +39,21 @@
         <Label
             Grid.Row="3"
             BackgroundColor="Black"
-            Text="Delete User"
+            Text="{Binding User.Surname}"
             TextColor="White"
             FontSize="50"
             FontAttributes="Bold"
             VerticalTextAlignment="Center"
+            HorizontalOptions="Center"
+            />
+        <Button
+            Grid.Row="4"
+            BackgroundColor="Black"
+            Text="Delete User"
+            TextColor="White"
+            FontSize="50"
+            FontAttributes="Bold"
+            Command="{Binding DeleteCommand}"
             HorizontalOptions="Center"/>
     </Grid>
     </views:ContentPageBase>

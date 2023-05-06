@@ -11,4 +11,9 @@ public partial class UserProfileView
 	{
 		InitializeComponent();
 	}
+
+    private void Clicked(object sender, EventArgs e)
+    {
+        
+    }
 }
