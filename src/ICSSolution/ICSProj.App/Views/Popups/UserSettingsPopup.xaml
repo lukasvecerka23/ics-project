@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+               x:DataType="vm:UserSettingsPopupViewModel"
+               x:Name="UserSettingsPopupRoot"
+               x:Class="ICSProj.App.Views.Popups.UserSettingsPopupView">
+    <Grid
+        RowDefinitions="*,*">
+        <Button
+            Grid.Row="0"
+            BackgroundColor="Orange"
+            Command="{Binding GoToUserProfileCommand}"
+            Clicked="ClosePopup"
+            Text="Settings"
+            FontSize="18"
+            FontAttributes="Bold"
+            HorizontalOptions="Center" />
+        <Button
+            Grid.Row="1"
+            BackgroundColor="Orange"
+            Command="{Binding GoToUserListCommand}"
+            Clicked="ClosePopup"
+            Text="Change User"
+            FontSize="18"
+            FontAttributes="Bold"
+            HorizontalOptions="Center" />
+    </Grid>
+</toolkit:Popup>
+

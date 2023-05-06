@@ -17,14 +17,11 @@ public class NavigationService: INavigationService
 
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
-
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
         new("//projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
-
         new("//tags", typeof(TagListView), typeof(TagListViewModel)),
         new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel)),
-
-        new("//tags/edit", typeof(TagEditView), typeof(TagEditViewModel))
+        new("//user/detail", typeof(UserProfileView), typeof(UserProfileViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()
