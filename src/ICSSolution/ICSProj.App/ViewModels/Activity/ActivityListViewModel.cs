@@ -66,16 +66,13 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     [RelayCommand]
     private async Task FilterAsync()
     {
-        Console.WriteLine(Project.ProjectId);
-        Console.WriteLine(Tag.Id);
-        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, Project.ProjectId, Tag.Id);
+        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, Start, End, Project?.ProjectId, Tag?.Id);
         RefreshFilter();
     }
 
     private void RefreshFilter()
     {
         Tags = _loginService.CurrentUser.Tags;
-        Console.WriteLine(Tags.Count());
         Projects = _loginService.CurrentUser.ProjectAssigns;
         Tag = null;
         Project = null;
