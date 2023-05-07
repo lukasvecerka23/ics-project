@@ -88,7 +88,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
 
                 // finds project assign user id that corresponds to user
                 //Project.ProjectAssigns.FirstOrDefault(item => item.UserId == _loginService.CurrentUserId));
-                // Todo delete projectssign user id from the collection and save on DB
+                // Todo delete projectassign user id from the collection and save on DB
 
             }
 
