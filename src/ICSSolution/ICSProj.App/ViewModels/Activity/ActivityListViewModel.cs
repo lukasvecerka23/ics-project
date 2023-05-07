@@ -75,7 +75,6 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private void RefreshFilter()
     {
         Tags = _loginService.CurrentUser.Tags;
-        Console.WriteLine(Tags.Count());
         Projects = _loginService.CurrentUser.ProjectAssigns;
         Tag = null;
         Project = null;
