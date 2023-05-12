@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+               xmlns:models="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+               x:DataType="vm:ActivityListViewModel"
+               x:Class="ICSProj.App.Views.Activity.ActivityCreationPopupView">
+    <Grid Padding="20"
+          RowDefinitions="Auto, Auto, Auto">
+        <Label Grid.Row="0"
+               Text="Create a new user"
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <Grid Grid.Row="1"
+              RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+              ColumnDefinitions="Auto, *, *">
+            <Label Grid.Row="0"
+                   Text="Description:"
+                   VerticalOptions="Center" />
+            <Entry Grid.Row="0"
+                   Grid.Column="1"
+                   Text="{Binding Activity.Description}"
+                   Placeholder="Enter first name" />
+            <Label Grid.Row="1"
+                   Text="Tag:"
+                   VerticalOptions="Center" />
+            <Picker Grid.Row="1"
+                    Grid.Column="1"
+                    ItemsSource="{Binding Tags}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}"
+                    SelectedItem="{Binding CreationTag}"/>
+            <Label Grid.Row="2"
+                   Text="Project:"
+                   VerticalOptions="Center" />
+            <Picker Grid.Row="2"
+                    Grid.Column="1"
+                    ItemsSource="{Binding Projects}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}"
+                    SelectedItem="{Binding CreationProject}"/>
+            <Label Grid.Row="3"
+                   Text="Od:"
+                   VerticalOptions="Center" />
+            <TimePicker
+                Grid.Row="3"
+                Grid.Column="1"
+                Time="{Binding SelectedTimeFrom}"
+                Format="HH:mm"
+                VerticalOptions="Center"
+            />
+            <DatePicker
+                Grid.Row="3"
+                Grid.Column="2"
+                Date="{Binding SelectedDateFrom}"
+                VerticalOptions="Center"
+            />
+            <Label Grid.Row="4"
+                   Text="Do:"
+                   VerticalOptions="Center" />
+            <TimePicker
+                Grid.Row="4"
+                Grid.Column="1"
+                Time="{Binding SelectedTimeTo}"
+                Format="HH:mm"
+                VerticalOptions="Center"
+            />
+            <DatePicker
+                Grid.Row="4"
+                Grid.Column="2"
+                Date="{Binding SelectedDateTo}"
+                VerticalOptions="Center"
+            />
+
+        </Grid>
+        <Button Grid.Row="2"
+                Text="Add User"
+                HorizontalOptions="End"
+                Command="{Binding AddActivityCommand}"
+                Clicked="ClosePopup"/>
+    </Grid>
+</toolkit:Popup>

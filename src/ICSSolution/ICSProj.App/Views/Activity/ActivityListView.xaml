@@ -61,6 +61,18 @@
                 TextColor="Black"
                 FontSize="40"
                 Command="{Binding ShowMenuPopupCommand}" />
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            BackgroundColor="Orange"
+            Text="Add Activity"
+            x:Name="AddActivityButton"
+            TextColor="Black"
+            FontSize="40"
+            Clicked="DisplayPopup" />
         <Button
             Grid.Row="0"
             Grid.Column="1"

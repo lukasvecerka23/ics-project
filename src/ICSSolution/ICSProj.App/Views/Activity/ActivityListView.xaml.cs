@@ -12,10 +12,10 @@ public partial class ActivityListView
         InitializeComponent();
     }
 
-    // public void DisplayPopup(object sender, EventArgs e)
-    // {
-    //     var menuPopup = new MenuPopupView(BindingContext);
-    //     this.ShowPopupAsync(menuPopup);
-    // }
+    public void DisplayPopup(object sender, EventArgs e)
+    {
+        var activityCreationPopup = new ActivityCreationPopupView();
+        this.ShowPopupAsync(activityCreationPopup);
+    }
 }
 

@@ -17,6 +17,8 @@ public partial class TagListViewModel : ViewModelBase
 
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
 
+    public Color PickedColor { get; set; }
+
     public TagListViewModel(
         ITagFacade tagFacade,
         INavigationService navigationService,
