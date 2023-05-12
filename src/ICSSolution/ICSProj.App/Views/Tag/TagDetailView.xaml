@@ -6,8 +6,16 @@
                        xmlns:vm="clr-namespace:ICSProj.App.ViewModels;assembly=ICSProj.App"
                        x:Class="ICSProj.App.Views.Tag.TagDetailView"
                        x:DataType="vm:TagDetailViewModel">
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
         <Label Grid.Row="0" Text="{Binding Tag.Name}" TextColor="White" FontSize="20"/>
-        <Button Grid.Row="1" Text="Delete" Command="{Binding DeleteCommand}"/>
+        <Label Grid.Row="1" Text="{Binding Tag.Color}" TextColor="White" FontSize="20"/>
+        <Border Grid.Row="2"
+                Stroke="{Binding TagColor}"
+                StrokeShape="RoundRectangle 40,40,40,40"
+                StrokeThickness="4"
+                BackgroundColor="{Binding TagColor}"
+                Padding="16,8"
+                HorizontalOptions="Center"/>
+        <Button Grid.Row="3" Text="Delete" Command="{Binding DeleteCommand}"/>
     </Grid>
 </views:ContentPageBase>

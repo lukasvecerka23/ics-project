@@ -14,6 +14,21 @@
             <converters:ProjectNameToStringConverter x:Key="ProjectNameToStringConverter" />
             <converters:TagNameToStringConverter x:Key="TagNameToStringConverter" />
             <converters:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
+
+            <Style x:Key="OvalButtonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="WidthRequest" Value="75" />
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="Margin" Value="5,0" />
+                <Style.Triggers>
+                    <Trigger TargetType="Frame" Property="IsEnabled" Value="False">
+                        <Setter Property="BorderColor" Value="Transparent" />
+                    </Trigger>
+                    <Trigger TargetType="Frame" Property="IsEnabled" Value="True">
+                        <Setter Property="BorderColor" Value="Black" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
