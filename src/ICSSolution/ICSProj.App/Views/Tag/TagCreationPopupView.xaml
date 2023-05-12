@@ -24,6 +24,24 @@
                    Grid.Column="1"
                    Text="{Binding Tag.Name}"
                    Placeholder="Enter tag name" />
+            <Label Grid.Row="1"
+                   Text="Color:"/>
+            <Grid Grid.Row="2"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="Auto, Auto, Auto">
+                <Button x:Name="redbut" Grid.Row="0" Grid.Column="0" BackgroundColor="Red" Text="Red" TextColor="White" Style="{StaticResource OvalButtonStyle}"
+                        Command="{Binding SetColorCommand}"
+                        CommandParameter="#FF0000"
+                        Clicked="SetButtonHighlight"/>
+                <Button x:Name="bluebut" Grid.Row="0" Grid.Column="1" BackgroundColor="Blue" Text="Blue" TextColor="White" Style="{StaticResource OvalButtonStyle}"
+                        Command="{Binding SetColorCommand}"
+                        CommandParameter="#0000FF"
+                        Clicked="SetButtonHighlight"/>
+                <Button x:Name="greenbut" Grid.Row="0" Grid.Column="2" BackgroundColor="Green" Text="Green" TextColor="White" Style="{StaticResource OvalButtonStyle}"
+                        Command="{Binding SetColorCommand}"
+                        CommandParameter="#00FF00"
+                        Clicked="SetButtonHighlight"/>
+            </Grid>
         </Grid>
         <Button Grid.Row="2"
                 Text="Add Tag"

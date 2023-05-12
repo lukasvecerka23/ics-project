@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ICSProj.App.Messages;
 using ICSProj.App.Services;
@@ -17,6 +18,9 @@ public partial class TagListViewModel : ViewModelBase
 
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
 
+    [ObservableProperty]
+    public Color tagColor;
+
     public TagListViewModel(
         ITagFacade tagFacade,
         INavigationService navigationService,
@@ -26,6 +30,7 @@ public partial class TagListViewModel : ViewModelBase
         this.tagFacade = tagFacade;
         this.navigationService = navigationService;
         this.loginService = loginService;
+        tagColor = Colors.Red;
     }
 
     protected override async Task LoadDataAsync()
@@ -33,6 +38,7 @@ public partial class TagListViewModel : ViewModelBase
         await base.LoadDataAsync();
         var tags = await tagFacade.GetAsync();
         Tags = tags.Where(tag => tag.CreatorId == loginService.CurrentUserId);
+        tagColor = Color.FromArgb(Tag.Color);
     }
 
     [RelayCommand]
@@ -82,5 +88,12 @@ public partial class TagListViewModel : ViewModelBase
     private async Task ShowUserSettingsAsync()
     {
         await navigationService.ShowPopupAsync(new UserSettingsPopupView());
+    }
+
+    [RelayCommand]
+    private void SetColor(string color)
+    {
+        TagColor = Color.FromArgb(color);
+        Tag.Color = color;
     }
 }
