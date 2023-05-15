@@ -321,7 +321,8 @@
                 Text="+"
                 FontSize="80"
                 FontFamily="PoppinsExtraLight"
-                Padding="0,0,0,-13" />
+                Padding="0,0,0,-13"
+                Clicked="DisplayPopup"/>
 
     </Grid>
 </views:ContentPageBase>
