@@ -281,7 +281,9 @@
                                     FontFamily="PoppinsLight"
                                     TextColor="#CC6767"
                                     BorderWidth="0"
-                                    BackgroundColor="Transparent"/>
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                    CommandParameter="{Binding Id}"/>
                         </Grid>
                     </Border>
 

@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Style x:Key="OvalButtonStyle" TargetType="Button">
@@ -5,14 +7,6 @@
         <Setter Property="WidthRequest" Value="75" />
         <Setter Property="HeightRequest" Value="25" />
         <Setter Property="Margin" Value="5,0" />
-        <Style.Triggers>
-            <Trigger TargetType="Frame" Property="IsEnabled" Value="False">
-                <Setter Property="BorderColor" Value="Transparent" />
-            </Trigger>
-            <Trigger TargetType="Frame" Property="IsEnabled" Value="True">
-                <Setter Property="BorderColor" Value="Black" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>
 
