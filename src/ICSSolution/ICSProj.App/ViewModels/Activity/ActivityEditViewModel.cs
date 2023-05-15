@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using ICSProj.App.Services;
 using ICSProj.App.Messages;
 using ICSProj.BL.Facades;
@@ -7,7 +7,7 @@ using ICSProj.BL.Models;
 namespace ICSProj.App.ViewModels;
 
 [QueryProperty(nameof(Id), nameof(Id))]
-public partial class ActivityDetailViewModel : ViewModelBase
+public partial class ActivityEditViewModel : ViewModelBase
 {
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
@@ -16,7 +16,7 @@ public partial class ActivityDetailViewModel : ViewModelBase
 
     public ActivityDetailModel? Activity { get; set; }
 
-    public ActivityDetailViewModel(
+    public ActivityEditViewModel(
         IActivityFacade activityFacade,
         INavigationService navigationService,
         IMessengerService messengerService) : base(messengerService)
@@ -25,16 +25,14 @@ public partial class ActivityDetailViewModel : ViewModelBase
         _navigationService = navigationService;
     }
 
-    protected override async Task LoadDataAsync()
-    {
-        await base.LoadDataAsync();
-        Activity = await _activityFacade.GetAsync(Id);
-    }
-
     [RelayCommand]
-    private async Task GoToEditAsync()
+    private async Task SaveAsync()
     {
-        await _navigationService.GoToAsync<ActivityEditViewModel>();
+        await _activityFacade.SaveAsync(Activity);
+
+        MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+
+        _navigationService.SendBackButtonPressed();
     }
 
     [RelayCommand]
