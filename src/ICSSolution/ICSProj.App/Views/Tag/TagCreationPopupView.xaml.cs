@@ -13,5 +13,20 @@ public partial class TagCreationPopupView : Popup
     {
         Close();
     }
-}
 
+    private Button lastClickedButton;
+
+    private void SetButtonHighlight(object sender, EventArgs args)
+    {
+        if (lastClickedButton != null)
+        {
+            lastClickedButton.BorderWidth = 0;
+        }
+
+        var button = (Button)sender;
+        button.BorderColor = Colors.Orange;
+        button.BorderWidth = 3;
+
+        lastClickedButton = button;
+    }
+}

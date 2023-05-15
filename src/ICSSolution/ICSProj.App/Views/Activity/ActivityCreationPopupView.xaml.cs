@@ -14,3 +14,4 @@ public partial class ActivityCreationPopupView : Popup
         Close();
     }
 }
+

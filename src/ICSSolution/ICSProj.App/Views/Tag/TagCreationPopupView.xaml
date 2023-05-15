@@ -7,9 +7,8 @@
                 xmlns:models="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
                 x:DataType="vm:TagListViewModel"
                 x:Class="ICSProj.App.Views.Tag.TagCreationPopupView">
-    
     <Grid Padding="20"
-          RowDefinitions="Auto, Auto, Auto"
+          RowDefinitions="Auto, Auto, Auto, Auto"
           BackgroundColor="#D57979"
           WidthRequest="400"
           HeightRequest="200">
@@ -21,8 +20,8 @@
                HeightRequest="30"
                HorizontalOptions="Center"/>
         <Grid Grid.Row="1"
-              RowDefinitions="Auto"
-              ColumnDefinitions="Auto, *"
+              RowDefinitions="Auto, Auto, Auto"
+              ColumnDefinitions="Auto, *, *"
               RowSpacing="10"
               HeightRequest="40"
               ColumnSpacing="5">
@@ -36,8 +35,26 @@
                    Text="{Binding Tag.Name}"
                    Placeholder="např. Čtení"
                    FontFamily="PoppinsLight"/>
-            </Grid>
-        <Button Grid.Row="2"
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Text="Color:"/>
+            <Button Grid.Row="2" Grid.Column="0" BackgroundColor="Red" Text="Red" TextColor="White" Style="{StaticResource OvalButtonStyle}"
+                    Command="{Binding SetColorCommand}"
+                    CommandParameter="#FF0000"
+                    Clicked="SetButtonHighlight"/>
+            <Button Grid.Row="2" Grid.Column="1" BackgroundColor="Blue" Text="Blue" TextColor="White" Style="{StaticResource OvalButtonStyle}"
+                    Command="{Binding SetColorCommand}"
+                    CommandParameter="#0000FF"
+                    Clicked="SetButtonHighlight"/>
+            <Button Grid.Row="2" Grid.Column="2" BackgroundColor="Green" Text="Green" TextColor="White" Style="{StaticResource OvalButtonStyle}"
+                    Command="{Binding SetColorCommand}"
+                    CommandParameter="#00FF00"
+                    Clicked="SetButtonHighlight"/>
+        </Grid>
+        <Label Grid.Row="3"
+               BackgroundColor="{Binding TagColor}"
+               HorizontalOptions="Center" />
+        <Button Grid.Row="3"
                 Text="Vytvořit"
                 HorizontalOptions="End"
                 Margin="0,20,0,0"
