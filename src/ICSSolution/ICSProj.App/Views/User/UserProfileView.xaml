@@ -8,96 +8,111 @@
                        x:Class="ICSProj.App.Views.User.UserProfileView"
                        x:Name="UserProfileViewRoot">
     <Grid
-        RowDefinitions="150,*,*,*,*">
-        <Image
-            Grid.Row="0"
-            Source="{Binding User.ImageUrl, TargetNullValue='user_placeholder.jpg'}"
-            BackgroundColor="Black"
-            Aspect="AspectFill"
-            WidthRequest="80" HeightRequest="80"
-            HorizontalOptions="Center"/>
+        RowDefinitions="*,*,*,*,*">
+        <Grid>
+            <Frame CornerRadius="80" WidthRequest="120" HeightRequest="120" Padding="0" BackgroundColor="Transparent" Grid.Column="0" Margin="0,40,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                    Aspect="AspectFill"
+                    Source="{Binding User.ImageUrl, TargetNullValue='user_placeholder.jpg'}"/>
+            </Frame>
+        </Grid>
+
         <Entry
             Grid.Row="1"
-            BackgroundColor="Black"
+            BackgroundColor="#CC6767"
             TextColor="White"
-            FontSize="35"
+            FontSize="15"
+            FontFamily="PoppinsLight"
             Text="{Binding User.ImageUrl}"
-            FontAttributes="Bold"
+            Margin="0,20,0,0"
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
+
         <Grid Grid.Row="2"
               RowDefinitions="Auto"
-              ColumnDefinitions="*,400"
-              HorizontalOptions="Center">
+              ColumnDefinitions="Auto, *"
+              HorizontalOptions="Start"
+              Margin="235,0,0,0">
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                BackgroundColor="Black"
-                Text="Name:"
-                TextColor="White"
-                FontSize="50"
-                FontAttributes="Bold"
+                BackgroundColor="Transparent"
+                Text="Jmeno:"
+                TextColor="#CC6767"
+                TextDecorations="Underline"
+                FontSize="40"
+                WidthRequest="170"
+                FontFamily="PoppinsExtraLight"
                 VerticalTextAlignment="Center"></Label>
             <Entry
                 Grid.Row="0"
                 Grid.Column="1"
-                BackgroundColor="Black"
+                BackgroundColor="Transparent"
                 Text="{Binding User.Name}"
-                TextColor="White"
-                FontSize="50"
-                FontAttributes="Bold"
+                TextColor="#CC6767"
+                FontSize="35"
+                FontFamily="PoppinsLight"
+                Margin="10,0,0,0"
+                WidthRequest="300"
                 VerticalTextAlignment="Center"
                 HorizontalOptions="Center"/>
         </Grid>
         <Grid Grid.Row="3"
               RowDefinitions="Auto"
-              ColumnDefinitions="*,400"
-              HorizontalOptions="Center">
+              ColumnDefinitions="Auto, *"
+              HorizontalOptions="Start"
+              Margin="235,0,0,0">
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                BackgroundColor="Black"
-                Text="Surname:"
-                TextColor="White"
-                FontSize="50"
-                FontAttributes="Bold"
+                BackgroundColor="Transparent"
+                Text="Příjmení:"
+                TextDecorations="Underline"
+                TextColor="#CC6767"
+                FontSize="40"
+                FontFamily="PoppinsExtraLight"
+                WidthRequest="170"
                 VerticalTextAlignment="Center"></Label>
             <Entry
                 Grid.Row="0"
                 Grid.Column="1"
-                BackgroundColor="Black"
+                BackgroundColor="Transparent"
                 Text="{Binding User.Surname}"
-                TextColor="White"
-                FontSize="50"
-                FontAttributes="Bold"
+                TextColor="#CC6767"
+                FontSize="35"
+                FontFamily="PoppinsLight"
+                WidthRequest="300"
+                Margin="10,0,0,0"
                 VerticalTextAlignment="Center"
                 HorizontalOptions="Center"/>
         </Grid>
         <Grid Grid.Row="4"
               RowDefinitions="Auto"
-              ColumnDefinitions="*,400"
+              ColumnDefinitions="*,*"
               HorizontalOptions="Center">
             <Button
-            Grid.Row="4"
-            Grid.Column="0"
-            BackgroundColor="Black"
-            Text="Delete User"
-            TextColor="White"
-            FontSize="50"
-            FontAttributes="Bold"
-            Command="{Binding DeleteCommand}"
-            Clicked="OnClickedButton"
-            HorizontalOptions="Center"/>
+                Grid.Row="4"
+                Grid.Column="0"
+                BackgroundColor="#CC6767"
+                Text="Uložit změny"
+                TextColor="White"
+                FontSize="30"
+                FontFamily="PoppinsLight"
+                Command="{Binding SaveChangesCommand}"
+                HorizontalOptions="Center"/>
             <Button
                 Grid.Row="4"
                 Grid.Column="1"
-                BackgroundColor="Black"
-                Text="save changes"
+                BackgroundColor= "#D90000"
+                Text="Smazat uživatele"
                 TextColor="White"
-                FontSize="50"
-                FontAttributes="Bold"
-                Command="{Binding SaveChangesCommand}"
+                FontFamily="PoppinsLight"
+                FontSize="30"
+                Margin="20,0,0,0"
+                Command="{Binding DeleteCommand}"
+                Clicked="OnClickedButton"
                 HorizontalOptions="Center"/>
         </Grid>
     </Grid>
-    </views:ContentPageBase>
+</views:ContentPageBase>
