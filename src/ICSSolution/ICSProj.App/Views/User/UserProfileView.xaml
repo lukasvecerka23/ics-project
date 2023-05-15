@@ -38,7 +38,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 BackgroundColor="Transparent"
-                Text="Jmeno:"
+                Text="Jméno:"
                 TextColor="#CC6767"
                 TextDecorations="Underline"
                 FontSize="40"
