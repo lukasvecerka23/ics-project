@@ -34,7 +34,7 @@
             <Label Grid.Row="0"
                    Grid.Column="1"
                    Text="{Binding Tag.Name}"
-                   TextColor="Black"
+                   TextColor="#CC6767"
                    FontSize="40"
                    FontFamily="PoppinsLight"/>
         </Grid>
