@@ -17,6 +17,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 Description = entity.Description,
                 ProjectId = entity.Project?.Id,
                 TagId = entity.Tag?.Id,
+                TagColor = entity.Tag?.Color,
                 ProjectName = entity.Project?.Name,
                 Duration = entity.End - entity.Start
             };

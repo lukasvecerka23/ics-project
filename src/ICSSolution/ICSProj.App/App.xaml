@@ -15,6 +15,7 @@
             <converters:ProjectNameToStringConverter x:Key="ProjectNameToStringConverter" />
             <converters:TagNameToStringConverter x:Key="TagNameToStringConverter" />
             <converters:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
+            <converters:TimePeriodToStringConverter x:Key="TimePeriodToStringConverter"/>
 
 
         </ResourceDictionary>

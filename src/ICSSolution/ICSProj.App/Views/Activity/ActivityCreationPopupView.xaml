@@ -48,7 +48,7 @@
                     Background="White"
                     ItemsSource="{Binding Tags}"
                     ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}"
-                    SelectedItem="{Binding CreationTag}"/>
+                    SelectedItem="{Binding Creation.Tag}"/>
             <Label Grid.Row="2"
                    Text="Projekt:"
                    TextColor="White"
@@ -60,7 +60,7 @@
                     Background="White"
                     ItemsSource="{Binding Projects}"
                     ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}"
-                    SelectedItem="{Binding CreationProject}"/>
+                    SelectedItem="{Binding Creation.Project}"/>
 
             <Label Grid.Row ="3"
                    Grid.Column="0"
@@ -72,7 +72,7 @@
                         Grid.Column="1"
                         Margin="10,0,0,0"
                         BackgroundColor="White"
-                        Time="{Binding SelectedTimeFrom}"
+                        Time="{Binding Creation.TimeFrom}"
                         Format="HH:mm"
                         VerticalOptions="Center"
             />
@@ -80,7 +80,7 @@
                         Grid.Column="2"
                         BackgroundColor="White"
                         Margin="30,0,0,15"
-                        Date="{Binding SelectedDateFrom}"
+                        Date="{Binding Creation.DateFrom}"
                         VerticalOptions="Center"
             />
             <Label Grid.Row="4"
@@ -93,7 +93,7 @@
                 Grid.Column="1"
                 Margin="10,0,0,0"
                 BackgroundColor="White"
-                Time="{Binding SelectedTimeTo}"
+                Time="{Binding Creation.TimeTo}"
                 Format="HH:mm"
                 VerticalOptions="Center"
             />
@@ -102,7 +102,7 @@
                 Grid.Column="2"
                 BackgroundColor="White"
                 Margin="30,0,0,15"
-                Date="{Binding SelectedDateTo}"
+                Date="{Binding Creation.DateTo}"
                 VerticalOptions="Center"
             />
 

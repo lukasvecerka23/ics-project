@@ -13,19 +13,12 @@ public partial class ActivityEditViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
     private readonly IAlertService _alertService;
+    private readonly IUserFacade _userFacade;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
-
-    public TagListModel Tag { get; set; } = null!;
-    public ProjectAssignListModel Project { get; set; } = null!;
-    public TagListModel CreationTag { get; set; } = TagListModel.Empty;
-    public ProjectAssignListModel CreationProject { get; set; } = ProjectAssignListModel.Empty;
-    public TimeSpan SelectedTimeFrom { get; set; } = TimeSpan.Zero;
-    public DateTime SelectedDateFrom { get; set; } = DateTime.Today;
-    public TimeSpan SelectedTimeTo { get; set; } = TimeSpan.Zero;
-    public DateTime SelectedDateTo { get; set; } = DateTime.Today;
-
+    public UserDetailModel CurrentUser { get; set; } = null!;
+    public ActivityCreationModel EditActivity { get; set; } = ActivityCreationModel.Empty;
     public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
 
     public ActivityEditViewModel(
@@ -33,37 +26,34 @@ public partial class ActivityEditViewModel : ViewModelBase
         INavigationService navigationService,
         ILoginService loginService,
         IAlertService alertService,
+        IUserFacade userFacade,
         IMessengerService messengerService) : base(messengerService)
     {
         _activityFacade = activityFacade;
         _navigationService = navigationService;
         _loginService = loginService;
         _alertService = alertService;
+        _userFacade = userFacade;
     }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Tags = _loginService.CurrentUser.Tags;
-        Projects = _loginService.CurrentUser.ProjectAssigns;
+        CurrentUser = await _userFacade.GetAsync(_loginService.CurrentUserId);
+        Tags = CurrentUser?.Tags;
+        Projects = CurrentUser?.ProjectAssigns;
+        FillEditActivity();
     }
 
     [RelayCommand]
     private async Task SaveAsync()
     {
-        Activity.Start = SelectedDateFrom + SelectedTimeFrom;
-        Activity.End = SelectedDateTo + SelectedTimeTo;
-        if (CreationTag?.Id != Guid.Empty)
-        {
-            Activity.TagId = CreationTag?.Id;
-            Activity.TagName = CreationTag?.Name;
-        }
-        if (CreationProject?.ProjectId != Guid.Empty)
-        {
-            Activity.ProjectId = CreationProject?.ProjectId;
-            Activity.ProjectName = CreationProject?.ProjectName;
-        }
-
+        Activity.Start = EditActivity.DateFrom + EditActivity.TimeFrom;
+        Activity.End = EditActivity.DateTo + EditActivity.TimeTo;
+        Activity.TagId = EditActivity.Tag?.Id;
+        Activity.TagName = EditActivity.Tag?.Name;
+        Activity.ProjectId = EditActivity.Project?.ProjectId;
+        Activity.ProjectName = EditActivity.Project?.ProjectName;
 
         try
         {
@@ -77,5 +67,15 @@ public partial class ActivityEditViewModel : ViewModelBase
         MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
 
         _navigationService.SendBackButtonPressed();
+    }
+
+    private void FillEditActivity()
+    {
+        EditActivity.DateFrom = Activity.Start.Date;
+        EditActivity.DateTo = Activity.End.Date;
+        EditActivity.TimeFrom = Activity.Start.TimeOfDay;
+        EditActivity.TimeTo = Activity.End.TimeOfDay;
+        EditActivity.Tag = Tags.FirstOrDefault(tag => tag.Id == Activity.TagId);
+        EditActivity.Project = Projects.FirstOrDefault(project => project.ProjectId == Activity.ProjectId);
     }
 }

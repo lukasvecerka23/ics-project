@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using ICSProj.BL.Enums;
 using ICSProj.App.Messages;
 using ICSProj.App.Services;
 using ICSProj.App.Views.Popups;
@@ -14,41 +15,40 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
     private readonly IAlertService _alertService;
+    private readonly IUserFacade _userFacade;
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
-    public TagListModel Tag { get; set; } = null!;
-    public ProjectAssignListModel Project  { get; set; } = null!;
+    public ActivityFilterModel Filter { get; set; } = ActivityFilterModel.Empty;
+    public ActivityCreationModel Creation { get; set; } = ActivityCreationModel.Empty;
     public UserDetailModel CurrentUser { get; set; }
-    public DateTime Start { get; set; } = DateTime.Today;
-    public DateTime End  { get; set; } = DateTime.Today;
     public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
-    public TagListModel CreationTag { get; set; } = TagListModel.Empty;
-    public ProjectAssignListModel CreationProject { get; set; } = ProjectAssignListModel.Empty;
-    public TimeSpan SelectedTimeFrom { get; set; } = TimeSpan.Zero;
-    public DateTime SelectedDateFrom { get; set; } = DateTime.Today;
-    public TimeSpan SelectedTimeTo { get; set; } = TimeSpan.Zero;
-    public DateTime SelectedDateTo { get; set; } = DateTime.Today;
+    public List<TimePeriod> TimePeriods { get; set; }
 
     public ActivityListViewModel(
         IActivityFacade activityFacade,
         INavigationService navigationService,
         ILoginService loginService,
         IMessengerService messengerService,
+        IUserFacade userFacade,
         IAlertService alertService) : base(messengerService)
     {
         _activityFacade = activityFacade;
         _navigationService = navigationService;
         _loginService = loginService;
         _alertService = alertService;
+        _userFacade = userFacade;
+        TimePeriods = new List<TimePeriod>((TimePeriod[])Enum.GetValues(typeof(TimePeriod)));
     }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        CurrentUser = _loginService.CurrentUser;
+        CurrentUser = await _userFacade.GetAsync(_loginService.CurrentUserId);
+        Tags = CurrentUser?.Tags;
+        Projects = CurrentUser?.ProjectAssigns;
         Activities = _activityFacade.GetAsync().Result.Where(activity => activity.CreatorId == _loginService.CurrentUserId);
-        RefreshFilter();
+        Filter = ActivityFilterModel.Empty;
     }
 
     [RelayCommand]
@@ -79,38 +79,21 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     [RelayCommand]
     private async Task FilterAsync()
     {
-        Activities = await _activityFacade.FilterActivities(CurrentUser.Id, Start, End, Project?.ProjectId, Tag?.Id);
-        RefreshFilter();
-    }
-
-    private void RefreshFilter()
-    {
-        Tags = CurrentUser.Tags;
-        Projects = CurrentUser.ProjectAssigns;
-        Tag = null;
-        Project = null;
-        End = DateTime.Today;
-        Start = DateTime.Today;
+        Filter.AdjustDatesBasedOnTimePeriod(Filter);
+        Activities = await _activityFacade.FilterActivities(CurrentUser.Id, Filter.Start, Filter.End, Filter.Project?.ProjectId, Filter.Tag?.Id);
     }
 
     [RelayCommand]
     private async Task AddActivityAsync()
     {
         Activity.CreatorId = CurrentUser.Id;
-        Activity.Start = SelectedDateFrom + SelectedTimeFrom;
-        Activity.End = SelectedDateTo + SelectedTimeTo;
+        Activity.Start = Creation.DateFrom + Creation.TimeFrom;
+        Activity.End = Creation.DateTo + Creation.TimeTo;
+        Activity.TagId = Creation.Tag?.Id;
+        Activity.TagName = Creation.Tag?.Name;
+        Activity.ProjectId = Creation.Project?.ProjectId;
+        Activity.ProjectName = Creation.Project?.ProjectName;
         Activity.CreatorName = $"{_loginService.CurrentUser.Name} {_loginService.CurrentUser.Surname}";
-        if (CreationTag?.Id != Guid.Empty)
-        {
-            Activity.TagId = CreationTag?.Id;
-            Activity.TagName = CreationTag?.Name;
-        }
-        if (CreationProject?.ProjectId != Guid.Empty)
-        {
-            Activity.ProjectId = CreationProject?.ProjectId;
-            Activity.ProjectName = CreationProject?.ProjectName;
-        }
-
 
         try
         {
@@ -118,16 +101,18 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         }
         catch (Exception)
         {
-            await _alertService.DisplayAsync("Test", "Test");
+            await _alertService.DisplayAsync("Vytvoření aktivity", "Nepodařilo se vytvořit novou aktivitu z důvodu kolize.");
         }
 
         Activity = ActivityDetailModel.Empty;
-        CreationTag = TagListModel.Empty;
-        CreationProject = ProjectAssignListModel.Empty;
-        SelectedTimeFrom = TimeSpan.Zero;
-        SelectedDateFrom = DateTime.Today;
-        SelectedTimeTo = TimeSpan.Zero;
-        SelectedDateTo = DateTime.Today;
+        Creation = ActivityCreationModel.Empty;
+        await LoadDataAsync();
+    }
+
+    [RelayCommand]
+    private async Task RefreshFilterAsync()
+    {
+        Filter = ActivityFilterModel.Empty;
         await LoadDataAsync();
     }
 

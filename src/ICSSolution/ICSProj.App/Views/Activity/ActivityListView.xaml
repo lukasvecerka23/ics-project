@@ -54,7 +54,9 @@
                     FontAttributes="Bold" />
             </Border>
             <Border Grid.Column="1" HorizontalOptions="Start">
-                <Picker ItemsSource="{Binding Projects }" ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}" SelectedItem="{Binding Project}"></Picker>
+                <Picker ItemsSource="{Binding TimePeriods }"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource TimePeriodToStringConverter}}"
+                        SelectedItem="{Binding Filter.TimePeriod}"/>
             </Border>
             <Border
                 Grid.Column="2"
@@ -93,7 +95,7 @@
                     TextColor="White"
                     BorderWidth="0"
                     BackgroundColor="Transparent"
-                    Command="{Binding FilterCommand}"/>
+                    Command="{Binding RefreshFilterCommand}"/>
             </Border>
         </Grid>
         <Grid Grid.Row="2" Margin="10">
@@ -129,7 +131,7 @@
                 Grid.Column="1"
                 HorizontalOptions="Start">
                 <DatePicker
-                    Date="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.Start}"
+                    Date="{Binding Filter.Start}"
                     />
             </Border>
             <Border
@@ -148,7 +150,7 @@
                 Grid.Column="3"
                 HorizontalOptions="Start">
                 <DatePicker
-                    Date="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.End}"
+                    Date="{Binding Filter.End}"
                     />
             </Border>
             <Border
@@ -166,7 +168,7 @@
             <Border
                 Grid.Column="5"
                 HorizontalOptions="Start">
-                <Picker Grid.Column="3" ItemsSource="{Binding Projects }" ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}" SelectedItem="{Binding Project}"></Picker>
+                <Picker Grid.Column="3" ItemsSource="{Binding Projects }" ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}" SelectedItem="{Binding Filter.Project}"></Picker>
             </Border>
             <Border
                 Grid.Column="6"
@@ -183,7 +185,7 @@
             <Border
                 Grid.Column="7"
                 HorizontalOptions="Start">
-                <Picker Grid.Column="2" ItemsSource="{Binding Tags }" ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}" SelectedItem="{Binding Tag}"></Picker>
+                <Picker Grid.Column="2" ItemsSource="{Binding Tags }" ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}" SelectedItem="{Binding Filter.Tag}"></Picker>
             </Border>
 
         </Grid>

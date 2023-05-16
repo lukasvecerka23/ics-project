@@ -12,6 +12,7 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessa
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
+    private readonly IAlertService _alertService;
 
     public IEnumerable<UserListModel> Users { get; set; } = null!;
     public UserDetailModel User { get; set; } = UserDetailModel.Empty;
@@ -20,11 +21,13 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessa
         IUserFacade userFacade,
         INavigationService navigationService,
         ILoginService loginService,
+        IAlertService alertService,
         IMessengerService messengerService) : base(messengerService)
     {
         _userFacade = userFacade;
         _navigationService = navigationService;
         _loginService = loginService;
+        _alertService = alertService;
     }
 
     protected override async Task LoadDataAsync()
@@ -36,7 +39,14 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessa
     [RelayCommand]
     private async Task AddUserAsync()
     {
-        await _userFacade.SaveAsync(User);
+        if (User.Name != string.Empty && User.Surname != string.Empty)
+        {
+            await _userFacade.SaveAsync(User);
+        }
+        else
+        {
+            await _alertService.DisplayAsync("Vytvoření uživatele", "Nelze vytvořit prázdného uživatele");
+        }
         User = UserDetailModel.Empty;
         await LoadDataAsync();
     }
@@ -50,13 +60,6 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessa
         await _navigationService.GoToAsync<ActivityListViewModel>();
     }
 
-    // [RelayCommand]
-    // private async Task GoToTagsAsync(Guid userId)
-    // {
-    //     _loginService.CurrentUserId = userId;
-    //     await _navigationService.GoToAsync<TagListViewModel>();
-    // }
-
     public async void Receive(UserEditMessage message)
     {
         await LoadDataAsync();
@@ -66,10 +69,4 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserEditMessa
     {
         await LoadDataAsync();
     }
-
-    // TODO: Add command for deleting user
-    // TODO: Add command for creating new user
-    // TODO: Add command for editing user
-    // TODO: Add command to navigate inside the app and store id of selected user to service
-    // TODO: Refresh data when user is deleted, edited or created
 }

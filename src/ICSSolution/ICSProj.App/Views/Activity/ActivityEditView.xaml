@@ -72,14 +72,14 @@
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"
                                 BackgroundColor="#CC6767"
-                                Time="{Binding SelectedTimeFrom}"
+                                Time="{Binding EditActivity.TimeFrom}"
                                 Format="HH:mm"/>
                     <DatePicker Grid.Row ="0"
                                 Grid.Column="1"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Start"
                                 BackgroundColor="#CC6767"
-                                Date="{Binding SelectedDateFrom}"/>
+                                Date="{Binding EditActivity.DateFrom}"/>
                 </Grid>
 
                 <Border
@@ -107,7 +107,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         BackgroundColor="#CC6767"
-                        Time="{Binding SelectedTimeTo}"
+                        Time="{Binding EditActivity.TimeTo}"
                         Format="HH:mm"/>
                     <DatePicker
                         Grid.Row="0"
@@ -115,7 +115,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Start"
                         BackgroundColor="#CC6767"
-                        Date="{Binding SelectedDateTo}"/>
+                        Date="{Binding EditActivity.DateTo}"/>
                 </Grid>
 
                 <Border
@@ -140,7 +140,7 @@
                         Background="#CC6767"
                         ItemsSource="{Binding Projects}"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}"
-                        SelectedItem="{Binding CreationProject}"/>
+                        SelectedItem="{Binding EditActivity.Project}"/>
 
                 <Border
                     Grid.Column="0"
@@ -164,7 +164,7 @@
                         Background="#CC6767"
                         ItemsSource="{Binding Tags}"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}"
-                        SelectedItem="{Binding CreationTag}"/>
+                        SelectedItem="{Binding EditActivity.Tag}"/>
             </Grid>
         </StackLayout>
 

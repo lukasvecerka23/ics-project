@@ -12,7 +12,7 @@ public partial class UserProfileViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
 
-    public UserDetailModel? User { get; set; }
+    public UserDetailModel User { get; set; }
 
     public UserProfileViewModel(
         IUserFacade userFacade,
@@ -49,7 +49,7 @@ public partial class UserProfileViewModel : ViewModelBase
         }
 
         //TODO move it to OnButtonClicked method
-        
+
     }
 
     [RelayCommand]

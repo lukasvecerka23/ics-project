@@ -10,6 +10,7 @@ public record ActivityListModel : ModelBase
     public string? Description { get; set; }
     public required TimeSpan Duration { get; set; }
     public string? ProjectName { get; set; }
+    public string? TagColor { get; set; }
 
 
     public static ActivityListModel Empty => new()
@@ -21,6 +22,7 @@ public record ActivityListModel : ModelBase
         Start = DateTime.Now,
         Duration = TimeSpan.Zero,
         ProjectName = string.Empty,
-        Description = string.Empty
+        Description = string.Empty,
+        TagColor = string.Empty
     };
 }

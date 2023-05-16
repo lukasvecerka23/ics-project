@@ -4,6 +4,7 @@ using ICSProj.App.Services;
 using ICSProj.App.Messages;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
+
 namespace ICSProj.App.ViewModels;
 
 [QueryProperty(nameof(Id), nameof(Id))]

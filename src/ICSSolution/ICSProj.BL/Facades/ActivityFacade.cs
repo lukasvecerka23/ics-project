@@ -89,6 +89,11 @@ public class ActivityFacade :
                 activity.TagId == tagId);
         }
 
+        foreach (string include in IncludesNavigationPathDetail)
+        {
+            filteredActivities = filteredActivities.Include(include);
+        }
+
         List<ActivityEntity> activities = await filteredActivities.ToListAsync();
 
         return _activityModelMapper.MapToListModel(activities);
