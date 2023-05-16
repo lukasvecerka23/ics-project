@@ -4,7 +4,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Style x:Key="OvalButtonStyle" TargetType="Button">
         <Setter Property="CornerRadius" Value="30" />
-        <Setter Property="WidthRequest" Value="75" />
+        <Setter Property="WidthRequest" Value="65" />
         <Setter Property="HeightRequest" Value="25" />
         <Setter Property="Margin" Value="5,0" />
     </Style>

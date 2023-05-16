@@ -37,18 +37,12 @@ public static class ProjectSeeds
         Creator = UserSeeds.UserEntity1
     };
 
-    public static readonly ProjectEntity ProjectDelete =
-        ProjectEntity1 with { Id = Guid.Parse("1a0b54ce-4182-439a-851a-cfb0173c679f") };
-    public static readonly ProjectEntity ProjectUpdate =
-        ProjectEntity1 with { Id = Guid.Parse("34d552e4-1b52-4288-afe6-26a448964801") };
 
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ProjectEntity>().HasData(
             ProjectEntity1 with {Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Activities = Array.Empty<ActivityEntity>()},
-            ProjectDelete with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Activities = Array.Empty<ActivityEntity>() },
-            ProjectUpdate with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>(), Activities = Array.Empty<ActivityEntity>() },
             ProjectEntity2 with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()},
             ProjectEntity3 with { Creator = null, ProjectAssigns = Array.Empty<ProjectAssignEntity>()}
                 );

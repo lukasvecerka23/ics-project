@@ -30,10 +30,12 @@
                 <ColumnDefinition Width="780" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Switch Grid.Column="0" OnColor="#CC6767"
-                VerticalOptions="Center"
+            <Switch x:Name="ToggleUserProjects" Grid.Column="0" OnColor="#CC6767"
+                    VerticalOptions="Center"
                     HorizontalOptions="End"
-                ThumbColor="Black"/>
+                    ThumbColor="Black"
+                    IsToggled="False"
+                    Toggled="OnToggled"/>
             <Label Grid.Column="1"
                    Text="Zobrazit pouze mé projekty"
                    FontFamily="PoppinsLight"

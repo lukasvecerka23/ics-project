@@ -4,10 +4,91 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:views="clr-namespace:ICSProj.App.Views;assembly=ICSProj.App"
                        xmlns:vm="clr-namespace:ICSProj.App.ViewModels;assembly=ICSProj.App"
+                       xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                       xmlns:models="using:ICSProj.BL.Models"
                        x:Class="ICSProj.App.Views.Project.ProjectDetailView"
                        x:DataType="vm:ProjectDetailViewModel">
-    <Grid RowDefinitions="*,Auto">
-        <Label Grid.Row="0" Text="{Binding Project.Name}" TextColor="White" FontSize="20" FontFamily="PoppinsExtraLight"/>
-        <!-- <Button Grid.Row="1" Text="Delete" Command="{Binding DeleteCommand}"/> -->
+    <Grid RowDefinitions="200,70,*">
+        <Label Grid.Row="0"
+               Text="{Binding Project.Name}"
+               TextColor="White"
+               FontSize="60"
+               HorizontalOptions="Center"
+               FontFamily="PoppinsExtraLight"
+        />
+        <Label
+                Grid.Row="1"
+                Text="Activities"
+                TextColor="White"
+                FontSize="40"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                FontFamily="PoppinsExtraLight"
+            />
+        <CollectionView
+            Grid.Row="3"
+            x:Name="ActivityList"
+            ItemsLayout="VerticalList"
+            ItemsSource="{Binding Activities}"
+        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="m:ActivityListModel">
+                    <Grid Padding="10"
+                          RowDefinitions="*,*,*">
+                            <Label
+                                Grid.Row="0"
+                                Text="{Binding Start}"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                ></Label>
+                            <Label
+                                Grid.Row="1"
+                                Text="{Binding Description}"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                ></Label>
+                            <Label
+                                Grid.Row="2"
+                                Text="{Binding Duration}"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                ></Label>
+                            <Label
+                                Grid.Row="3"
+                                Text="{Binding ProjectName}"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                ></Label>
+                            <Label
+                                Grid.Row="4"
+                                Text="{Binding TagId}"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                ></Label>
+                            <Button
+                                Text="Detail"
+                                TextColor="Blue"
+                                ></Button>
+                        </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+            <!-- <Button Grid.Row="1" Text="Delete" Command="{Binding DeleteCommand}"/> -->
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            Text="{Binding ButtonName}"
+            FontSize="40"
+            TextColor="Black"
+            Command="{Binding DeleteProjectCommand}"
+        ></Button>
     </Grid>
 </views:ContentPageBase>
