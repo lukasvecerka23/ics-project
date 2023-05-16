@@ -6,7 +6,7 @@ namespace ICSProj.App.Converters;
 
 public class ProjectNameToStringConverter : BaseConverterOneWay<ProjectAssignListModel, string>
 {
-    public override string ConvertFrom(ProjectAssignListModel value, CultureInfo? culture)
+    public override string ConvertFrom(ProjectAssignListModel value, CultureInfo culture)
         => value.ProjectName;
     public override string DefaultConvertReturnValue { get; set; } = string.Empty;
 }

@@ -15,7 +15,7 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
 
     public Guid Id { get; set; }
 
-    public ActivityDetailModel? Activity { get; set; }
+    public ActivityDetailModel Activity { get; set; }
 
     public ActivityDetailViewModel(
         IActivityFacade activityFacade,
@@ -38,7 +38,7 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
         if (Activity is not null)
         {
             await _navigationService.GoToAsync<ActivityEditViewModel>(
-                new Dictionary<string, object?>
+                new Dictionary<string, object>
                 {
                     [nameof(ActivityEditViewModel.Activity)] = Activity
                 });

@@ -6,8 +6,8 @@ public record ActivityFilterModel()
 {
     public DateTime Start { get; set; }
     public DateTime End  { get; set; }
-    public TagListModel Tag { get; set; }
-    public ProjectAssignListModel Project  { get; set; }
+    public TagListModel? Tag { get; set; }
+    public ProjectAssignListModel? Project  { get; set; }
 
     public TimePeriod? TimePeriod { get; set; }
 

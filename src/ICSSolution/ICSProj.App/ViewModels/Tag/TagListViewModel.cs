@@ -56,7 +56,7 @@ public partial class TagListViewModel : ViewModelBase
     private async Task GoToDetailAsync(Guid id)
     {
         await navigationService.GoToAsync<TagDetailViewModel>(
-            new Dictionary<string, object?> { [nameof(TagDetailViewModel.Id)] = id });
+            new Dictionary<string, object> { [nameof(TagDetailViewModel.Id)] = id });
     }
 
     [RelayCommand]

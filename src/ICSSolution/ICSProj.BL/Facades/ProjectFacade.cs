@@ -70,11 +70,8 @@ public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, Project
 
         IRepository<ProjectAssignEntity> projectAssignRepository = uow.GetRepository<ProjectAssignEntity, ProjectAssignEntityMapper>();
 
-        //var entity = await projectAssignRepository.Get()
-
         var entityId = projectAssignRepository.Get()
-            .SingleOrDefault(e => e.UserId == userId && e.ProjectId == ProjectId)
-            .Id;
+            .SingleOrDefault(e => e.UserId == userId && e.ProjectId == ProjectId)!.Id;
 
         projectAssignRepository.Delete(entityId);
 

@@ -6,7 +6,7 @@ namespace ICSProj.App.Converters;
 
 public class TimePeriodToStringConverter: BaseConverterOneWay<TimePeriod, string>
 {
-    public override string ConvertFrom(TimePeriod value, CultureInfo? culture)
+    public override string ConvertFrom(TimePeriod value, CultureInfo culture)
         => value switch
         {
             TimePeriod.None => "Žádné",
