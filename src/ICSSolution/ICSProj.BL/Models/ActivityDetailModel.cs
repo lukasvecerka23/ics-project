@@ -17,8 +17,8 @@ public record ActivityDetailModel : ModelBase
     {
         Id = Guid.Empty,
         CreatorId = Guid.Empty,
-        TagId = Guid.Empty,
-        ProjectId = Guid.Empty,
+        TagId = null,
+        ProjectId = null,
         Start = DateTime.Now,
         End = DateTime.Now,
         ProjectName = string.Empty,

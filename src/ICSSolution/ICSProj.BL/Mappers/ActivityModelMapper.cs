@@ -46,6 +46,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             End = model.End,
             CreatorId = model.CreatorId,
             TagId = model.TagId,
-            ProjectId = model.ProjectId
+            ProjectId = model.ProjectId,
+            Description = model.Description
         };
 }
