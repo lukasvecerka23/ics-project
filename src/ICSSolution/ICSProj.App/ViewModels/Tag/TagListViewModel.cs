@@ -30,12 +30,12 @@ public partial class TagListViewModel : ViewModelBase
         this.navigationService = navigationService;
         this.loginService = loginService;
         TagColor = Colors.Red;
-        CurrentUser = loginService.CurrentUser;
     }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+        CurrentUser = loginService.CurrentUser;
         var tags = await tagFacade.GetAsync();
         Tags = tags.Where(tag => tag.CreatorId == loginService.CurrentUserId);
         TagColor = Color.FromArgb(Tag.Color);

@@ -36,6 +36,7 @@ public partial class ProjectListViewModel: ViewModelBase
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+        CurrentUser = _loginService.CurrentUser;
         Projects = await _projectFacade.GetAsync();
     }
 
