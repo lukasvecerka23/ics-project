@@ -198,7 +198,8 @@
                     FontFamily="PoppinsLight"
                     TextColor="White"
                     BorderWidth="0"
-                    BackgroundColor="Transparent"/>
+                    BackgroundColor="Transparent"
+                    Command="{Binding FilterCommand}"/>
             </Border>
         </Grid>
 

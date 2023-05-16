@@ -16,6 +16,7 @@ public partial class TagListViewModel : ViewModelBase
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
+    public UserDetailModel CurrentUser { get; set; }
 
     public Color TagColor {get; set;}
 
@@ -29,6 +30,7 @@ public partial class TagListViewModel : ViewModelBase
         this.navigationService = navigationService;
         this.loginService = loginService;
         TagColor = Colors.Red;
+        CurrentUser = loginService.CurrentUser;
     }
 
     protected override async Task LoadDataAsync()
