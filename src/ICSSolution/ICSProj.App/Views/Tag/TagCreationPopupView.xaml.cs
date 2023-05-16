@@ -24,7 +24,7 @@ public partial class TagCreationPopupView : Popup
         }
 
         var button = (Button)sender;
-        button.BorderColor = Colors.Orange;
+        button.BorderColor = Color.FromArgb("#CF12D8");
         button.BorderWidth = 3;
 
         lastClickedButton = button;

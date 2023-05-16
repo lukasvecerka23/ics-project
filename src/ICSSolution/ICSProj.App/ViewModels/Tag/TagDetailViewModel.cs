@@ -44,18 +44,9 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
     [RelayCommand]
     private async Task DeleteAsync()
     {
-        if (Tag is not null)
-        {
-            try
-            {
-                await tagFacade.DeleteAsync(Tag.Id);
-                MessengerService.Send(new TagDeleteMessage());
-            }
-            catch (InvalidOperationException)
-            {
-                await alertService.DisplayAsync("Big Bad", "Error occured");
-            }
-        }
+        await tagFacade.DeleteAsync(Tag.Id);
+        MessengerService.Send(new TagDeleteMessage());
+        navigationService.SendBackButtonPressed();
     }
 
     public async void Receive(TagEditMessage message)

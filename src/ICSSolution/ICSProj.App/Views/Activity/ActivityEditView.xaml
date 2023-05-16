@@ -13,18 +13,11 @@
         </Grid.RowDefinitions>
 
         <StackLayout Grid.Row="0" Spacing="30" Margin="55,35,0,0" HorizontalOptions="Start" VerticalOptions="Start">
-            <Label Margin="30,0,0,0"
-                   Text="{Binding Activity.Description}"
-                   TextColor="#CC6767"
-                   FontSize="Large"
-                   HorizontalOptions="Start"
-                   TextDecorations="Underline"/>
-
 
             <Grid ColumnSpacing="25" RowSpacing="15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -42,15 +35,15 @@
                     Background="#CC6767"
                     Padding="16,8"
                     HorizontalOptions="Start">
-                    <Label Text=" Od: "
+                    <Label Text=" Popis: "
                            TextColor="White"
                            FontFamily="PoppinsExtraLight"
                            HorizontalOptions="Center"
                            FontSize="17"
                            FontAttributes="Bold" />
                 </Border>
-                <Entry Text="{Binding Activity.Start}"
-
+                <Entry Text="{Binding Activity.Description}"
+                       TextColor="#CC6767"
                        Grid.Row="0"
                        Grid.Column="1"
                        HorizontalOptions="Start"
@@ -63,6 +56,39 @@
                     Background="#CC6767"
                     Padding="16,8"
                     HorizontalOptions="Start">
+                    <Label Text=" Od: "
+                           TextColor="White"
+                           FontFamily="PoppinsExtraLight"
+                           HorizontalOptions="Center"
+                           FontSize="17"
+                           FontAttributes="Bold" />
+                </Border>
+                <Grid Grid.Row="1"
+                      Grid.Column="1"
+                      RowDefinitions ="Auto"
+                      ColumnDefinitions="Auto, Auto">
+                    <TimePicker Grid.Row ="0"
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                BackgroundColor="#CC6767"
+                                Time="{Binding SelectedTimeFrom}"
+                                Format="HH:mm"/>
+                    <DatePicker Grid.Row ="0"
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                BackgroundColor="#CC6767"
+                                Date="{Binding SelectedDateFrom}"/>
+                </Grid>
+
+                <Border
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    StrokeShape="RoundRectangle 20,20,20,20"
+                    Background="#CC6767"
+                    Padding="16,8"
+                    HorizontalOptions="Start">
                     <Label Text=" Do: "
                            TextColor="White"
                            FontFamily="PoppinsExtraLight"
@@ -70,18 +96,31 @@
                            FontSize="17"
                            FontAttributes="Bold" />
                 </Border>
-                <Label Text="{Binding Activity.End}"
-                       TextColor="#CC6767"
-                       TextDecorations="Underline"
-                       FontSize="Medium"
-                       Grid.Row="1"
-                       Grid.Column="1"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"/>
+
+                <Grid Grid.Row="2"
+                      Grid.Column="1"
+                      RowDefinitions ="Auto"
+                      ColumnDefinitions="Auto, Auto">
+                    <TimePicker
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        BackgroundColor="#CC6767"
+                        Time="{Binding SelectedTimeTo}"
+                        Format="HH:mm"/>
+                    <DatePicker
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        BackgroundColor="#CC6767"
+                        Date="{Binding SelectedDateTo}"/>
+                </Grid>
 
                 <Border
                     Grid.Column="0"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     StrokeShape="RoundRectangle 20,20,20,20"
                     Background="#CC6767"
                     Padding="16,8"
@@ -93,18 +132,19 @@
                            FontSize="17"
                            FontAttributes="Bold" />
                 </Border>
-                <Label Text="{Binding Activity.ProjectName}"
-                       TextColor="#CC6767"
-                       TextDecorations="Underline"
-                       FontSize="Medium"
-                       Grid.Row="2"
-                       Grid.Column="1"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"/>
+
+                <Picker Grid.Row="3"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        Background="#CC6767"
+                        ItemsSource="{Binding Projects}"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}"
+                        SelectedItem="{Binding CreationProject}"/>
 
                 <Border
                     Grid.Column="0"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     StrokeShape="RoundRectangle 20,20,20,20"
                     Background="#CC6767"
                     Padding="16,8"
@@ -117,14 +157,14 @@
                            FontAttributes="Bold" />
                 </Border>
 
-                <Label Text="{Binding Activity.TagName}"
-                       TextColor="#CC6767"
-                       TextDecorations="Underline"
-                       FontSize="Medium"
-                       Grid.Row="3"
-                       Grid.Column="1"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"/>
+                <Picker Grid.Row="4"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        Background="#CC6767"
+                        ItemsSource="{Binding Tags}"
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}"
+                        SelectedItem="{Binding CreationTag}"/>
             </Grid>
         </StackLayout>
 
