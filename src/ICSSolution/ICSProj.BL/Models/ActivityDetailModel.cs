@@ -23,6 +23,7 @@ public record ActivityDetailModel : ModelBase
         End = DateTime.Now,
         ProjectName = string.Empty,
         TagName = string.Empty,
-        CreatorName = string.Empty
+        CreatorName = string.Empty,
+        Description = string.Empty
     };
 }

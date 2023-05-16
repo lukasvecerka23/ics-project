@@ -8,7 +8,7 @@ using ICSProj.DAL.Repositories;
 
 namespace ICSProj.BL.Facades;
 
-public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, ProjectDetailModel, ProjectEntityMapper>
+public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, ProjectDetailModel, ProjectEntityMapper>, IProjectFacade
 {
 
     private readonly IProjectModelMapper _projectModelMapper;
@@ -31,4 +31,10 @@ public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, Project
 
         return entity == null ? null : _projectModelMapper.MapToDetailModel(entity);
     }
+
+    protected override List<string> IncludesNavigationPathDetail =>
+        new()
+        {
+            $"{nameof(ActivityEntity.Creator)}"
+        };
 }

@@ -6,6 +6,8 @@ public record TagListModel : ModelBase
 
     public required string Name { get; set; }
 
+    public string? Color { get; set; }
+
     public static TagListModel Empty => new()
     {
         Id = Guid.Empty,

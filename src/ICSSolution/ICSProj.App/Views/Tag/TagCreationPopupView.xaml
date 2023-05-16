@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+                xmlns:models="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                x:DataType="vm:TagListViewModel"
+                x:Class="ICSProj.App.Views.Tag.TagCreationPopupView">
+    <Grid Padding="20"
+          RowDefinitions="Auto, Auto, Auto, *"
+          BackgroundColor="#D57979"
+          WidthRequest="450"
+          HeightRequest="250">
+
+        <Label Grid.Row="0"
+               Text="Vytvořit nový tag"
+               TextColor="White"
+               FontFamily="PoppinsLight"
+               FontSize="18"
+               HeightRequest="30"
+               HorizontalOptions="Center"/>
+
+        <Grid Grid.Row="1"
+              RowDefinitions="Auto, Auto"
+              ColumnDefinitions="Auto, *">
+
+            <Label Grid.Row="0"
+                   Text="Jméno:"
+                   TextColor="White"
+                   FontFamily="PoppinsLight"
+                   VerticalOptions="Center" />
+            <Entry Grid.Row="0"
+                   Grid.Column="1"
+                   Margin="10,0,0,0"
+                   BackgroundColor="White"
+                   Text="{Binding Tag.Name}"
+                   Placeholder="např. Čtení"
+                   FontFamily="PoppinsLight"/>
+            <Label
+                   Grid.Row="1"
+                   Text="Barva:"
+                   FontFamily="PoppinsLight"
+                   TextColor="White"
+                   VerticalOptions="Center"/>
+                
+        </Grid>
+        <Grid Grid.Row="2"
+              ColumnDefinitions="*, *, *"
+              Margin="0,0,0,10">
+            <Button 
+                Grid.Column="0"
+                BackgroundColor="Red"
+                Text="Červená"
+                TextColor="White"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#FF0000"
+                Clicked="SetButtonHighlight"/>
+            <Button 
+                Grid.Column="1"
+                BackgroundColor="Blue"
+                Text="Modrá"
+                TextColor="White"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#0000FF"
+                Clicked="SetButtonHighlight"/>
+            <Button 
+                Grid.Column="2"
+                BackgroundColor="Green"
+                Text="Zelená"
+                TextColor="White"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#00FF00"
+                Clicked="SetButtonHighlight"/>
+        </Grid>
+
+
+            <Button Grid.Row="3"
+                    Text="Vytvořit"
+                    TextColor="White"
+                    FontFamily="PoppinsLight"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    BackgroundColor="#C25454"
+                    Command="{Binding AddTagCommand}"
+                    Clicked="ClosePopup"/>
+
+
+        
+    </Grid>
+</toolkit:Popup>

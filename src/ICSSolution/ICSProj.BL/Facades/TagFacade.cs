@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ICSProj.BL.Facades;
 
-public class TagFacade : FacadeBase<TagEntity, TagListModel, TagDetailModel, TagEntityMapper>
+public class TagFacade : FacadeBase<TagEntity, TagListModel, TagDetailModel, TagEntityMapper>, ITagFacade
 {
     private readonly ITagModelMapper _tagModelMapper;
 
