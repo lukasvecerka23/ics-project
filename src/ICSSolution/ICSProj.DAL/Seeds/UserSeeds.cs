@@ -18,7 +18,7 @@ public static class UserSeeds
         Id = Guid.Parse("9c68b64f-4db0-472d-8863-dc69ffef7f88"),
         Name = "Petr",
         Surname = "Novák",
-        ImageUrl = null
+        ImageUrl = "https://www.sablonynazed.cz/576-large_default/medvidek-pu-01.jpg"
     };
 
     public static readonly UserEntity UserEntity2 = new()

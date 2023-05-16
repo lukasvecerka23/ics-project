@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ICSProj.App.Messages;
 using ICSProj.App.Services;
@@ -14,8 +15,10 @@ public partial class TagListViewModel : ViewModelBase
     private readonly ILoginService loginService;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
-
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
+    public UserDetailModel CurrentUser { get; set; }
+
+    public Color TagColor {get; set;}
 
     public TagListViewModel(
         ITagFacade tagFacade,
@@ -26,13 +29,16 @@ public partial class TagListViewModel : ViewModelBase
         this.tagFacade = tagFacade;
         this.navigationService = navigationService;
         this.loginService = loginService;
+        TagColor = Colors.Red;
     }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+        CurrentUser = loginService.CurrentUser;
         var tags = await tagFacade.GetAsync();
         Tags = tags.Where(tag => tag.CreatorId == loginService.CurrentUserId);
+        TagColor = Color.FromArgb(Tag.Color);
     }
 
     [RelayCommand]
@@ -57,6 +63,7 @@ public partial class TagListViewModel : ViewModelBase
         MessengerService.Send(new TagEditMessage { TagId = Tag.Id });
 
         await LoadDataAsync();
+        Tag = TagDetailModel.Empty;
 
         navigationService.SendBackButtonPressed();
     }
@@ -81,5 +88,12 @@ public partial class TagListViewModel : ViewModelBase
     private async Task ShowUserSettingsAsync()
     {
         await navigationService.ShowPopupAsync(new UserSettingsPopupView());
+    }
+
+    [RelayCommand]
+    private void SetColor(string color)
+    {
+        TagColor = Color.FromArgb(color);
+        Tag.Color = color;
     }
 }

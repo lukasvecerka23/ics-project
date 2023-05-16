@@ -19,32 +19,41 @@ public static class ActivitySeeds
     {
         Id = Guid.Parse("42390eec-637b-4cf0-a33d-380a418b7915"),
         CreatorId = UserSeeds.UserEntity1.Id,
+        Creator = UserSeeds.UserEntity1,
         Description = "Working on important thing...",
         Start = new DateTime(2023, 2, 10, 10,0,0),
         End = new DateTime(2023, 2,10,11,0,0),
         ProjectId = ProjectSeeds.ProjectEntity1.Id,
-        TagId = default
+        Project = ProjectSeeds.ProjectEntity1,
+        TagId = default,
+        Tag = default
     };
 
     public static readonly ActivityEntity ActivityEntity2 = new()
     {
         Id = Guid.Parse("79168d67-711c-48f2-bbec-a89cf4b831ae"),
         CreatorId = UserSeeds.UserEntity2.Id,
+        Creator = UserSeeds.UserEntity2,
         Description = "Working on second important thing...",
         Start = new DateTime(2023, 2, 12, 20,0,0),
         End = new DateTime(2023, 2,12,22,0,0),
         ProjectId = default,
-        TagId = TagSeeds.TagEntity2.Id
+        Project = default,
+        TagId = TagSeeds.TagEntity2.Id,
+        Tag = TagSeeds.TagEntity2
     };
     public static readonly ActivityEntity ActivityEntityDeletedByProject = new()
     {
         Id = Guid.Parse("79168d67-711c-48f2-bbec-a89cf4b831aa"),
         CreatorId = UserSeeds.UserEntity2.Id,
+        Creator = UserSeeds.UserEntity2,
         Description = "Working on something important",
         Start = new DateTime(2023, 4, 9, 16, 20, 0, 0),
         End = new DateTime(2023, 4, 11, 10, 10, 0, 0),
         ProjectId = ProjectSeeds.ProjectEntity1.Id,
-        TagId = default
+        Project = ProjectSeeds.ProjectEntity1,
+        TagId = default,
+        Tag = default
     };
 
     public static readonly ActivityEntity ActivityUpdate = ActivityEntity2 with {Id = Guid.Parse("A61EF52A-F678-4C6D-AD1D-692640278753")};

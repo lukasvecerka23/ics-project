@@ -56,7 +56,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         await base.LoadDataAsync();
 
         Project = await projectFacade.GetAsync(Id);
-        Activities = await activityFacade.GetAsync();
+        //Activities = await activityFacade.GetAsync();
         UserData = await userFacade.GetAsync(_loginService.CurrentUserId);
         isProjectAssignedToUser = UserData.ProjectAssigns.Any(p => p.UserId == _loginService.CurrentUserId
                                                                         && p.ProjectId == Project.Id);
@@ -90,6 +90,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
                 {
                     await projectFacade.DeleteAsync(Project.Id);
                     MessengerService.Send(new ProjectDeleteMessage());
+                    navigationService.SendBackButtonPressed();
 
                 }
                 catch (InvalidOperationException)
@@ -104,7 +105,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
             {
                 if (isProjectAssignedToUser)
                 {
-                    //implement leave project
+                    await projectFacade.LeaveProject(_loginService.CurrentUserId, Project.Id);
                     
                 }
                 else
@@ -112,14 +113,10 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
                     await projectFacade.RegisterProject(_loginService.CurrentUserId, Project.Id);
                 }
                 MessengerService.Send(new UserProjectLeaveJoinMessage());
-
             }
-            
 
         }
-
-
-        navigationService.SendBackButtonPressed();
+        await LoadDataAsync();
     }
 
     public async void Receive(ProjectEditMessage message)

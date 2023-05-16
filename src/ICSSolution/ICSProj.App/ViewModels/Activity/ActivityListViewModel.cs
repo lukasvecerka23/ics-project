@@ -11,43 +11,44 @@ namespace ICSProj.App.ViewModels;
 public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDeleteMessage>
 {
     private readonly IActivityFacade _activityFacade;
-    private readonly ITagFacade _tagFacade;
-    private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
-    private string tagName = null;
-    private string projectName = null;
-    private DateTime start = DateTime.MinValue;
-    private DateTime end = DateTime.MaxValue;
+    private readonly IAlertService _alertService;
+    public IEnumerable<TagListModel> Tags { get; set; } = null!;
+    public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
+    public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
+    public TagListModel Tag { get; set; } = null!;
+    public ProjectAssignListModel Project  { get; set; } = null!;
+    public UserDetailModel CurrentUser { get; set; }
+    public DateTime Start { get; set; } = DateTime.Today;
+    public DateTime End  { get; set; } = DateTime.Today;
+    public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
+    public TagListModel CreationTag { get; set; } = TagListModel.Empty;
+    public ProjectAssignListModel CreationProject { get; set; } = ProjectAssignListModel.Empty;
+    public TimeSpan SelectedTimeFrom { get; set; } = TimeSpan.Zero;
+    public DateTime SelectedDateFrom { get; set; } = DateTime.Today;
+    public TimeSpan SelectedTimeTo { get; set; } = TimeSpan.Zero;
+    public DateTime SelectedDateTo { get; set; } = DateTime.Today;
 
     public ActivityListViewModel(
         IActivityFacade activityFacade,
-        ITagFacade tagFacade,
-        IProjectFacade projectFacade,
         INavigationService navigationService,
         ILoginService loginService,
-        IMessengerService messengerService) : base(messengerService)
+        IMessengerService messengerService,
+        IAlertService alertService) : base(messengerService)
     {
         _activityFacade = activityFacade;
-        _tagFacade = tagFacade;
-        _projectFacade = projectFacade;
         _navigationService = navigationService;
         _loginService = loginService;
+        _alertService = alertService;
     }
-
-    public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        var tagsByUser = await _tagFacade.GetTagsByUser(_loginService.CurrentUserId);
-        var tagId = tagsByUser?.FirstOrDefault(tag => tag.Name == tagName)?.Id;
-
-        var projectsByUser = await _projectFacade.GetAsync();
-        var projectId = projectsByUser?.FirstOrDefault(project => project.Name == projectName)?.Id;
-
-        Activities = await _activityFacade.FilterActivities(_loginService.CurrentUserId, start, end, projectId, tagId);
-        Console.WriteLine(Activities.Count());
+        CurrentUser = _loginService.CurrentUser;
+        Activities = _activityFacade.GetAsync().Result.Where(activity => activity.CreatorId == _loginService.CurrentUserId);
+        RefreshFilter();
     }
 
     [RelayCommand]
@@ -70,6 +71,61 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private async Task ShowUserSettingsAsync()
     {
         await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
+    }
+
+    [RelayCommand]
+    private async Task FilterAsync()
+    {
+        Activities = await _activityFacade.FilterActivities(CurrentUser.Id, Start, End, Project?.ProjectId, Tag?.Id);
+        RefreshFilter();
+    }
+
+    private void RefreshFilter()
+    {
+        Tags = CurrentUser.Tags;
+        Projects = CurrentUser.ProjectAssigns;
+        Tag = null;
+        Project = null;
+        End = DateTime.Today;
+        Start = DateTime.Today;
+    }
+
+    [RelayCommand]
+    private async Task AddActivityAsync()
+    {
+        Activity.CreatorId = CurrentUser.Id;
+        Activity.Start = SelectedDateFrom + SelectedTimeFrom;
+        Activity.End = SelectedDateTo + SelectedTimeTo;
+        Activity.CreatorName = $"{_loginService.CurrentUser.Name} {_loginService.CurrentUser.Surname}";
+        if (CreationTag?.Id != Guid.Empty)
+        {
+            Activity.TagId = CreationTag?.Id;
+            Activity.TagName = CreationTag?.Name;
+        }
+        if (CreationProject?.ProjectId != Guid.Empty)
+        {
+            Activity.ProjectId = CreationProject?.ProjectId;
+            Activity.ProjectName = CreationProject?.ProjectName;
+        }
+
+
+        try
+        {
+            await _activityFacade.SaveAsync(CurrentUser.Id, Activity);
+        }
+        catch (Exception)
+        {
+            await _alertService.DisplayAsync("Test", "Test");
+        }
+
+        Activity = ActivityDetailModel.Empty;
+        CreationTag = TagListModel.Empty;
+        CreationProject = ProjectAssignListModel.Empty;
+        SelectedTimeFrom = TimeSpan.Zero;
+        SelectedDateFrom = DateTime.Today;
+        SelectedTimeTo = TimeSpan.Zero;
+        SelectedDateTo = DateTime.Today;
+        await LoadDataAsync();
     }
 
 }

@@ -9,6 +9,8 @@ public record UserDetailModel : ModelBase
     public string? ImageUrl { get; set; }
     public ObservableCollection<ProjectAssignListModel> ProjectAssigns { get; init; } = new();
 
+    public ObservableCollection<TagListModel> Tags { get; init; } = new();
+
     public static UserDetailModel Empty => new()
     {
         Id      = Guid.Empty,

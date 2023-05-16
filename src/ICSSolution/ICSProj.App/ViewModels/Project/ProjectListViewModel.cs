@@ -8,7 +8,7 @@ using ICSProj.BL.Models;
 
 namespace ICSProj.App.ViewModels;
 
-public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDeleteMessage>
+public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDeleteMessage>, IRecipient<UserProjectLeaveJoinMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
@@ -16,6 +16,7 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     private readonly IUserFacade _userFacade;
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
+    public UserDetailModel CurrentUser { get; set; }
 
     public ProjectDetailModel Project { get; set; } = ProjectDetailModel.Empty;
 
@@ -30,16 +31,21 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
         _navigationService = navigationService;
         _loginService = loginService;
         _userFacade = userFacade;
+        CurrentUser = _loginService.CurrentUser;
     }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+        CurrentUser = _loginService.CurrentUser;
         Projects = await _projectFacade.GetAsync();
     }
 
     public async Task ShowUserProjects()
     {
+        //var ProjectsAssigned = _loginService.CurrentUser.ProjectAssigns
+        //Projects = Projects.Where(i => i.CreatorId == _loginService.CurrentUserId);
+        Projects = await _projectFacade.GetProjectsAssignedToUser(_loginService.CurrentUserId);
         MessengerService.Send(new ProjectEditMessage{ProjectId = Projects.First().Id});
     }
 

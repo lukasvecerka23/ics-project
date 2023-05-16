@@ -22,7 +22,7 @@ public class ActivityFacade :
         var activityEntity = ModelMapper.MapToEntity(activity);
 
         bool conflictingActivity = await dbSetActivities.AnyAsync(
-            x => x.CreatorId == userId && (
+            x => x.Id != activity.Id && x.CreatorId == userId && (
                  (activityEntity.Start <= x.Start && activityEntity.End >= x.End) ||
                  (activityEntity.Start >= x.Start && activityEntity.Start <= x.End) ||
                  (activityEntity.End >= x.Start && activityEntity.End <= x.End)     ||
@@ -33,7 +33,7 @@ public class ActivityFacade :
 
     public async Task<ActivityDetailModel> SaveAsync(Guid userId, ActivityDetailModel activity)
     {
-        if (await HasMoreActivitiesAtTheSameTime(userId, activity) == true)
+        if (await HasMoreActivitiesAtTheSameTime(userId, activity))
         {
             throw new Exception("There are conflicting activities");
         }
@@ -93,4 +93,13 @@ public class ActivityFacade :
 
         return _activityModelMapper.MapToListModel(activities);
     }
+
+    protected override List<string> IncludesNavigationPathDetail =>
+        new()
+        {
+            $"{nameof(ActivityEntity.Project)}",
+            $"{nameof(ActivityEntity.Tag)}",
+            $"{nameof(ActivityEntity.Creator)}"
+        };
+
 }

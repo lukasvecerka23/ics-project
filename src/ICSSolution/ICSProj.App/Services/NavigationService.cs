@@ -18,6 +18,7 @@ public class NavigationService: INavigationService
 
         new("//activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         new("//activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+        new("//activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
 
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
         new("//projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
@@ -30,14 +31,12 @@ public class NavigationService: INavigationService
         where TViewModel : IViewModel
     {
         var route = GetRouteByViewModel<TViewModel>();
-        Console.WriteLine(route);
         await Shell.Current.GoToAsync(route);
     }
     public async Task GoToAsync<TViewModel>(IDictionary<string, object?> parameters)
         where TViewModel : IViewModel
     {
         var route = GetRouteByViewModel<TViewModel>();
-        Console.WriteLine(route);
         await Shell.Current.GoToAsync(route, parameters);
     }
 
