@@ -12,7 +12,7 @@ public partial class ActivityEditViewModel : ViewModelBase
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
 
-    public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
+    public ActivityDetailModel Activity { get; init; } = ActivityDetailModel.Empty;
 
     public ActivityEditViewModel(
         IActivityFacade activityFacade,
