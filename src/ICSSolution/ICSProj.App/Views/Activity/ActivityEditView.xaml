@@ -48,6 +48,7 @@
                            FontAttributes="Bold" />
                 </Border>
                 <Entry Text="{Binding Activity.Description}"
+                       BackgroundColor="White"
                        TextColor="Black"
                        Grid.Row="0"
                        Grid.Column="1"
