@@ -12,9 +12,15 @@ public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, Project
 {
 
     private readonly IProjectModelMapper _projectModelMapper;
+    private readonly IProjectAssignModelMapper _projectAssignModelMapper;
+
     public ProjectFacade(IUnitOfWorkFactory unitOfWorkFactory,
-        IProjectModelMapper projectModelMapper) : base(unitOfWorkFactory, projectModelMapper) =>
+        IProjectModelMapper projectModelMapper, IProjectAssignModelMapper projectAssignModelMapper) : base(unitOfWorkFactory, projectModelMapper)
+    {
         _projectModelMapper = projectModelMapper;
+        _projectAssignModelMapper = projectAssignModelMapper;
+    }
+        
 
     public override async Task<ProjectDetailModel?> GetAsync(Guid id)
     {
@@ -31,4 +37,38 @@ public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, Project
 
         return entity == null ? null : _projectModelMapper.MapToDetailModel(entity);
     }
+
+    public async Task<bool> RegisterProject(Guid UserId, Guid ProjectId)
+    {
+
+        ProjectAssignDetailModel NewRegistration = ProjectAssignDetailModel.Empty;
+
+        NewRegistration.Id = new Guid();
+        NewRegistration.ProjectId = ProjectId;
+        NewRegistration.UserId = UserId;
+
+        var entity = _projectAssignModelMapper.MapToEntity(NewRegistration);
+
+
+        await using IUnitOfWork unitOfWork = UnitOfWorkFactory.Create();
+
+        IRepository<ProjectAssignEntity> projectRepository =
+            UnitOfWorkFactory.Create().GetRepository<ProjectAssignEntity, ProjectAssignEntityMapper>();
+
+        await projectRepository.InsertAsync(entity);
+
+        return true;
+
+    }
+
+    public async Task<bool> LeaveProject(Guid id)
+    {
+        await using IUnitOfWork unitofWork = UnitOfWorkFactory.Create();
+
+        IRepository<ProjectEntity> projectRepository =
+            UnitOfWorkFactory.Create().GetRepository<ProjectEntity, ProjectEntityMapper>();
+
+        return true;
+    }
+
 }

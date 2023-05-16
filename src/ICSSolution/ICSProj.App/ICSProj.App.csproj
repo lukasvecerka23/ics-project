@@ -127,8 +127,4 @@
       <ProjectReference Include="..\ICSProj.DAL\ICSProj.DAL.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Messages\" />
-    </ItemGroup>
-
 </Project>

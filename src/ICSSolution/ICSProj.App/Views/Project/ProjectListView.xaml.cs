@@ -11,6 +11,7 @@ public partial class ProjectListView
     {
         InitializeComponent();
         _viewModel = viewModel;
+        ToggleUserProjects.IsToggled = false;
     }
 
     public void DisplayPopup(object sender, EventArgs e)
@@ -22,6 +23,7 @@ public partial class ProjectListView
     async void OnToggled(object sender, ToggledEventArgs e)
     {
         // print to debug console
+        
         if (e.Value)
         {
             //set ProjectList to User's Projects
@@ -32,8 +34,11 @@ public partial class ProjectListView
             //set ProjectList to All projects
             await _viewModel.ShowAllProjects();
         }
-        Debug.WriteLine(e.ToString());
-        Debug.WriteLine(e.Value);
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        ToggleUserProjects.IsToggled = false;
     }
 }
 

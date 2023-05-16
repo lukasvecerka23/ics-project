@@ -6,7 +6,6 @@ using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
 using ICSProj.App.Services;
 using ICSProj.App.ViewModels;
-
 namespace ICSProj.App.ViewModels;
 
 [QueryProperty(nameof(Id), nameof(Id))]
@@ -16,6 +15,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
     private readonly IActivityFacade activityFacade;
     private readonly INavigationService navigationService;
     private readonly IAlertService alertService;
+    private readonly IUserFacade userFacade;
     private readonly ILoginService _loginService;
    
 
@@ -23,10 +23,14 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
     public ProjectDetailModel? Project { get; private set; }
     public IEnumerable<ActivityListModel>? Activities { get; set; }
 
+    public UserDetailModel? UserData { get; set; }
+
     public string ButtonName
     {
         get; set;
     }
+
+    public bool isProjectAssignedToUser { get; set; }
 
     public ProjectDetailViewModel(
         IProjectFacade projectFacade,
@@ -34,6 +38,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         INavigationService navigationService,
         ILoginService loginService,
         IMessengerService MessengerService,
+        IUserFacade userFacade,
         IAlertService alertService)
         : base(MessengerService)
     {
@@ -41,6 +46,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         this.activityFacade = activityFacade;
         this.navigationService = navigationService;
         this.alertService = alertService;
+        this.userFacade = userFacade;
         _loginService = loginService;
 
     }
@@ -51,13 +57,24 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
 
         Project = await projectFacade.GetAsync(Id);
         Activities = await activityFacade.GetAsync();
+        UserData = await userFacade.GetAsync(_loginService.CurrentUserId);
+        isProjectAssignedToUser = UserData.ProjectAssigns.Any(p => p.UserId == _loginService.CurrentUserId
+                                                                        && p.ProjectId == Project.Id);
         if (Project?.CreatorId == _loginService.CurrentUserId)
         {
             ButtonName = "Delete Project";
         }
         else
         {
-            ButtonName = "Leave Project";
+            
+            if (isProjectAssignedToUser)
+            {
+                ButtonName = "Leave Project";
+            }
+            else
+            {
+                ButtonName = "Register Project";
+            }
         }
     }
 
@@ -72,7 +89,8 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
                 try
                 {
                     await projectFacade.DeleteAsync(Project.Id);
-                    
+                    MessengerService.Send(new ProjectDeleteMessage());
+
                 }
                 catch (InvalidOperationException)
                 {
@@ -84,16 +102,23 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         {
             if (Project is not null)
             {
-                // find userId that matches Id in projectassigns Project.ProjectAssigns.First().UserId and delete it from collection
-
-                // finds project assign user id that corresponds to user
-                //Project.ProjectAssigns.FirstOrDefault(item => item.UserId == _loginService.CurrentUserId));
-                // Todo delete projectassign user id from the collection and save on DB
+                if (isProjectAssignedToUser)
+                {
+                    //implement leave project
+                    
+                }
+                else
+                {
+                    await projectFacade.RegisterProject(_loginService.CurrentUserId, Project.Id);
+                }
+                MessengerService.Send(new UserProjectLeaveJoinMessage());
 
             }
+            
 
         }
-        MessengerService.Send(new ProjectDeleteMessage());
+
+
         navigationService.SendBackButtonPressed();
     }
 

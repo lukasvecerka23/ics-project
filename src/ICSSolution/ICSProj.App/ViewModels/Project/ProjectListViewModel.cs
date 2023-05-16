@@ -40,7 +40,6 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
 
     public async Task ShowUserProjects()
     {
-        Projects = Projects.Where(i => i.CreatorId == _loginService.CurrentUserId);
         MessengerService.Send(new ProjectEditMessage{ProjectId = Projects.First().Id});
     }
 
@@ -90,6 +89,11 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     }
 
     public async void Receive(ProjectDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(UserProjectLeaveJoinMessage message)
     {
         await LoadDataAsync();
     }
