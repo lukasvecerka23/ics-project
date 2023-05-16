@@ -13,6 +13,7 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
+    private readonly IAlertService _alertService;
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
     public UserDetailModel CurrentUser { get; set; }
@@ -23,11 +24,13 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
         IProjectFacade projectFacade,
         INavigationService navigationService,
         ILoginService loginService,
+        IAlertService alertService,
         IMessengerService MessengerService) : base(MessengerService)
     {
         _projectFacade = projectFacade;
         _navigationService = navigationService;
         _loginService = loginService;
+        _alertService = alertService;
         CurrentUser = _loginService.CurrentUser;
     }
 
@@ -63,12 +66,18 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
 
         Project.CreatorId = _loginService.CurrentUserId;
 
-        Project = await _projectFacade.SaveAsync(Project);
-        await _projectFacade.RegisterProject(_loginService.CurrentUserId, Project.Id);
+        if (Project.Name == string.Empty)
+        {
+            await _alertService.DisplayAsync("Vytvoření projektu", "Název projektu nesmí být prázdný.");
+        }
+        else
+        {
+            Project = await _projectFacade.SaveAsync(Project);
+            await _projectFacade.RegisterProject(_loginService.CurrentUserId, Project.Id);
+            MessengerService.Send(new ProjectEditMessage { ProjectId = Project.Id });
+        }
+
         Project = ProjectDetailModel.Empty;
-
-        MessengerService.Send(new ProjectEditMessage { ProjectId = Project.Id });
-
         await LoadDataAsync();
 
         _navigationService.SendBackButtonPressed();
