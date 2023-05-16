@@ -116,7 +116,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         //Assert
         await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
         var activityFromDb = await dbxAssert.Activities.SingleAsync(i => i.Id == activity.Id);
-        DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb));
+        DeepAssert.Equal(activity, ActivityModelMapper.MapToDetailModel(activityFromDb), "CreatorName");
     }
 
     [Fact]
@@ -167,7 +167,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity2.Id, from, to, null, null);
 
         // Assert
-        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity2), activities);
+        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity2 with {Creator = UserSeeds.UserEntity2}), activities);
     }
 
     [Fact]
@@ -180,8 +180,14 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         // Act
         var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity1.Id, from, to, ProjectSeeds.ProjectEntity1.Id, null);
 
+        var testActivity = ActivityModelMapper.MapToListModel(
+            ActivitySeeds.ActivityEntity1 with
+            {
+                Project = ProjectSeeds.ProjectEntity1,
+                Creator = UserSeeds.UserEntity1
+            });
         // Assert
-        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1 with {Project = ProjectSeeds.ProjectEntity1}), activities);
+        Assert.Contains(testActivity, activities);
     }
 
     [Fact]
@@ -194,7 +200,12 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         // Act
         var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity2.Id, from, to, null, TagSeeds.TagEntity2.Id);
 
+        var testActivity = ActivityModelMapper.MapToListModel(
+            ActivitySeeds.ActivityEntity2 with
+            {
+                Creator = UserSeeds.UserEntity2
+            });
         // Assert
-        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity2), activities);
+        Assert.Contains(testActivity, activities);
     }
 }
