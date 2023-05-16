@@ -67,7 +67,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
             }
             else
             {
-                ButtonName = "Registrovat Projekt";
+                ButtonName = "Registrovat si Projekt";
             }
         }
     }
