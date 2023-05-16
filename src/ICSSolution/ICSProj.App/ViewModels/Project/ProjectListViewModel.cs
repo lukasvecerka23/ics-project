@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using ICSProj.App.Messages;
 using ICSProj.App.Services;
 using ICSProj.App.Views.Popups;
@@ -7,7 +8,7 @@ using ICSProj.BL.Models;
 
 namespace ICSProj.App.ViewModels;
 
-public partial class ProjectListViewModel: ViewModelBase
+public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDeleteMessage>, IRecipient<UserProjectLeaveJoinMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
@@ -38,6 +39,20 @@ public partial class ProjectListViewModel: ViewModelBase
         await base.LoadDataAsync();
         CurrentUser = _loginService.CurrentUser;
         Projects = await _projectFacade.GetAsync();
+    }
+
+    public async Task ShowUserProjects()
+    {
+        //var ProjectsAssigned = _loginService.CurrentUser.ProjectAssigns
+        //Projects = Projects.Where(i => i.CreatorId == _loginService.CurrentUserId);
+        Projects = await _projectFacade.GetProjectsAssignedToUser(_loginService.CurrentUserId);
+        MessengerService.Send(new ProjectEditMessage{ProjectId = Projects.First().Id});
+    }
+
+    public async Task ShowAllProjects()
+    {
+        await LoadDataAsync();
+        MessengerService.Send(new ProjectEditMessage{ProjectId = Projects.First().Id});
     }
 
     [RelayCommand]
@@ -77,5 +92,15 @@ public partial class ProjectListViewModel: ViewModelBase
     private async Task ShowUserSettingsAsync()
     {
         await _navigationService.ShowPopupAsync(new UserSettingsPopupView());
+    }
+
+    public async void Receive(ProjectDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(UserProjectLeaveJoinMessage message)
+    {
+        await LoadDataAsync();
     }
 }
