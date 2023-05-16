@@ -8,5 +8,6 @@ public class TagEntityMapper : IEntityMapper<TagEntity>
     {
         existingEntity.Name = newEntity.Name;
         existingEntity.CreatorId = newEntity.CreatorId;
+        existingEntity.Color = newEntity.Color;
     }
 }

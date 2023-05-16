@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+               x:DataType="vm:UserSettingsPopupViewModel"
+               x:Name="UserSettingsPopupRoot"
+               x:Class="ICSProj.App.Views.Popups.UserSettingsPopupView">
+    <Grid
+        HeightRequest="100"
+        WidthRequest="400"
+        RowDefinitions="50,50"
+        BackgroundColor="#CC6767">
+        <Button
+            Grid.Row="0"
+            Command="{Binding GoToUserProfileCommand}"
+            Text="Nastavení"
+            HorizontalOptions="Center"
+            Clicked="ClosePopup"
+            FontSize="18"
+            WidthRequest="400"
+            FontFamily="PoppinsLight"
+            BackgroundColor="#CC6767"
+            BorderWidth="0"/>
+        <Button
+            Grid.Row="1"
+            Command="{Binding GoToUserListCommand}"
+            Clicked="ClosePopup"
+            Text="Změnit uživatele"
+            HorizontalOptions="Center"
+            FontSize="18"
+            WidthRequest="400"
+            FontFamily="PoppinsLight"
+            BackgroundColor="#CC6767"
+            BorderWidth="0" />
+    </Grid>
+</toolkit:Popup>
+

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="ICSProj.App.Views.Tag.TagListView"
+                xmlns:views="clr-namespace:ICSProj.App.Views"
+                xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+                xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                x:Name="TagListViewRoot"
+                x:DataType="vm:TagListViewModel">
+
+    <Grid RowDefinitions="Auto,Auto,*, Auto">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                <Label Grid.Column="0" Text="Tagy"
+               FontSize="40"
+               FontFamily="PoppinsLight"
+               TextColor="#CC6767"
+               Margin="30,15,30,30"
+               HorizontalOptions="Start"  />
+                <ImageButton Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="10" HorizontalOptions="End"
+                    x:Name="UserSettingsButton"
+                    Source="user_placeholder.jpg"
+                    Command="{Binding ShowUserSettingsCommand}"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280" />
+                    <ColumnDefinition Width="300" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                Grid.Column="0"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Margin="50,0,0,0">
+                    <Label Text="Název"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="20" />
+                </Border>
+                <Border
+                Grid.Column="1"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                    <Label Text="Barva"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="20" />
+                </Border>
+            </Grid>
+
+            <CollectionView Grid.Row="2"
+            Margin="0,0,0,0"
+                        x:Name="TagList"
+                        ItemsLayout="VerticalGrid"
+                        ItemsSource="{Binding Tags}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:TagListModel">
+                        <Border
+                        Stroke="#CC6767"
+                        Grid.Column="0"
+                        StrokeShape="RoundRectangle 30,30,30,30"
+                        StrokeThickness="2"
+                        Margin="8"
+                        Background="White"
+                        HeightRequest="40"
+                        WidthRequest="900"
+                        HorizontalOptions="Center">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference TagListViewRoot}, Path=BindingContext.GoToTagsCommand}"
+                                      CommandParameter="{Binding Id}"/>
+                            </Border.GestureRecognizers>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="70" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                Text="{Binding Name}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Label Grid.Column="1"
+                                Text=""
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Button Grid.Column="2"
+                                    Margin="-15,-3,0,0"
+                                    Text="Detail"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    FontSize="20"
+                                    FontFamily="PoppinsLight"
+                                    TextColor="#CC6767"
+                                    BorderWidth="0"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding Source={x:Reference TagListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                    CommandParameter="{Binding Id}"/>
+                        </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Frame
+               Grid.Row="3"
+               Margin="0"
+               IsClippedToBounds="True"
+               VerticalOptions="End"
+               BackgroundColor="#EE7676"
+               HeightRequest="70"
+               CornerRadius="0">
+            </Frame>
+            <ImageButton
+                Grid.Row="3"
+                Grid.Column="0"
+                Source="menu.jpg"
+                BackgroundColor="Transparent"
+                WidthRequest="60"
+                HeightRequest="60"
+                Margin="10,5,5,5"
+                HorizontalOptions="Start"
+                VerticalOptions="End"
+                Padding="0,0,0,0"
+                Command="{Binding ShowMenuPopupCommand}" />
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                BackgroundColor="#CC6767"
+                WidthRequest="60"
+                HeightRequest="60"
+                CornerRadius="30"
+                Margin="0,0,10,5"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                TextColor="White"
+                Text="+"
+                FontSize="80"
+                FontFamily="PoppinsExtraLight"
+                Padding="0,0,0,-13"
+                Clicked="DisplayPopup"/>
+        </Grid>
+</views:ContentPageBase>

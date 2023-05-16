@@ -1,18 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.DAL", "ICSProj.DAL\ICSProj.DAL.csproj", "{7256B77E-85F8-4973-AED8-810A5A8CC5E5}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSProj.DAL", "ICSProj.DAL\ICSProj.DAL.csproj", "{7256B77E-85F8-4973-AED8-810A5A8CC5E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.DAL.Tests", "ICSProj.DAL.Tests\ICSProj.DAL.Tests.csproj", "{03E6DAE2-CB30-40CC-816D-53386116A152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSProj.DAL.Tests", "ICSProj.DAL.Tests\ICSProj.DAL.Tests.csproj", "{03E6DAE2-CB30-40CC-816D-53386116A152}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.BL", "ICSProj.BL\ICSProj.BL.csproj", "{35BB4B29-35AF-4DA9-8544-EF81EE9FDEDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSProj.BL", "ICSProj.BL\ICSProj.BL.csproj", "{35BB4B29-35AF-4DA9-8544-EF81EE9FDEDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.BL.Tests", "ICSProj.BL.Tests\ICSProj.BL.Tests.csproj", "{1AAD23EB-C6E6-4468-A41C-5B9201455DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSProj.BL.Tests", "ICSProj.BL.Tests\ICSProj.BL.Tests.csproj", "{1AAD23EB-C6E6-4468-A41C-5B9201455DA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder1", "SolutionFolder1", "{3D8B5161-E932-4566-87C5-935B20BB583F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.Common.Tests", "ICSProj.Common.Tests\ICSProj.Common.Tests.csproj", "{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSProj.Common.Tests", "ICSProj.Common.Tests\ICSProj.Common.Tests.csproj", "{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSProj.App", "ICSProj.App\ICSProj.App.csproj", "{D511EEBD-028A-4EB2-B418-578CC5F56610}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSProj.App", "ICSProj.App\ICSProj.App.csproj", "{D511EEBD-028A-4EB2-B418-578CC5F56610}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,7 +45,11 @@ Global
 		{2F983CC3-EE81-4D2A-B6FA-02E6BD04DCD5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D511EEBD-028A-4EB2-B418-578CC5F56610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D511EEBD-028A-4EB2-B418-578CC5F56610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D511EEBD-028A-4EB2-B418-578CC5F56610}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{D511EEBD-028A-4EB2-B418-578CC5F56610}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D511EEBD-028A-4EB2-B418-578CC5F56610}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICSProj.App.Views"
+                       xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                       xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+                       x:DataType="vm:UserProfileViewModel"
+                       x:Class="ICSProj.App.Views.User.UserProfileView"
+                       x:Name="UserProfileViewRoot">
+    <Grid
+        RowDefinitions="*,*,*,*,*">
+        <Grid>
+            <Frame CornerRadius="80" WidthRequest="120" HeightRequest="120" Padding="0" BackgroundColor="Transparent" Grid.Column="0" Margin="0,40,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                    Aspect="AspectFill"
+                    Source="{Binding User.ImageUrl, TargetNullValue='user_placeholder.jpg'}"/>
+            </Frame>
+        </Grid>
+
+        <Entry
+            Grid.Row="1"
+            BackgroundColor="#CC6767"
+            TextColor="White"
+            FontSize="15"
+            FontFamily="PoppinsLight"
+            Text="{Binding User.ImageUrl}"
+            Margin="0,20,0,0"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+
+        <Grid Grid.Row="2"
+              RowDefinitions="Auto"
+              ColumnDefinitions="Auto, *"
+              HorizontalOptions="Start"
+              Margin="235,0,0,0">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                Text="Jméno:"
+                TextColor="#CC6767"
+                TextDecorations="Underline"
+                FontSize="40"
+                WidthRequest="170"
+                FontFamily="PoppinsExtraLight"
+                VerticalTextAlignment="Center"></Label>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Text="{Binding User.Name}"
+                TextColor="#CC6767"
+                FontSize="35"
+                FontFamily="PoppinsLight"
+                Margin="10,0,0,0"
+                WidthRequest="300"
+                VerticalTextAlignment="Center"
+                HorizontalOptions="Center"/>
+        </Grid>
+        <Grid Grid.Row="3"
+              RowDefinitions="Auto"
+              ColumnDefinitions="Auto, *"
+              HorizontalOptions="Start"
+              Margin="235,0,0,0">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                Text="Příjmení:"
+                TextDecorations="Underline"
+                TextColor="#CC6767"
+                FontSize="40"
+                FontFamily="PoppinsExtraLight"
+                WidthRequest="170"
+                VerticalTextAlignment="Center"></Label>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Text="{Binding User.Surname}"
+                TextColor="#CC6767"
+                FontSize="35"
+                FontFamily="PoppinsLight"
+                WidthRequest="300"
+                Margin="10,0,0,0"
+                VerticalTextAlignment="Center"
+                HorizontalOptions="Center"/>
+        </Grid>
+        <Grid Grid.Row="4"
+              RowDefinitions="Auto"
+              ColumnDefinitions="*,*"
+              HorizontalOptions="Center">
+            <Button
+                Grid.Row="4"
+                Grid.Column="0"
+                BackgroundColor="#CC6767"
+                Text="Uložit změny"
+                TextColor="White"
+                FontSize="30"
+                FontFamily="PoppinsLight"
+                Command="{Binding SaveChangesCommand}"
+                HorizontalOptions="Center"/>
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                BackgroundColor= "#D90000"
+                Text="Smazat uživatele"
+                TextColor="White"
+                FontFamily="PoppinsLight"
+                FontSize="30"
+                Margin="20,0,0,0"
+                Command="{Binding DeleteCommand}"
+                Clicked="OnClickedButton"
+                HorizontalOptions="Center"/>
+        </Grid>
+    </Grid>
+</views:ContentPageBase>
