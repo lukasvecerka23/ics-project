@@ -5,4 +5,9 @@
     xmlns:maui="using:Microsoft.Maui"
     xmlns:local="using:ICSProj.App.WinUI">
 
+    <maui:MauiWinUIApplication.Resources>
+        <Thickness x:Key="TextControlBorderThemeThicknessFocused">1</Thickness>
+        <Color x:Key="TextControlBorderThemeColorFocused">#00FF00</Color>
+    </maui:MauiWinUIApplication.Resources>
+
 </maui:MauiWinUIApplication>

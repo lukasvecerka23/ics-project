@@ -16,7 +16,7 @@ public partial class TagCreationPopupView : Popup
 
     private Button lastClickedButton;
 
-    async void SetButtonHighlight(object sender, EventArgs args)
+    private void SetButtonHighlight(object sender, EventArgs args)
     {
         if (lastClickedButton != null)
         {

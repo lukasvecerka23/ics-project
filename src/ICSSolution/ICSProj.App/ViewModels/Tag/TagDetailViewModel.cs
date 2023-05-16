@@ -17,8 +17,7 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
     public Guid Id { get; set; }
     public TagDetailModel? Tag { get; private set; }
 
-    [ObservableProperty]
-    public Color tagColor;
+    public Color TagColor { get; set; }
 
     public TagDetailViewModel(
         ITagFacade tagFacade,
@@ -30,7 +29,7 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
         this.tagFacade = tagFacade;
         this.navigationService = navigationService;
         this.alertService = alertService;
-        tagColor = Colors.Red;
+        TagColor = Colors.Red;
     }
 
     protected override async Task LoadDataAsync()

@@ -8,73 +8,170 @@
              x:DataType="vm:ProjectListViewModel"
              x:Name="ProjectListViewRoot"
              x:Class="ICSProj.App.Views.Project.ProjectListView">
-    <Grid RowDefinitions="*,Auto">
-        <CollectionView Grid.Row="0"
+
+    <Grid RowDefinitions="Auto,Auto,Auto, *, Auto">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+            <Label Grid.Column="0" Text="Projekty"
+               FontSize="40"
+               FontFamily="PoppinsLight"
+               TextColor="#CC6767"
+               Margin="30,15,30,30"
+               HorizontalOptions="Start"  />
+            <ImageButton Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="10" HorizontalOptions="End"
+                    x:Name="UserSettingsButton"
+                    Source="user_placeholder.jpg"
+                    Command="{Binding ShowUserSettingsCommand}"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="30,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="780" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Switch Grid.Column="0" OnColor="#CC6767"
+                VerticalOptions="Center"
+                    HorizontalOptions="End"
+                ThumbColor="Black"/>
+            <Label Grid.Column="1"
+                   Text="Zobrazit pouze mé projekty"
+                   FontFamily="PoppinsLight"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   BackgroundColor="White"
+                   Margin="-110,0,0,0"
+                   FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="210" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="0"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Margin="50,0,0,0">
+                <Label Text="Název"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="20" />
+            </Border>
+            <Border
+                Grid.Column="1"
+                StrokeThickness="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label Text="Vytvořil"
+                    TextColor="Black"
+                    FontFamily="PoppinsLight"
+                    FontSize="20" />
+            </Border>
+        </Grid>
+
+        <CollectionView Grid.Row="3"
+            Margin="0,0,0,0"
                         x:Name="ProjectList"
-                        ItemsLayout="HorizontalList"
+                        ItemsLayout="VerticalGrid"
                         ItemsSource="{Binding Projects}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:ProjectListModel">
-                    <Frame WidthRequest="150"
-                           HeightRequest="150"
-                           IsClippedToBounds="True">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
-                                                  CommandParameter="{Binding Id}"/>
-                        </Frame.GestureRecognizers>
-
-                        <Grid WidthRequest="150"
-                              HeightRequest="150"
-                              Margin="5"
-                              RowDefinitions="*,Auto"
-                              BackgroundColor="Aqua">
-                            <!-- <Image Grid.Row="0" -->
-                            <!--        Aspect="AspectFill" -->
-                            <!--        Source="{Binding ImageUrl}" /> -->
-                            <Label Grid.Row="1"
-                                   Text="{Binding Name}"
-                                   HorizontalOptions="Center"
-                                   FontSize="14" />
-                            <Label Grid.Row="1"
-                                   Text="{Binding CreatorName}"
-                                   HorizontalOptions="Center"
-                                   FontSize="14" />
+                    <Border
+                        Stroke="#CC6767"
+                        Grid.Column="0"
+                        StrokeShape="RoundRectangle 30,30,30,30"
+                        StrokeThickness="2"
+                        Margin="8"
+                        Background="White"
+                        HeightRequest="40"
+                        WidthRequest="900"
+                        HorizontalOptions="Center">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToProjectsCommand}"
+                                      CommandParameter="{Binding Id}"/>
+                        </Border.GestureRecognizers>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="305" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="55" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                Text="{Binding Name}"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="30,0,0,0"/>
+                            <Label Grid.Column="1"
+                                Text="{Binding CreatorName}"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="Black"
+                                Margin="0,0,0,0"/>
+                            <Button Grid.Column="2"
+                                    Margin="-40,-3,0,0"
+                                    Text="Detail"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    FontSize="20"
+                                    FontFamily="PoppinsLight"
+                                    TextColor="#CC6767"
+                                    BorderWidth="0"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding Source={x:Reference ProjectListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                    CommandParameter="{Binding Id}"/>
                         </Grid>
-                    </Frame>
+                    </Border>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <!-- <Button Grid.Row="1" -->
-        <!--         Text="Add New User" -->
-        <!--         Clicked="DisplayPopup" /> -->
-        <Button
-            Grid.Row="1"
-            Grid.Column="0"
-            VerticalOptions="End"
-            HorizontalOptions="Start"
-            BackgroundColor="Orange"
-            Text="Menu"
-            x:Name="MenuButton"
-            TextColor="Black"
-            FontSize="40"
-            Command="{Binding ShowMenuPopupCommand}" />
-        <Button
-            Grid.Row="0"
-            Grid.Column="1"
-            VerticalOptions="Start"
-            HorizontalOptions="End"
-            BackgroundColor="Orange"
-            Text="Settings"
-            x:Name="UserSettingsButton"
-            TextColor="Black"
-            FontSize="40"
-            Command="{Binding ShowUserSettingsCommand}" />
-        <Button Grid.Row="1"
+
+        <Frame Grid.Row="4"
+               Margin="0"
+               IsClippedToBounds="True"
+               BackgroundColor="#EE7676"
+               HeightRequest="70"
+               VerticalOptions="End"
+               CornerRadius="0">
+        </Frame>
+        <ImageButton Grid.Row="4"
+                Source="menu.jpg"
                 Grid.Column="0"
-                HorizontalOptions="End" VerticalOptions="Start"
-                Text="Add new project"
-                Clicked="DisplayPopup"
-                FontSize="14"/>
+                BackgroundColor="Transparent"
+                WidthRequest="60"
+                HeightRequest="60"
+                Margin="10,5,5,5"
+                HorizontalOptions="Start"
+                VerticalOptions="End"
+                Padding="0,0,0,0"
+                Command="{Binding ShowMenuPopupCommand}" />
+        <Button Grid.Row="4"
+                Grid.Column="1"
+                BackgroundColor="#CC6767"
+                WidthRequest="60"
+                HeightRequest="60"
+                CornerRadius="30"
+                Margin="0,0,10,5"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                TextColor="White"
+                Text="+"
+                FontSize="80"
+                FontFamily="PoppinsExtraLight"
+                Padding="0,0,0,-13"
+                Clicked="DisplayPopup" />
+
     </Grid>
 </views:ContentPageBase>

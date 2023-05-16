@@ -15,11 +15,10 @@ public partial class TagListViewModel : ViewModelBase
     private readonly ILoginService loginService;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
-
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
+    public UserDetailModel CurrentUser { get; set; }
 
-    [ObservableProperty]
-    public Color tagColor;
+    public Color TagColor {get; set;}
 
     public TagListViewModel(
         ITagFacade tagFacade,
@@ -30,7 +29,8 @@ public partial class TagListViewModel : ViewModelBase
         this.tagFacade = tagFacade;
         this.navigationService = navigationService;
         this.loginService = loginService;
-        tagColor = Colors.Red;
+        TagColor = Colors.Red;
+        CurrentUser = loginService.CurrentUser;
     }
 
     protected override async Task LoadDataAsync()
@@ -38,7 +38,7 @@ public partial class TagListViewModel : ViewModelBase
         await base.LoadDataAsync();
         var tags = await tagFacade.GetAsync();
         Tags = tags.Where(tag => tag.CreatorId == loginService.CurrentUserId);
-        tagColor = Color.FromArgb(Tag.Color);
+        TagColor = Color.FromArgb(Tag.Color);
     }
 
     [RelayCommand]

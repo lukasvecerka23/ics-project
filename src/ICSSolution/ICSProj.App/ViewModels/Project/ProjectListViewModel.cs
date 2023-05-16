@@ -15,6 +15,7 @@ public partial class ProjectListViewModel: ViewModelBase
     private readonly IUserFacade _userFacade;
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
+    public UserDetailModel CurrentUser { get; set; }
 
     public ProjectDetailModel Project { get; set; } = ProjectDetailModel.Empty;
 
@@ -29,6 +30,7 @@ public partial class ProjectListViewModel: ViewModelBase
         _navigationService = navigationService;
         _loginService = loginService;
         _userFacade = userFacade;
+        CurrentUser = _loginService.CurrentUser;
     }
 
     protected override async Task LoadDataAsync()

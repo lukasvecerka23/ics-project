@@ -15,8 +15,10 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private readonly ILoginService _loginService;
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
+    public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public TagListModel Tag { get; set; } = null!;
     public ProjectAssignListModel Project  { get; set; } = null!;
+    public UserDetailModel CurrentUser { get; set; }
     public DateTime Start { get; set; } = DateTime.Today;
     public DateTime End  { get; set; } = DateTime.Today;
     public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
@@ -36,9 +38,8 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         _activityFacade = activityFacade;
         _navigationService = navigationService;
         _loginService = loginService;
+        CurrentUser = _loginService.CurrentUser;
     }
-
-    public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
 
     protected override async Task LoadDataAsync()
     {
