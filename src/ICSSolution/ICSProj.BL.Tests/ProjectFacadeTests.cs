@@ -14,7 +14,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
 
     public ProjectFacadeTests(ITestOutputHelper output) : base(output)
     {
-        _projectFacadeSut = new ProjectFacade(UnitOfWorkFactory, ProjectModelMapper);
+        _projectFacadeSut = new ProjectFacade(UnitOfWorkFactory, ProjectModelMapper, ProjectAssignModelMapper);
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
         var allProjects = await _projectFacadeSut.GetAsync();
 
         //Assert
-        var seedModel = ProjectModelMapper.MapToListModel(ProjectSeeds.ProjectEntity1);
+        var seedModel = ProjectModelMapper.MapToListModel(ProjectSeeds.ProjectEntity1 with { Creator = UserSeeds.UserEntity1 });
         Assert.Contains(seedModel, allProjects);
     }
 

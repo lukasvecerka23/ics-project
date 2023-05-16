@@ -48,7 +48,8 @@
                     Background="White"
                     ItemsSource="{Binding Tags}"
                     ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}"
-                    SelectedItem="{Binding Creation.Tag}"/>
+                    SelectedItem="{Binding Creation.Tag}"
+                    />
             <Label Grid.Row="2"
                    Text="Projekt:"
                    TextColor="White"
