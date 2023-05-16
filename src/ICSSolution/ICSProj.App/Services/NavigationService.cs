@@ -22,6 +22,7 @@ public class NavigationService: INavigationService
 
         new("//projects", typeof(ProjectListView), typeof(ProjectListViewModel)),
         new("//projects/detail", typeof(ProjectDetailView), typeof(ProjectDetailViewModel)),
+        new("//projects/detail/activity", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
 
         new("//tags", typeof(TagListView), typeof(TagListViewModel)),
         new("//tags/detail", typeof(TagDetailView), typeof(TagDetailViewModel))

@@ -23,7 +23,7 @@ public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListMode
                 Id = entity.Id,
                 Name = entity.Name,
                 CreatorId = entity.CreatorId,
-                CreatorName = entity.Creator?.Name + " " + entity.Creator?.Surname
+                CreatorName = ConcateNameSurname(entity)
             };
 
     public override ProjectDetailModel MapToDetailModel(ProjectEntity? entity)
@@ -34,7 +34,7 @@ public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListMode
                 Id = entity.Id,
                 Name = entity.Name,
                 CreatorId = entity.CreatorId,
-                CreatorName = entity.Creator?.Name + " " + entity.Creator?.Surname,
+                CreatorName = ConcateNameSurname(entity),
                 Activities = _activityModelMapper.MapToListModel(entity.Activities)
                     .ToObservableCollection(),
                 ProjectAssigns = _projectAssignModelMapper.MapToListModel(entity.ProjectAssigns)
@@ -48,4 +48,7 @@ public class ProjectModelMapper : ModelMapperBase<ProjectEntity, ProjectListMode
             Name = model.Name,
             CreatorId = model.CreatorId
         };
+
+    public string ConcateNameSurname(ProjectEntity entity)
+        => $"{entity.Creator?.Name} {entity.Creator?.Surname}";
 }

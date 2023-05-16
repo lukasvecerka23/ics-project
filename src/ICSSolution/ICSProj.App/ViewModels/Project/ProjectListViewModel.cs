@@ -41,7 +41,6 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     public async Task ShowUserProjects()
     {
         Projects = await _projectFacade.GetProjectsAssignedToUser(_loginService.CurrentUserId);
-        MessengerService.Send(new ProjectEditMessage{ProjectId = Projects.First().Id});
     }
 
     public async Task ShowAllProjects()

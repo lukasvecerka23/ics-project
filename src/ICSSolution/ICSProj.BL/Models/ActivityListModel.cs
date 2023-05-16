@@ -3,6 +3,7 @@
 public record ActivityListModel : ModelBase
 {
     public required Guid CreatorId { get; set; }
+    public required string CreatorName { get; set; }
     public Guid? TagId { get; set; }
     public Guid? ProjectId { get; set; }
 
@@ -17,6 +18,7 @@ public record ActivityListModel : ModelBase
     {
         Id = Guid.Empty,
         CreatorId = Guid.Empty,
+        CreatorName = string.Empty,
         TagId = null,
         ProjectId = null,
         Start = DateTime.Now,

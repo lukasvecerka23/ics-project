@@ -21,21 +21,6 @@ public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, Project
         _projectModelMapper = projectModelMapper;
         _projectAssignModelMapper = projectAssignModelMapper;
     }
-    public override async Task<ProjectDetailModel?> GetAsync(Guid id)
-    {
-        await using IUnitOfWork unitOfWork = UnitOfWorkFactory.Create();
-
-        IRepository<ProjectEntity> projectRepository =
-            UnitOfWorkFactory.Create().GetRepository<ProjectEntity, ProjectEntityMapper>();
-
-        ProjectEntity? entity = await projectRepository.Get()
-            .Include(e => e.Activities)
-            .Include(e => e.ProjectAssigns)
-            .ThenInclude(p => p.User)
-            .SingleOrDefaultAsync(e => e.Id == id);
-
-        return entity == null ? null : _projectModelMapper.MapToDetailModel(entity);
-    }
 
     public async Task<bool> RegisterProject(Guid UserId, Guid ProjectId)
     {
@@ -101,6 +86,9 @@ public class ProjectFacade : FacadeBase<ProjectEntity, ProjectListModel, Project
     protected override List<string> IncludesNavigationPathDetail =>
         new()
         {
-            $"{nameof(ProjectEntity.Creator)}"
+            $"{nameof(ProjectEntity.Creator)}",
+            $"{nameof(ProjectEntity.Activities)}",
+            $"{nameof(ProjectEntity.ProjectAssigns)}",
+            $"{nameof(ProjectEntity.ProjectAssigns)}.{nameof(ProjectAssignEntity.User)}"
         };
 }

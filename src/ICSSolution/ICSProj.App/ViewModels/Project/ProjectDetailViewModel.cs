@@ -17,7 +17,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
     private readonly IAlertService alertService;
     private readonly IUserFacade userFacade;
     private readonly ILoginService _loginService;
-   
+
 
     public Guid Id { get; set; }
     public ProjectDetailModel? Project { get; private set; }
@@ -66,7 +66,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         }
         else
         {
-            
+
             if (isProjectAssignedToUser)
             {
                 ButtonName = "Leave Project";
@@ -91,6 +91,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
                     await projectFacade.DeleteAsync(Project.Id);
                     MessengerService.Send(new ProjectDeleteMessage());
                     navigationService.SendBackButtonPressed();
+                    return;
 
                 }
                 catch (InvalidOperationException)
@@ -106,7 +107,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
                 if (isProjectAssignedToUser)
                 {
                     await projectFacade.LeaveProject(_loginService.CurrentUserId, Project.Id);
-                    
+
                 }
                 else
                 {
@@ -125,5 +126,12 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         {
             await LoadDataAsync();
         }
+    }
+
+    [RelayCommand]
+    private async Task GoToActivityDetailAsync(Guid activityId)
+    {
+        await navigationService.GoToAsync("/activity",
+                new Dictionary<string, object?> { [nameof(ActivityDetailViewModel.Id)] = activityId});
     }
 }
