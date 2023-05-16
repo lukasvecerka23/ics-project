@@ -10,16 +10,24 @@
              x:Class="ICSProj.App.Views.Project.ProjectListView">
 
     <Grid RowDefinitions="Auto,Auto,Auto, *, Auto">
-        <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+        <Grid Grid.Row="0" ColumnDefinitions="*,100">
             <Label Grid.Column="0" Text="Projekty"
                FontSize="40"
                FontFamily="PoppinsLight"
                TextColor="#CC6767"
                Margin="30,15,30,30"
                HorizontalOptions="Start"  />
-            <ImageButton Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="10" HorizontalOptions="End"
-                    x:Name="UserSettingsButton"
-                    Source="user_placeholder.jpg"
+            <Frame  Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="-5,0,0,0" HorizontalOptions="Start">
+                <Image
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                    Aspect="AspectFill"
+                    WidthRequest="80" HeightRequest="80"
+                    Source="{Binding CurrentUser.ImageUrl, TargetNullValue='user_placeholder.jpg'}"/>
+            </Frame>
+            <Button Grid.Column="1" CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Margin="-5,0,0,0" HorizontalOptions="Start"
+                    Text=""
+                    VerticalOptions="Center"
+                    BorderWidth="0"
                     Command="{Binding ShowUserSettingsCommand}"/>
         </Grid>
         <Grid Grid.Row="1" Margin="30,0,0,0">
