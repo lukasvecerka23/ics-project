@@ -13,6 +13,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
+    private readonly IAlertService _alertService;
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
@@ -33,11 +34,13 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         IActivityFacade activityFacade,
         INavigationService navigationService,
         ILoginService loginService,
-        IMessengerService messengerService) : base(messengerService)
+        IMessengerService messengerService,
+        IAlertService alertService) : base(messengerService)
     {
         _activityFacade = activityFacade;
         _navigationService = navigationService;
         _loginService = loginService;
+        _alertService = alertService;
     }
 
     protected override async Task LoadDataAsync()
@@ -104,7 +107,15 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         Activity.ProjectName = CreationProject?.ProjectName;
         Activity.CreatorName = $"{_loginService.CurrentUser.Name} {_loginService.CurrentUser.Surname}";
 
-        await _activityFacade.SaveAsync(Activity);
+        try
+        {
+            await _activityFacade.SaveAsync(CurrentUser.Id, Activity);
+        }
+        catch (Exception)
+        {
+            await _alertService.DisplayAsync("Test", "Test");
+        }
+
         Activity = ActivityDetailModel.Empty;
         CreationTag = TagListModel.Empty;
         CreationProject = ProjectAssignListModel.Empty;

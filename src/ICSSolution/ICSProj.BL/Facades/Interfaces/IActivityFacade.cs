@@ -7,4 +7,6 @@ public interface IActivityFacade: IFacade<ActivityEntity, ActivityListModel, Act
 {
     public Task<IEnumerable<ActivityListModel>> FilterActivities(Guid userId, DateTime startDate,
         DateTime endDate, Guid? projectId, Guid? tagId);
+
+    public Task<ActivityDetailModel> SaveAsync(Guid userId, ActivityDetailModel activity);
 }
