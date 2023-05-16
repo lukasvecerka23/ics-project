@@ -5,7 +5,7 @@ namespace ICSProj.App.Converters;
 
 public class DateTimeToDateConverter : BaseConverterOneWay<DateTime, DateOnly>
 {
-    public override DateOnly ConvertFrom(DateTime value, CultureInfo? culture)
+    public override DateOnly ConvertFrom(DateTime value, CultureInfo culture)
         => DateOnly.FromDateTime(value);
     public override DateOnly DefaultConvertReturnValue { get; set; } = DateOnly.MinValue;
 }

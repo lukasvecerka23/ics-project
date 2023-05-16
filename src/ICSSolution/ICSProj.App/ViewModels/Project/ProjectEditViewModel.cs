@@ -4,8 +4,6 @@ using ICSProj.App.Messages;
 using ICSProj.App.Services;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
-using ICSProj.App.Services;
-using ICSProj.App.ViewModels;
 
 namespace ICSProj.App.ViewModels;
 
@@ -17,7 +15,7 @@ public partial class ProjectEditViewModel : ViewModelBase, IRecipient<ProjectEdi
     private readonly IAlertService alertService;
 
     public Guid Id { get; set; }
-    public ProjectDetailModel? Project { get; private set; }
+    public ProjectDetailModel Project { get; private set; }
 
     public ProjectEditViewModel(
         IProjectFacade projectFacade,

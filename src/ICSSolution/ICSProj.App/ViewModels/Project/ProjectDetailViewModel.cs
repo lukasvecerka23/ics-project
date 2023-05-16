@@ -4,15 +4,13 @@ using ICSProj.App.Messages;
 using ICSProj.App.Services;
 using ICSProj.BL.Facades;
 using ICSProj.BL.Models;
-using ICSProj.App.Services;
-using ICSProj.App.ViewModels;
+
 namespace ICSProj.App.ViewModels;
 
 [QueryProperty(nameof(Id), nameof(Id))]
 public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectEditMessage>
 {
     private readonly IProjectFacade projectFacade;
-    private readonly IActivityFacade activityFacade;
     private readonly INavigationService navigationService;
     private readonly IAlertService alertService;
     private readonly IUserFacade userFacade;
@@ -20,10 +18,9 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
 
 
     public Guid Id { get; set; }
-    public ProjectDetailModel? Project { get; private set; }
-    public IEnumerable<ActivityListModel>? Activities { get; set; }
+    public ProjectDetailModel Project { get; private set; }
 
-    public UserDetailModel? UserData { get; set; }
+    public UserDetailModel UserData { get; set; }
 
     public string ButtonName
     {
@@ -34,7 +31,6 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
 
     public ProjectDetailViewModel(
         IProjectFacade projectFacade,
-        IActivityFacade activityFacade,
         INavigationService navigationService,
         ILoginService loginService,
         IMessengerService MessengerService,
@@ -43,7 +39,6 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         : base(MessengerService)
     {
         this.projectFacade = projectFacade;
-        this.activityFacade = activityFacade;
         this.navigationService = navigationService;
         this.alertService = alertService;
         this.userFacade = userFacade;
@@ -56,9 +51,8 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
         await base.LoadDataAsync();
 
         Project = await projectFacade.GetAsync(Id);
-        //Activities = await activityFacade.GetAsync();
         UserData = await userFacade.GetAsync(_loginService.CurrentUserId);
-        isProjectAssignedToUser = UserData.ProjectAssigns.Any(p => p.UserId == _loginService.CurrentUserId
+        isProjectAssignedToUser = UserData!.ProjectAssigns.Any(p => p.UserId == _loginService.CurrentUserId
                                                                         && p.ProjectId == Project.Id);
         if (Project?.CreatorId == _loginService.CurrentUserId)
         {
@@ -132,6 +126,6 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
     private async Task GoToActivityDetailAsync(Guid activityId)
     {
         await navigationService.GoToAsync("/activity",
-                new Dictionary<string, object?> { [nameof(ActivityDetailViewModel.Id)] = activityId});
+                new Dictionary<string, object> { [nameof(ActivityDetailViewModel.Id)] = activityId});
     }
 }

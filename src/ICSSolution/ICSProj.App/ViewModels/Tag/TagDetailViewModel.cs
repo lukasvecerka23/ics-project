@@ -15,7 +15,7 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
     private readonly IAlertService alertService;
 
     public Guid Id { get; set; }
-    public TagDetailModel? Tag { get; private set; }
+    public TagDetailModel Tag { get; private set; }
 
     public Color TagColor { get; set; }
 

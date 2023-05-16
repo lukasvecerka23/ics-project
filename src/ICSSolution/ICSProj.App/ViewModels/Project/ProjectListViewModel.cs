@@ -53,7 +53,7 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     private async Task GoToDetailAsync(Guid id)
     {
         await _navigationService.GoToAsync<ProjectDetailViewModel>(
-            new Dictionary<string, object?> { [nameof(ProjectDetailViewModel.Id)] = id });
+            new Dictionary<string, object> { [nameof(ProjectDetailViewModel.Id)] = id });
     }
 
     [RelayCommand]
