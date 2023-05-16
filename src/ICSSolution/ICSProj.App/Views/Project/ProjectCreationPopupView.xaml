@@ -33,6 +33,8 @@
             <Entry Grid.Row="0"
                    Grid.Column="1"
                    Text="{Binding Project.Name}"
+                   TextColor="Black"
+                   BackgroundColor="White"
                    Placeholder="např. ICS projekt"
                    FontFamily="PoppinsLight"/>
         </Grid>
