@@ -35,6 +35,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 ProjectName = entity.Project?.Name,
                 TagName = entity.Tag?.Name,
                 CreatorName = entity.Creator?.Name,
+                Description = entity.Description
             };
 
     public override ActivityEntity MapToEntity(ActivityDetailModel model)
@@ -45,6 +46,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             End = model.End,
             CreatorId = model.CreatorId,
             TagId = model.TagId,
-            ProjectId = model.ProjectId
+            ProjectId = model.ProjectId,
+            Description = model.Description
         };
 }

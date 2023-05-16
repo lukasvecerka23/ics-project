@@ -18,7 +18,8 @@ public class TagModelMapper : ModelMapperBase<TagEntity, TagListModel,TagDetailM
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                CreatorId = entity.CreatorId
+                CreatorId = entity.CreatorId,
+                Color = entity.Color,
             };
 
     public override TagDetailModel MapToDetailModel(TagEntity? entity)
@@ -29,6 +30,7 @@ public class TagModelMapper : ModelMapperBase<TagEntity, TagListModel,TagDetailM
                 Id = entity.Id,
                 Name = entity.Name,
                 CreatorId = entity.CreatorId,
+                Color = entity.Color,
                 Activities = _activityModelMapper.MapToListModel(entity.Activities)
                     .ToObservableCollection()
             };
@@ -38,6 +40,7 @@ public class TagModelMapper : ModelMapperBase<TagEntity, TagListModel,TagDetailM
         {
             Id = model.Id,
             Name = model.Name,
-            CreatorId = model.CreatorId
+            CreatorId = model.CreatorId,
+            Color = model.Color,
         };
 }

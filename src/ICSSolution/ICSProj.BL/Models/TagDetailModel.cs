@@ -7,6 +7,9 @@ public record TagDetailModel : ModelBase
     public required Guid CreatorId { get; set; }
 
     public required string Name { get; set; }
+
+    public string? Color { get; set; }
+
     public ObservableCollection<ActivityListModel> Activities { get; init; } = new();
 
     public static TagDetailModel Empty => new()

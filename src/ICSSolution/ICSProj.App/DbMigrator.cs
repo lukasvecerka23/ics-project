@@ -23,7 +23,7 @@ public class SqliteDbMigrator: IDbMigrator
     public async Task MigrateAsync(CancellationToken cancellationToken)
     {
         await using ICSProjDbContext dbContext = await _dbContextFactory.CreateDbContextAsync(cancellationToken);
-        await dbContext.Database.MigrateAsync(cancellationToken);
+        // await dbContext.Database.MigrateAsync(cancellationToken);
 
         await dbContext.Database.EnsureDeletedAsync(cancellationToken);
         await dbContext.Database.EnsureCreatedAsync(cancellationToken);

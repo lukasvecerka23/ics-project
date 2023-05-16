@@ -3,7 +3,17 @@
     x:Class="ICSProj.App.Shells.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ICSProj.App.Views"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:u="clr-namespace:ICSProj.App.Views.User"
+    xmlns:a="clr-namespace:ICSProj.App.Views.Activity"
+    xmlns:p="clr-namespace:ICSProj.App.Views.Project"
+    xmlns:t="clr-namespace:ICSProj.App.Views.Tag"
+    FlyoutBehavior="Disabled"
+    x:Name="AppShellRoot">
+
+    <ShellContent ContentTemplate="{DataTemplate u:UserListView}" Route="users"/>
+    <ShellContent ContentTemplate="{DataTemplate a:ActivityListView}" Route="activities"/>
+    <ShellContent ContentTemplate="{DataTemplate p:ProjectListView}" Route="projects"/>
+    <ShellContent ContentTemplate="{DataTemplate t:TagListView}" Route="tags"/>
+
 
 </Shell>
