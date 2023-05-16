@@ -19,7 +19,7 @@
         />
         <Label
                 Grid.Row="1"
-                Text="Activity"
+                Text="Aktivity"
                 TextColor="#CC6767"
                 FontSize="40"
                 VerticalOptions="Start"
@@ -32,7 +32,8 @@
             <Label Grid.Column="0"
                    Text="Datum"
                    TextDecorations="Underline"
-                   FontFamily="PoppinsLight"
+                   FontFamily="Poppins"
+                   FontSize="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    Margin="20,0,0,0"
@@ -40,7 +41,8 @@
             <Label Grid.Column="1"
                    Text="Popis"
                    TextDecorations="Underline"
-                   FontFamily="PoppinsLight"
+                   FontFamily="Poppins"
+                   FontSize="20"
                    HorizontalOptions="Start"
                    VerticalOptions="Center"
                    Margin="100,0,0,0"
@@ -48,7 +50,8 @@
             <Label Grid.Column="2"
                    Text="Doba trvání"
                    TextDecorations="Underline"
-                   FontFamily="PoppinsLight"
+                   FontFamily="Poppins"
+                   FontSize="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    Margin="20,0,0,0"
@@ -69,7 +72,7 @@
                             StrokeShape="RoundRectangle 30,30,30,30"
                             StrokeThickness="2"
                     >
-                    <Grid Padding="5"
+                    <Grid Padding="0"
                           RowDefinitions="Auto"
                           ColumnDefinitions="140,480,140,160"
                     >
@@ -78,35 +81,44 @@
                                 Text="{Binding Start}"
                                 TextColor="Black"
                                 FontFamily="PoppinsLight"
+                                FontSize="20"
                                 HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                ></Label>
+                                VerticalOptions="Center">
+                            </Label>
+
                             <Label
                                 Grid.Column="1"
                                 Text="{Binding Description}"
                                 TextColor="Black"
                                 FontFamily="PoppinsLight"
+                                FontSize="20"
                                 HorizontalOptions="Start"
                                 VerticalOptions="Center"
-                                Margin="10,0,0,0"
-                                ></Label>
+                                Margin="10,0,0,0">
+                            </Label>
+
                             <Label
                                 Grid.Column="2"
                                 Text="{Binding Duration}"
                                 TextColor="Black"
                                 FontFamily="PoppinsLight"
+                                FontSize="20"
                                 HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                ></Label>
+                                VerticalOptions="Center">
+
+                            </Label>
+
                         <Button
-                                Grid.Column="5"
+                                Grid.Column="3"
                                 Text="Detail"
                                 TextColor="White"
                                 FontFamily="PoppinsLight"
+                                FontSize="15"
                                 BackgroundColor="#CC6767"
                                 HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                ></Button>
+                                VerticalOptions="Center">
+
+                            </Button>
                         </Grid>
                     </Border>
                 </DataTemplate>
