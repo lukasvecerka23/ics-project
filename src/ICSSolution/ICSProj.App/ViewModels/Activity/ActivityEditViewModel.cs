@@ -11,6 +11,8 @@ public partial class ActivityEditViewModel : ViewModelBase
 {
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
+    private readonly ILoginService _loginService;
+    private readonly IAlertService _alertService;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
@@ -29,10 +31,21 @@ public partial class ActivityEditViewModel : ViewModelBase
     public ActivityEditViewModel(
         IActivityFacade activityFacade,
         INavigationService navigationService,
+        ILoginService loginService,
+        IAlertService alertService,
         IMessengerService messengerService) : base(messengerService)
     {
         _activityFacade = activityFacade;
         _navigationService = navigationService;
+        _loginService = loginService;
+        _alertService = alertService;
+    }
+
+    protected override async Task LoadDataAsync()
+    {
+        await base.LoadDataAsync();
+        Tags = _loginService.CurrentUser.Tags;
+        Projects = _loginService.CurrentUser.ProjectAssigns;
     }
 
     [RelayCommand]
@@ -40,12 +53,26 @@ public partial class ActivityEditViewModel : ViewModelBase
     {
         Activity.Start = SelectedDateFrom + SelectedTimeFrom;
         Activity.End = SelectedDateTo + SelectedTimeTo;
-        Activity.TagId = CreationTag?.Id ?? Activity.TagId;
-        Activity.ProjectId = CreationProject?.ProjectId ?? Activity.ProjectId;
-        Activity.TagName = CreationTag?.Name ?? Activity.TagName;
-        Activity.ProjectName = CreationProject?.ProjectName ?? Activity.ProjectName;
+        if (CreationTag?.Id != Guid.Empty)
+        {
+            Activity.TagId = CreationTag?.Id;
+            Activity.TagName = CreationTag?.Name;
+        }
+        if (CreationProject?.ProjectId != Guid.Empty)
+        {
+            Activity.ProjectId = CreationProject?.ProjectId;
+            Activity.ProjectName = CreationProject?.ProjectName;
+        }
 
-        await _activityFacade.SaveAsync(Activity);
+
+        try
+        {
+            await _activityFacade.SaveAsync(_loginService.CurrentUserId, Activity);
+        }
+        catch (Exception)
+        {
+            await _alertService.DisplayAsync("Test", "Test");
+        }
 
         MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
 

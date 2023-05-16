@@ -69,15 +69,17 @@
                       ColumnDefinitions="Auto, Auto">
                     <TimePicker Grid.Row ="0"
                                 Grid.Column="0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
                                 BackgroundColor="#CC6767"
                                 Time="{Binding SelectedTimeFrom}"
-                                Format="HH:mm"
-                                VerticalOptions="Center"/>
+                                Format="HH:mm"/>
                     <DatePicker Grid.Row ="0"
                                 Grid.Column="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
                                 BackgroundColor="#CC6767"
-                                Date="{Binding SelectedDateFrom}"
-                                VerticalOptions="Center"/>
+                                Date="{Binding SelectedDateFrom}"/>
                 </Grid>
 
                 <Border
@@ -94,19 +96,27 @@
                            FontSize="17"
                            FontAttributes="Bold" />
                 </Border>
-                <TimePicker
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    BackgroundColor="#CC6767"
-                    Time="{Binding SelectedTimeTo}"
-                    Format="HH:mm"
-                    VerticalOptions="Center"/>
-                <DatePicker
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    BackgroundColor="#CC6767"
-                    Date="{Binding SelectedDateTo}"
-                    VerticalOptions="Center"/>
+
+                <Grid Grid.Row="2"
+                      Grid.Column="1"
+                      RowDefinitions ="Auto"
+                      ColumnDefinitions="Auto, Auto">
+                    <TimePicker
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        BackgroundColor="#CC6767"
+                        Time="{Binding SelectedTimeTo}"
+                        Format="HH:mm"/>
+                    <DatePicker
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        BackgroundColor="#CC6767"
+                        Date="{Binding SelectedDateTo}"/>
+                </Grid>
 
                 <Border
                     Grid.Column="0"
@@ -123,9 +133,10 @@
                            FontAttributes="Bold" />
                 </Border>
 
-                <Picker Grid.Row="2"
+                <Picker Grid.Row="3"
                         Grid.Column="1"
-                        Margin="10,0,0,0"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
                         Background="#CC6767"
                         ItemsSource="{Binding Projects}"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}"
@@ -149,6 +160,7 @@
                 <Picker Grid.Row="4"
                         Grid.Column="1"
                         VerticalOptions="Center"
+                        HorizontalOptions="Start"
                         Background="#CC6767"
                         ItemsSource="{Binding Tags}"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}"

@@ -56,9 +56,7 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         => await _navigationService.GoToAsync<ActivityDetailViewModel>(
             new Dictionary<string, object?>
             {
-                [nameof(ActivityDetailViewModel.Id)] = id,
-                [nameof(ActivityDetailViewModel.Tags)] = Tags,
-                [nameof(ActivityDetailViewModel.Projects)] = Projects
+                [nameof(ActivityDetailViewModel.Id)] = id
             });
 
     public async void Receive(ActivityDeleteMessage message)
