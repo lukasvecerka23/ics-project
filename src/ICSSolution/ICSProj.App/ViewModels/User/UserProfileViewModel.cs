@@ -52,7 +52,13 @@ public partial class UserProfileViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveChangesAsync()
     {
-        await _userFacade.SaveAsync(User);
-        MessengerService.Send(new UserEditMessage(){UserId = _loginService.CurrentUserId});
+        if (User is not null)
+        {
+            User.Tags.Clear();
+            User.ProjectAssigns.Clear();
+            await _userFacade.SaveAsync(User);
+            MessengerService.Send(new UserEditMessage(){UserId = _loginService.CurrentUserId});
+        }
+        
     }
 }

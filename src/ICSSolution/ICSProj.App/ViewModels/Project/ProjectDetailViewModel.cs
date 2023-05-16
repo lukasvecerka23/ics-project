@@ -91,6 +91,7 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
                     await projectFacade.DeleteAsync(Project.Id);
                     MessengerService.Send(new ProjectDeleteMessage());
                     navigationService.SendBackButtonPressed();
+                    return;
 
                 }
                 catch (InvalidOperationException)
