@@ -65,6 +65,7 @@
                 </Border>
                 <Grid Grid.Row="1"
                       Grid.Column="1"
+                      ColumnSpacing="15"
                       RowDefinitions ="Auto"
                       ColumnDefinitions="Auto, Auto">
                     <TimePicker Grid.Row ="0"
@@ -99,6 +100,7 @@
 
                 <Grid Grid.Row="2"
                       Grid.Column="1"
+                      ColumnSpacing="15"
                       RowDefinitions ="Auto"
                       ColumnDefinitions="Auto, Auto">
                     <TimePicker
