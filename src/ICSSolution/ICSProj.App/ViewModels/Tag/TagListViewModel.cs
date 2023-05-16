@@ -13,6 +13,7 @@ public partial class TagListViewModel : ViewModelBase
     private readonly ITagFacade tagFacade;
     private readonly INavigationService navigationService;
     private readonly ILoginService loginService;
+    private readonly IAlertService alertService;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
@@ -24,11 +25,13 @@ public partial class TagListViewModel : ViewModelBase
         ITagFacade tagFacade,
         INavigationService navigationService,
         ILoginService loginService,
+        IAlertService alertService,
         IMessengerService MessengerService) : base(MessengerService)
     {
         this.tagFacade = tagFacade;
         this.navigationService = navigationService;
         this.loginService = loginService;
+        this.alertService = alertService;
         TagColor = Colors.Red;
     }
 
@@ -57,6 +60,12 @@ public partial class TagListViewModel : ViewModelBase
     [RelayCommand]
     private async Task AddTagAsync()
     {
+        if (string.Empty == Tag.Name)
+        {
+            await alertService.DisplayAsync("Nastala chyba", "Název tagu nemùže být prázdný");
+            return;
+        }
+
         Tag.CreatorId = loginService.CurrentUserId;
         await tagFacade.SaveAsync(Tag);
 
