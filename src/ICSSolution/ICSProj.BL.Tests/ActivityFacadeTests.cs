@@ -41,7 +41,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         var activity = activities.Single(i => i.Id == ActivitySeeds.ActivityEntity1.Id);
 
         // Assert
-        DeepAssert.Equal(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1), activity);
+        DeepAssert.Equal(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1), activity, "ProjectName", "CreatorName");
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         var activity = await _activityFacadeSUT.GetAsync(ActivitySeeds.ActivityEntity1.Id);
 
         // Assert
-        DeepAssert.Equal(ActivityModelMapper.MapToDetailModel(ActivitySeeds.ActivityEntity1), activity);
+        DeepAssert.Equal(ActivityModelMapper.MapToDetailModel(ActivitySeeds.ActivityEntity1), activity, "ProjectName", "CreatorName");
     }
 
     [Fact]
@@ -181,7 +181,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         var activities = await _activityFacadeSUT.FilterActivities(UserSeeds.UserEntity1.Id, from, to, ProjectSeeds.ProjectEntity1.Id, null);
 
         // Assert
-        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1), activities);
+        Assert.Contains(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity1 with {Project = ProjectSeeds.ProjectEntity1}), activities);
     }
 
     [Fact]
