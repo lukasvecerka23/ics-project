@@ -12,6 +12,9 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
 
+    public IEnumerable<TagListModel> Tags { get; set; } = null!;
+    public IEnumerable<ProjectAssignListModel> Projects { get; set; } = null!;
+
     public Guid Id { get; set; }
 
     public ActivityDetailModel? Activity { get; set; }
@@ -37,7 +40,12 @@ public partial class ActivityDetailViewModel : ViewModelBase, IRecipient<Activit
         if (Activity is not null)
         {
             await _navigationService.GoToAsync<ActivityEditViewModel>(
-                new Dictionary<string, object?> { [nameof(ActivityEditViewModel.Activity)] = Activity });
+                new Dictionary<string, object?>
+                {
+                    [nameof(ActivityEditViewModel.Activity)] = Activity,
+                    [nameof(ActivityEditViewModel.Tags)] = Tags,
+                    [nameof(ActivityEditViewModel.Projects)] = Projects
+                });
         }
     }
 
