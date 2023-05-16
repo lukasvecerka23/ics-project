@@ -29,7 +29,7 @@
             Grid.Row="3"
             x:Name="ActivityList"
             ItemsLayout="VerticalList"
-            ItemsSource="{Binding Activities}"
+            ItemsSource="{Binding Project.Activities}"
         >
             <CollectionView.ItemTemplate>
                 <DataTemplate
