@@ -66,13 +66,11 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     private async Task AddProjectAsync()
     {
         await base.LoadDataAsync();
-        var Users = await _userFacade.GetAsync();
-        var User = Users?.FirstOrDefault(user => user.Id == _loginService.CurrentUserId);
 
         Project.CreatorId = _loginService.CurrentUserId;
-        Project.CreatorName = User.Name + User.Surname;
 
-        await _projectFacade.SaveAsync(Project);
+        Project = await _projectFacade.SaveAsync(Project);
+        await _projectFacade.RegisterProject(_loginService.CurrentUserId, Project.Id);
         Project = ProjectDetailModel.Empty;
 
         MessengerService.Send(new ProjectEditMessage { ProjectId = Project.Id });
