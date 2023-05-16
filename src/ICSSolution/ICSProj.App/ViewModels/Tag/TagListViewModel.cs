@@ -13,6 +13,8 @@ public partial class TagListViewModel : ViewModelBase
     private readonly ITagFacade tagFacade;
     private readonly INavigationService navigationService;
     private readonly ILoginService loginService;
+    private readonly IUserFacade userFacade;
+    private readonly IAlertService alertService;
 
     public IEnumerable<TagListModel> Tags { get; set; } = null!;
     public TagDetailModel Tag { get; set; } = TagDetailModel.Empty;
