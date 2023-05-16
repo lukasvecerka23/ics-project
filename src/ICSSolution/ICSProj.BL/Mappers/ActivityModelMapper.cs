@@ -14,6 +14,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 Id = entity.Id,
                 Start = entity.Start,
                 CreatorId = entity.CreatorId,
+                CreatorName = ConcateNameSurname(entity),
                 Description = entity.Description,
                 ProjectId = entity.ProjectId,
                 TagId = entity.TagId,
@@ -35,7 +36,7 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 TagId = entity.TagId,
                 ProjectName = entity.Project?.Name,
                 TagName = entity.Tag?.Name,
-                CreatorName = entity.Creator?.Name,
+                CreatorName = ConcateNameSurname(entity),
                 Description = entity.Description
             };
 
@@ -50,4 +51,6 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             ProjectId = model.ProjectId,
             Description = model.Description
         };
+    public string ConcateNameSurname(ActivityEntity entity)
+        => $"{entity.Creator?.Name} {entity.Creator?.Surname}";
 }

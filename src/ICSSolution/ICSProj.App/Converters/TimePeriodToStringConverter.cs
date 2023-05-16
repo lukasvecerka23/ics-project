@@ -9,6 +9,7 @@ public class TimePeriodToStringConverter: BaseConverterOneWay<TimePeriod, string
     public override string ConvertFrom(TimePeriod value, CultureInfo? culture)
         => value switch
         {
+            TimePeriod.None => "Žádné",
             TimePeriod.LastWeek => "Poslední týden",
             TimePeriod.LastMonth => "Poslední měsíc",
             TimePeriod.PreviousMonth => "Předchozí měsíc",

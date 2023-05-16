@@ -7,6 +7,7 @@
                        xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
                        xmlns:models="using:ICSProj.BL.Models"
                        x:Class="ICSProj.App.Views.Project.ProjectDetailView"
+                       x:Name="ProjectDetailViewRoot"
                        x:DataType="vm:ProjectDetailViewModel">
     <Grid RowDefinitions="100,70,Auto,200,*">
         <Label Grid.Row="0"
@@ -116,10 +117,10 @@
                                 FontSize="15"
                                 BackgroundColor="#CC6767"
                                 HorizontalOptions="Center"
-                                VerticalOptions="Center">
-
-                            </Button>
-                        </Grid>
+                                VerticalOptions="Center"
+                                Command="{Binding Source={x:Reference ProjectDetailViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
+                                CommandParameter="{Binding Id}"/>
+                    </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

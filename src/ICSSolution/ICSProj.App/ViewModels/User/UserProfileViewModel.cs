@@ -47,14 +47,8 @@ public partial class UserProfileViewModel : ViewModelBase
             MessengerService.Send(new UserDeleteMessage());
             _navigationService.SendBackButtonPressed();
         }
-
     }
-
-    [RelayCommand]
-    private async Task GoToUserListAsync()
-    {
-        await _navigationService.GoToAsync<UserListViewModel>();
-    }
+   
 
     [RelayCommand]
     private async Task SaveChangesAsync()
