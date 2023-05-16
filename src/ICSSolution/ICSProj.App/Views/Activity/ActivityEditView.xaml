@@ -8,11 +8,16 @@
                        x:DataType="vm:ActivityEditViewModel">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackLayout Grid.Row="0" Spacing="30" Margin="55,35,0,0" HorizontalOptions="Start" VerticalOptions="Start">
+        <StackLayout Grid.Row="0"
+                     Spacing="30"
+                     Margin="55,35,0,0"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Center"
+                     Padding="20">
 
             <Grid ColumnSpacing="25" RowSpacing="15">
                 <Grid.ColumnDefinitions>
@@ -20,12 +25,12 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <Border
@@ -43,7 +48,7 @@
                            FontAttributes="Bold" />
                 </Border>
                 <Entry Text="{Binding Activity.Description}"
-                       TextColor="#CC6767"
+                       TextColor="Black"
                        Grid.Row="0"
                        Grid.Column="1"
                        HorizontalOptions="Start"
@@ -72,15 +77,16 @@
                                 Grid.Column="0"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"
-                                BackgroundColor="#CC6767"
+                                BackgroundColor="White"
                                 Time="{Binding EditActivity.TimeFrom}"
                                 Format="HH:mm"/>
                     <DatePicker Grid.Row ="0"
                                 Grid.Column="1"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Start"
-                                BackgroundColor="#CC6767"
-                                Date="{Binding EditActivity.DateFrom}"/>
+                                BackgroundColor="White"
+                                Date="{Binding EditActivity.DateFrom}"
+                                Margin="0,0,0,10"/>
                 </Grid>
 
                 <Border
@@ -108,7 +114,7 @@
                         Grid.Column="0"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
-                        BackgroundColor="#CC6767"
+                        BackgroundColor="White"
                         Time="{Binding EditActivity.TimeTo}"
                         Format="HH:mm"/>
                     <DatePicker
@@ -116,8 +122,9 @@
                         Grid.Column="1"
                         VerticalOptions="Center"
                         HorizontalOptions="Start"
-                        BackgroundColor="#CC6767"
-                        Date="{Binding EditActivity.DateTo}"/>
+                        BackgroundColor="White"
+                        Date="{Binding EditActivity.DateTo}"
+                        Margin="0,0,0,10"/>
                 </Grid>
 
                 <Border
@@ -139,7 +146,7 @@
                         Grid.Column="1"
                         VerticalOptions="Center"
                         HorizontalOptions="Start"
-                        Background="#CC6767"
+                        BackgroundColor="White"
                         ItemsSource="{Binding Projects}"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource ProjectNameToStringConverter}}"
                         SelectedItem="{Binding EditActivity.Project}"/>
@@ -163,7 +170,7 @@
                         Grid.Column="1"
                         VerticalOptions="Center"
                         HorizontalOptions="Start"
-                        Background="#CC6767"
+                        BackgroundColor="White"
                         ItemsSource="{Binding Tags}"
                         ItemDisplayBinding="{Binding ., Converter={StaticResource TagNameToStringConverter}}"
                         SelectedItem="{Binding EditActivity.Tag}"/>
@@ -171,14 +178,10 @@
         </StackLayout>
 
         <Button Grid.Row="1"
-                Grid.Column="0"
                 Text="Uložit"
-                Margin="55,0,0,30"
-                WidthRequest="100"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
+                VerticalOptions="End"
                 TextColor="White"
-                FontSize="17"
+                FontSize="20"
                 BackgroundColor="YellowGreen"
                 Command="{Binding SaveCommand}"/>
     </Grid>
