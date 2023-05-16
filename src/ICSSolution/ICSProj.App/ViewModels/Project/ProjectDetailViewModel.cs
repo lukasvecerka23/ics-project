@@ -62,18 +62,18 @@ public partial class ProjectDetailViewModel : ViewModelBase, IRecipient<ProjectE
                                                                         && p.ProjectId == Project.Id);
         if (Project?.CreatorId == _loginService.CurrentUserId)
         {
-            ButtonName = "Delete Project";
+            ButtonName = "Smazat Projekt";
         }
         else
         {
 
             if (isProjectAssignedToUser)
             {
-                ButtonName = "Leave Project";
+                ButtonName = "Opustit Projekt";
             }
             else
             {
-                ButtonName = "Register Project";
+                ButtonName = "Registrovat Projekt";
             }
         }
     }
