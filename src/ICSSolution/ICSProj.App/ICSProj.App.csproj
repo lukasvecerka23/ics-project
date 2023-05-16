@@ -18,6 +18,8 @@
         <ApplicationId>com.companyname.icsproj.app</ApplicationId>
         <ApplicationIdGuid>D22DDAF0-C2AB-493B-B898-3B74C2F68D46</ApplicationIdGuid>
 
+        <PublishReadyToRun>false</PublishReadyToRun>
+      
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
