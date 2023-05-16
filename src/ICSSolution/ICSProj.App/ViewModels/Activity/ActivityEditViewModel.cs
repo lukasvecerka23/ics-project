@@ -61,7 +61,7 @@ public partial class ActivityEditViewModel : ViewModelBase
         }
         catch (Exception)
         {
-            await _alertService.DisplayAsync("Test", "Test");
+            await _alertService.DisplayAsync("Editace aktivity", "Aktivita je v kolizi s jinou aktivitou.");
         }
 
         MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });

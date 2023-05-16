@@ -34,7 +34,7 @@ public static class ActivitySeeds
         Id = Guid.Parse("79168d67-711c-48f2-bbec-a89cf4b831ae"),
         CreatorId = UserSeeds.UserEntity2.Id,
         Creator = UserSeeds.UserEntity2,
-        Description = "Working on second important thing...",
+        Description = "Delani na projektu ICS",
         Start = new DateTime(2023, 2, 12, 20,0,0),
         End = new DateTime(2023, 2,12,22,0,0),
         ProjectId = default,
@@ -42,22 +42,35 @@ public static class ActivitySeeds
         TagId = TagSeeds.TagEntity2.Id,
         Tag = TagSeeds.TagEntity2
     };
-    public static readonly ActivityEntity ActivityEntityDeletedByProject = new()
+
+    public static readonly ActivityEntity ActivityEntity3 = new()
     {
-        Id = Guid.Parse("79168d67-711c-48f2-bbec-a89cf4b831aa"),
+        Id = Guid.Parse("5eac6bd3-d915-4d2f-a8a1-9cf872b586c5"),
         CreatorId = UserSeeds.UserEntity2.Id,
         Creator = UserSeeds.UserEntity2,
-        Description = "Working on something important",
-        Start = new DateTime(2023, 4, 9, 16, 20, 0, 0),
-        End = new DateTime(2023, 4, 11, 10, 10, 0, 0),
-        ProjectId = ProjectSeeds.ProjectEntity1.Id,
-        Project = ProjectSeeds.ProjectEntity1,
+        Description = "Uceni na zkousky :void:",
+        Start = new DateTime(2023, 4, 12, 20,0,0),
+        End = new DateTime(2023, 4,12,22,0,0),
+        ProjectId = default,
+        Project = default,
+        TagId = TagSeeds.TagEntity2.Id,
+        Tag = TagSeeds.TagEntity2
+    };
+
+    public static readonly ActivityEntity ActivityEntity4 = new()
+    {
+        Id = Guid.Parse("1eda4cdb-c52c-422c-ad6c-c374169ef7bb"),
+        CreatorId = UserSeeds.UserEntity1.Id,
+        Creator = UserSeeds.UserEntity1,
+        Description = "Cetba knihy",
+        Start = new DateTime(2023, 4, 10, 20,0,0),
+        End = new DateTime(2023, 4,10,22,0,0),
+        ProjectId = default,
+        Project = default,
         TagId = default,
         Tag = default
     };
 
-    public static readonly ActivityEntity ActivityUpdate = ActivityEntity2 with {Id = Guid.Parse("A61EF52A-F678-4C6D-AD1D-692640278753")};
-    public static readonly ActivityEntity ActivityDelete = ActivityEntity2 with {Id = Guid.Parse("EE694005-F18C-46BF-A098-776147447FA9")};
 
 
     public static void Seed(this ModelBuilder modelBuilder)
@@ -65,9 +78,8 @@ public static class ActivitySeeds
         modelBuilder.Entity<ActivityEntity>().HasData(
             ActivityEntity1 with {Creator = null, Project = null, Tag = null},
             ActivityEntity2 with {Creator = null, Project = null, Tag = null},
-            ActivityUpdate with { Creator = null, Project = null, Tag = null },
-            ActivityDelete with { Creator = null, Project = null, Tag = null },
-            ActivityEntityDeletedByProject with {Creator = null, Project = null, Tag = null}
+            ActivityEntity3 with {Creator = null, Project = null, Tag = null},
+            ActivityEntity4 with {Creator = null, Project = null, Tag = null}
         );
     }
 }
