@@ -41,7 +41,7 @@
 
         <Grid Grid.Row="3"
               RowDefinitions="*"
-              ColumnDefinitions="140, 480,140">
+              ColumnDefinitions="140, 340,140, 140">
             <Label Grid.Column="0"
                    Text="Datum"
                    TextDecorations="Underline"
@@ -69,6 +69,15 @@
                    VerticalOptions="Center"
                    Margin="20,0,0,0"
             ></Label>
+            <Label Grid.Column="3"
+                   Text="Vytvořil"
+                   TextDecorations="Underline"
+                   FontFamily="Poppins"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="20,0,0,0"
+            ></Label>
 
         </Grid>
         <CollectionView
@@ -87,7 +96,7 @@
                     >
                     <Grid Padding="0"
                           RowDefinitions="Auto"
-                          ColumnDefinitions="140,480,140,160"
+                          ColumnDefinitions="140,340,140,140,*"
                     >
                             <Label
                                 Grid.Column="0"
@@ -119,9 +128,18 @@
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center">
                             </Label>
+                        <Label
+                            Grid.Column="3"
+                            Text="{Binding CreatorName}"
+                            TextColor="Black"
+                            FontFamily="PoppinsLight"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                        </Label>
 
-                        <Button
-                                Grid.Column="3"
+                            <Button
+                                Grid.Column="4"
                                 Text="Detail"
                                 TextColor="White"
                                 FontFamily="PoppinsLight"
