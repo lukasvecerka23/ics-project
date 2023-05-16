@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+                xmlns:models="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                x:DataType="vm:TagListViewModel"
+                x:Class="ICSProj.App.Views.Tag.TagCreationPopupView">
+    <Grid Padding="20"
+          RowSpacing="5"
+          RowDefinitions="Auto, Auto, Auto, *"
+          BackgroundColor="#D57979"
+          WidthRequest="450"
+          HeightRequest="280">
+
+        <Label Grid.Row="0"
+               Text="Vytvořit nový tag"
+               TextColor="White"
+               FontFamily="PoppinsLight"
+               FontSize="18"
+               HeightRequest="30"
+               HorizontalOptions="Center"/>
+
+        <Grid Grid.Row="1"
+              RowSpacing="8"
+              RowDefinitions="Auto, Auto"
+              ColumnDefinitions="Auto,250">
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Text="Jméno:"
+                   TextColor="White"
+                   FontFamily="PoppinsLight"
+                   VerticalOptions="Center" />
+            <Entry Grid.Row="0"
+                   Grid.Column="1"
+                   Margin="10,0,0,0"
+                   BackgroundColor="White"
+                   Text="{Binding Tag.Name}"
+                   TextColor="Black"
+                   Placeholder="např. Čtení"
+                   FontFamily="PoppinsLight"/>
+            <Label
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Text="Barva:"
+                   FontFamily="PoppinsLight"
+                   TextColor="White"
+                   VerticalOptions="Center"/>
+                
+        </Grid>
+        <Grid Grid.Row="2"
+              ColumnDefinitions="Auto,Auto,Auto,*"
+              RowDefinitions="Auto,Auto,Auto"
+              RowSpacing="5"
+              Margin="60,0,10,40">
+            <Button
+                Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="#e8b293"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#E8B293"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="#f6cc57"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#F6CC57"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="0"
+                Grid.Column="2"
+                BackgroundColor="#ff944e"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#ff944e"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                BackgroundColor="#cab7fc"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#cab7fc"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="#a059a3"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#a059a3"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="#5b264f"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#5b264f"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="#779b99"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#779b99"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="#418ba6"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#418ba6"
+                Clicked="SetButtonHighlight"/>
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                BackgroundColor="#373b7a"
+                FontFamily="PoppinsExtraLight"
+                Style="{StaticResource OvalButtonStyle}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding SetColorCommand}"
+                CommandParameter="#373b7a"
+                Clicked="SetButtonHighlight"/>
+            <Button Grid.Row="2"
+                Grid.Column="3"
+                Text="Vytvořit"
+                TextColor="White"
+                FontFamily="PoppinsLight"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="#C25454"
+                Command="{Binding AddTagCommand}"
+                Clicked="ClosePopup"/>
+        </Grid>
+    </Grid>
+</toolkit:Popup>

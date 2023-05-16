@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICSProj.App.Views;assembly=ICSProj.App"
+                       xmlns:vm="clr-namespace:ICSProj.App.ViewModels;assembly=ICSProj.App"
+                       x:Class="ICSProj.App.Views.Tag.TagDetailView"
+                       x:DataType="vm:TagDetailViewModel">
+    <Grid RowDefinitions="Auto,Auto,*"
+          RowSpacing="10"
+          Padding="40">
+
+        <Label Grid.Row="0"
+               Text="Tag Details"
+               TextColor="#CC6767"
+               FontSize="40"
+               FontFamily="PoppinsLight"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               Margin="0,0,0,0"/>
+
+        <Grid Grid.Row="1"
+              RowDefinitions="Auto"
+              ColumnDefinitions="140, *"
+              Margin="200,10,0,0">
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Text="Jméno:"
+                   TextColor="#CC6767"
+                   TextDecorations="Underline"
+                   FontSize="40"
+                   WidthRequest="150"
+                   FontFamily="PoppinsLight"/>
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Text="{Binding Tag.Name}"
+                   TextColor="#CC6767"
+                   FontSize="40"
+                   FontFamily="PoppinsLight"/>
+        </Grid>
+
+
+        <Grid Grid.Row="2"
+              RowDefinitions="Auto"
+              ColumnDefinitions="140,*,*"
+              Margin="200,0,250,0">
+            <Label Grid.Row="0"
+               Grid.Column="0"
+               Text="Barva:"
+               TextColor="#CC6767"
+               TextDecorations="Underline"
+               FontSize="40"
+               FontFamily="PoppinsLight"
+               VerticalOptions="Center"
+               HorizontalOptions="Start"/>
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Text="{Binding Tag.Color}"
+                   TextColor="Black"
+                   FontSize="30"
+                   FontFamily="PoppinsLight"
+                   VerticalOptions="Center"/>
+            <Border Grid.Row="2"
+                    Grid.Column="2"
+                    Stroke="{Binding TagColor}"
+                    StrokeShape="RoundRectangle 40,40,40,40"
+                    WidthRequest="80"
+                    StrokeThickness="4"
+                    BackgroundColor="{Binding TagColor}"/>
+        </Grid>
+
+        <Button Grid.Row="3"
+                Text="Smazat tag"
+                TextColor="White"
+                FontSize="30"
+                FontFamily="PoppinsLight"
+                BackgroundColor="#D90000"
+                VerticalOptions="End"
+                Command="{Binding DeleteCommand}"/>
+    </Grid>
+</views:ContentPageBase>

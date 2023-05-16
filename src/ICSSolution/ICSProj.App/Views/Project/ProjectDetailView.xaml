@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:ICSProj.App.Views;assembly=ICSProj.App"
+                       xmlns:vm="clr-namespace:ICSProj.App.ViewModels;assembly=ICSProj.App"
+                       xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+                       xmlns:models="using:ICSProj.BL.Models"
+                       x:Class="ICSProj.App.Views.Project.ProjectDetailView"
+                       x:Name="ProjectDetailViewRoot"
+                       x:DataType="vm:ProjectDetailViewModel">
+    <Grid RowDefinitions="70,30,70,Auto,220,*">
+        <Label Grid.Row="0"
+               Text="{Binding Project.Name}"
+               TextColor="#CC6767"
+               FontSize="50"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontFamily="PoppinsLight"
+               Margin="0,0,0,0"
+        />
+        <Label
+            Grid.Row="1"
+            Text="{Binding Project.CreatorName}"
+            TextColor="#CC6767"
+            FontSize="25"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            FontFamily="PoppinsLight"
+            Margin="0,0,0,0"
+        />
+        <Label
+                Grid.Row="2"
+                Text="Aktivity"
+                TextColor="#CC6767"
+                FontSize="40"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                FontFamily="PoppinsExtraLight"
+        />
+
+        <Grid Grid.Row="3"
+              RowDefinitions="*"
+              ColumnDefinitions="140, 340,140, 140">
+            <Label Grid.Column="0"
+                   Text="Datum"
+                   TextDecorations="Underline"
+                   FontFamily="Poppins"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="20,0,0,0"
+                   ></Label>
+            <Label Grid.Column="1"
+                   Text="Popis"
+                   TextDecorations="Underline"
+                   FontFamily="Poppins"
+                   FontSize="20"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Margin="100,0,0,0"
+            ></Label>
+            <Label Grid.Column="2"
+                   Text="Doba trvání"
+                   TextDecorations="Underline"
+                   FontFamily="Poppins"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="20,0,0,0"
+            ></Label>
+            <Label Grid.Column="3"
+                   Text="Vytvořil"
+                   TextDecorations="Underline"
+                   FontFamily="Poppins"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="20,0,0,0"
+            ></Label>
+
+        </Grid>
+        <CollectionView
+            Grid.Row="4"
+            x:Name="ActivityList"
+            ItemsLayout="VerticalList"
+            ItemsSource="{Binding Project.Activities}"
+        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="m:ActivityListModel">
+                    <Border Stroke="#CC6767"
+                            Margin="5"
+                            StrokeShape="RoundRectangle 30,30,30,30"
+                            StrokeThickness="2"
+                    >
+                    <Grid Padding="0"
+                          RowDefinitions="Auto"
+                          ColumnDefinitions="140,340,140,140,*"
+                    >
+                            <Label
+                                Grid.Column="0"
+                                Text="{Binding Start}"
+                                TextColor="Black"
+                                FontFamily="PoppinsLight"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                            </Label>
+
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Description}"
+                                TextColor="Black"
+                                FontFamily="PoppinsLight"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                Margin="10,0,0,0">
+                            </Label>
+
+                            <Label
+                                Grid.Column="2"
+                                Text="{Binding Duration}"
+                                TextColor="Black"
+                                FontFamily="PoppinsLight"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                            </Label>
+                        <Label
+                            Grid.Column="3"
+                            Text="{Binding CreatorName}"
+                            TextColor="Black"
+                            FontFamily="PoppinsLight"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                        </Label>
+
+                        <Button Grid.Column="5"
+                                Margin="-10,-4,0,0"
+                                Text="Detail"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="20"
+                                FontFamily="PoppinsLight"
+                                TextColor="#CC6767"
+                                BorderWidth="0"
+                                BackgroundColor="Transparent"
+                                Command="{Binding Source={x:Reference ProjectDetailViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
+                                CommandParameter="{Binding Id}"/>
+                    </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+            <!-- <Button Grid.Row="1" Text="Delete" Command="{Binding DeleteCommand}"/> -->
+        <Button
+            Grid.Row="5"
+            VerticalOptions="End"
+            Text="{Binding ButtonName}"
+            FontSize="25"
+            FontFamily="PoppinsLight"
+            TextColor="White"
+            BackgroundColor="#D90000"
+            Command="{Binding DeleteProjectCommand}"
+        ></Button>
+    </Grid>
+</views:ContentPageBase>

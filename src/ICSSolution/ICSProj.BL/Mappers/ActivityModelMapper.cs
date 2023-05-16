@@ -14,9 +14,11 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 Id = entity.Id,
                 Start = entity.Start,
                 CreatorId = entity.CreatorId,
+                CreatorName = ConcateNameSurname(entity),
                 Description = entity.Description,
-                ProjectId = entity.Project?.Id,
-                TagId = entity.Tag?.Id,
+                ProjectId = entity.ProjectId,
+                TagId = entity.TagId,
+                TagColor = entity.Tag?.Color,
                 ProjectName = entity.Project?.Name,
                 Duration = entity.End - entity.Start
             };
@@ -34,7 +36,8 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
                 TagId = entity.TagId,
                 ProjectName = entity.Project?.Name,
                 TagName = entity.Tag?.Name,
-                CreatorName = entity.Creator?.Name,
+                CreatorName = ConcateNameSurname(entity),
+                Description = entity.Description
             };
 
     public override ActivityEntity MapToEntity(ActivityDetailModel model)
@@ -45,6 +48,9 @@ public class ActivityModelMapper : ModelMapperBase<ActivityEntity, ActivityListM
             End = model.End,
             CreatorId = model.CreatorId,
             TagId = model.TagId,
-            ProjectId = model.ProjectId
+            ProjectId = model.ProjectId,
+            Description = model.Description
         };
+    public string ConcateNameSurname(ActivityEntity entity)
+        => $"{entity.Creator?.Name} {entity.Creator?.Surname}";
 }

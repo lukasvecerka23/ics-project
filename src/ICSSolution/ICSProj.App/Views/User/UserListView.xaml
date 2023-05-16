@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ICSProj.App.Views"
+             xmlns:m="clr-namespace:ICSProj.BL.Models;assembly=ICSProj.BL"
+             xmlns:vm="clr-namespace:ICSProj.App.ViewModels"
+             x:DataType="vm:UserListViewModel"
+             x:Name="UserListViewRoot"
+             x:Class="ICSProj.App.Views.User.UserListView">
+    
+    <Grid RowDefinitions="Auto, *, Auto">
+        <Label Grid.Row="0"
+               Text="Výběr uživatele"
+               FontSize="40"
+               FontFamily="PoppinsLight"
+               TextColor="#CC6767"
+               Margin="30"
+               HorizontalOptions="Center" />
+
+
+        <CollectionView Grid.Row="1"
+                        x:Name="UserList"
+                        ItemsLayout="VerticalGrid, 2"
+                        ItemsSource="{Binding Users}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="m:UserListModel">
+                    <Frame Grid.Column="0"
+                        Margin="8"
+                        IsClippedToBounds="True"
+                        BackgroundColor="#CC6767"
+                        HeightRequest="100"
+                        WidthRequest="350"
+                        CornerRadius="50">
+                        <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference UserListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
+                                      CommandParameter="{Binding Id}"/>
+                    </Frame.GestureRecognizers>
+                    <Grid ColumnDefinitions="*,*">
+                            <Frame CornerRadius="40" WidthRequest="80" HeightRequest="80" Padding="0" BackgroundColor="Transparent" Grid.Column="0" Margin="-5,0,0,0" HorizontalOptions="Start">
+                            <Image
+                               HorizontalOptions="Fill" VerticalOptions="Fill"
+                               Aspect="AspectFill"
+                               WidthRequest="80" HeightRequest="80"
+                               Source="{Binding ImageUrl, TargetNullValue='user_placeholder.jpg'}"/>
+                        </Frame>
+                        <Label Grid.Column="1"
+                        Text="{Binding Name}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        FontSize="30"
+                        FontFamily="PoppinsExtraLight"
+                        TextColor="White"
+                        Margin="-15,0,0,0"/>
+                    </Grid>
+                </Frame>
+
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="#CC6767"
+                WidthRequest="80"
+                HeightRequest="80"
+                CornerRadius="40"
+                Margin="10"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                TextColor="White"
+                Text="+"
+                FontSize="95"
+                FontFamily="PoppinsExtraLight"
+                Padding="0,0,0,-13"
+                Clicked="DisplayPopup" />
+    </Grid>
+</views:ContentPageBase>
+

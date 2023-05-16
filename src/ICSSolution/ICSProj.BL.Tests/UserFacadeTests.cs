@@ -49,7 +49,7 @@ public sealed class UserFacadeTests: FacadeTestsBase
         var user = await _userFacadeSUT.GetAsync(UserSeeds.UserEntity1.Id);
 
         // Assert
-        DeepAssert.Equal(UserModelMapper.MapToDetailModel(UserSeeds.UserEntity1), user, "ProjectAssigns");
+        DeepAssert.Equal(UserModelMapper.MapToDetailModel(UserSeeds.UserEntity1), user, "ProjectAssigns", "Tags");
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public sealed class UserFacadeTests: FacadeTestsBase
         var returnedModel = await _userFacadeSUT.GetAsync(detailModel.Id);
 
         // Assert
-        DeepAssert.Equal(detailModel, returnedModel, "ProjectAssigns");
+        DeepAssert.Equal(detailModel, returnedModel, "ProjectAssigns", "Tags");
     }
 
     [Fact]
