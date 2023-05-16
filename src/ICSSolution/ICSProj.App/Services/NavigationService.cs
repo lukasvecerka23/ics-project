@@ -10,7 +10,6 @@ namespace ICSProj.App.Services;
 
 public class NavigationService: INavigationService
 {
-    public Guid CurrentUserId { get; set; } = Guid.Empty;
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
         new("//users", typeof(UserListView), typeof(UserListViewModel)),

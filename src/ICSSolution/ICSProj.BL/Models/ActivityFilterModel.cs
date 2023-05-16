@@ -2,7 +2,7 @@ using ICSProj.BL.Enums;
 
 namespace ICSProj.BL.Models;
 
-public record ActivityFilterModel()
+public record ActivityFilterModel: ModelBase
 {
     public DateTime Start { get; set; }
     public DateTime End  { get; set; }

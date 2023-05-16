@@ -1,4 +1,3 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using ICSProj.App.Messages;
@@ -12,7 +11,6 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
 {
     private readonly ITagFacade tagFacade;
     private readonly INavigationService navigationService;
-    private readonly IAlertService alertService;
 
     public Guid Id { get; set; }
     public TagDetailModel Tag { get; private set; }
@@ -22,13 +20,11 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
     public TagDetailViewModel(
         ITagFacade tagFacade,
         INavigationService navigationService,
-        IMessengerService MessengerService,
-        IAlertService alertService)
+        IMessengerService MessengerService)
         : base(MessengerService)
     {
         this.tagFacade = tagFacade;
         this.navigationService = navigationService;
-        this.alertService = alertService;
     }
 
     protected override async Task LoadDataAsync()
@@ -37,7 +33,7 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
 
         Tag = await tagFacade.GetAsync(Id);
 
-        TagColor = Color.FromArgb(Tag.Color);
+        TagColor = Color.FromArgb(Tag?.Color);
     }
 
     [RelayCommand]

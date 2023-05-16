@@ -1,4 +1,3 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ICSProj.App.Messages;
 using ICSProj.App.Services;
@@ -83,16 +82,6 @@ public partial class TagListViewModel : ViewModelBase
     private async Task ShowMenuPopupAsync()
     {
         await navigationService.ShowPopupAsync(new MenuPopupView());
-    }
-
-    public async void Receive(TagEditMessage message)
-    {
-        await LoadDataAsync();
-    }
-
-    public async void Receive(TagDeleteMessage message)
-    {
-        await LoadDataAsync();
     }
 
     [RelayCommand]
