@@ -101,11 +101,18 @@ public partial class ActivityListViewModel: ViewModelBase, IRecipient<ActivityDe
         Activity.CreatorId = CurrentUser.Id;
         Activity.Start = SelectedDateFrom + SelectedTimeFrom;
         Activity.End = SelectedDateTo + SelectedTimeTo;
-        Activity.TagId = CreationTag?.Id;
-        Activity.ProjectId = CreationProject?.ProjectId;
-        Activity.TagName = CreationTag?.Name;
-        Activity.ProjectName = CreationProject?.ProjectName;
         Activity.CreatorName = $"{_loginService.CurrentUser.Name} {_loginService.CurrentUser.Surname}";
+        if (CreationTag?.Id != Guid.Empty)
+        {
+            Activity.TagId = CreationTag?.Id;
+            Activity.TagName = CreationTag?.Name;
+        }
+        if (CreationProject?.ProjectId != Guid.Empty)
+        {
+            Activity.ProjectId = CreationProject?.ProjectId;
+            Activity.ProjectName = CreationProject?.ProjectName;
+        }
+
 
         try
         {
