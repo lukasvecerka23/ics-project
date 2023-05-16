@@ -16,6 +16,7 @@
             <converters:TagNameToStringConverter x:Key="TagNameToStringConverter" />
             <converters:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
             <converters:TimePeriodToStringConverter x:Key="TimePeriodToStringConverter"/>
+            <converters:HexStringToColorConverter x:Key="HexStringToColorConverter"/>
 
 
         </ResourceDictionary>
