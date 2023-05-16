@@ -13,7 +13,6 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private readonly ILoginService _loginService;
-    private readonly IUserFacade _userFacade;
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
     public UserDetailModel CurrentUser { get; set; }
@@ -24,13 +23,11 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
         IProjectFacade projectFacade,
         INavigationService navigationService,
         ILoginService loginService,
-        IMessengerService MessengerService,
-        IUserFacade userFacade) : base(MessengerService)
+        IMessengerService MessengerService) : base(MessengerService)
     {
         _projectFacade = projectFacade;
         _navigationService = navigationService;
         _loginService = loginService;
-        _userFacade = userFacade;
         CurrentUser = _loginService.CurrentUser;
     }
 
@@ -43,8 +40,6 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
 
     public async Task ShowUserProjects()
     {
-        //var ProjectsAssigned = _loginService.CurrentUser.ProjectAssigns
-        //Projects = Projects.Where(i => i.CreatorId == _loginService.CurrentUserId);
         Projects = await _projectFacade.GetProjectsAssignedToUser(_loginService.CurrentUserId);
         MessengerService.Send(new ProjectEditMessage{ProjectId = Projects.First().Id});
     }
@@ -66,13 +61,11 @@ public partial class ProjectListViewModel: ViewModelBase, IRecipient<ProjectDele
     private async Task AddProjectAsync()
     {
         await base.LoadDataAsync();
-        var Users = await _userFacade.GetAsync();
-        var User = Users?.FirstOrDefault(user => user.Id == _loginService.CurrentUserId);
 
         Project.CreatorId = _loginService.CurrentUserId;
-        Project.CreatorName = User.Name + User.Surname;
 
-        await _projectFacade.SaveAsync(Project);
+        Project = await _projectFacade.SaveAsync(Project);
+        await _projectFacade.RegisterProject(_loginService.CurrentUserId, Project.Id);
         Project = ProjectDetailModel.Empty;
 
         MessengerService.Send(new ProjectEditMessage { ProjectId = Project.Id });
