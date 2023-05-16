@@ -139,7 +139,7 @@
                         </Label>
 
                         <Button Grid.Column="5"
-                                Margin="-15,-4,0,0"
+                                Margin="-10,-4,0,0"
                                 Text="Detail"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
