@@ -48,8 +48,6 @@ public partial class UserProfileViewModel : ViewModelBase
             _navigationService.SendBackButtonPressed();
         }
 
-        //TODO move it to OnButtonClicked method
-
     }
 
     [RelayCommand]
