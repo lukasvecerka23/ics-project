@@ -35,7 +35,6 @@ public partial class TagListViewModel : ViewModelBase
         this.loginService = loginService;
         this.userFacade = userFacade;
         this.alertService = alertService;
-        TagColor = Colors.Red;
     }
 
     protected override async Task LoadDataAsync()

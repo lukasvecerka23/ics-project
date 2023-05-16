@@ -29,7 +29,6 @@ public partial class TagDetailViewModel : ViewModelBase, IRecipient<TagEditMessa
         this.tagFacade = tagFacade;
         this.navigationService = navigationService;
         this.alertService = alertService;
-        TagColor = Colors.Red;
     }
 
     protected override async Task LoadDataAsync()
