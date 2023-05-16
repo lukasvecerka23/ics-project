@@ -7,6 +7,6 @@ namespace ICSProj.App.Converters;
 public class HexStringToColorConverter: BaseConverterOneWay<string, Color>
 {
     public override Color ConvertFrom(string value, CultureInfo? culture)
-        => Color.FromArgb(value);
+        => value != null ?  Color.FromArgb(value) : Colors.Transparent;
     public override Color DefaultConvertReturnValue { get; set; } = Colors.Transparent;
 }
