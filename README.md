@@ -1,109 +1,40 @@
 # ICS Projekt 2023 - Time Tracker
+MAUI Desktop application for tracking activities. Activities can be associated with project or tag. User can choose from his own tags and can create or sign in to project.
+
+Final score: 99/100
+
 ## **Autoři**
-- Lukáš Večerka (xvecer30)
-- Veronika Nevařilová (xnevar00)
-- Alina Penkova (xpenko00)
-- Jaroslav Streit (xstrei06)
-- Jáchym Doležal (xdolez0c)
+- Lukáš Večerka ([xvecer30](https://github.com/lukasvecerka23))
+- Veronika Nevařilová ([xnevar00](https://github.com/xnevar00))
+- Alina Penkova ([xpenko00](https://github.com/kafkatamurar))
+- Jaroslav Streit ([xstrei06](https://github.com/MrStinky765))
+- Jáchym Doležal ([xdolez0c](https://github.com/JachymDolezal))
 
 
-## **Fáze 1**
-
-### Organizace
-
-- komunikační kanál: Discord
-- Azure Boards: rozdělení úkolů dle metodiky SCRUM
-- týdenní schůzky: Zhodnocení,Plánování
-### Repozitář
-
-- pracovní verze ve větvi Dev
-- automatický build a testování pomocí [![Build Status](https://dev.azure.com/ics-2023-xvecer30/project/_apis/build/status/project-.NET%20Desktop-CI?branchName=dev)](https://dev.azure.com/ics-2023-xvecer30/project/_build/latest?definitionId=1&branchName=dev)
-
-### Datový model
-
-#### Entity
-- **User**: jméno, příjmení, URL obrázku,
-    - má vlastní **seznam tagů**, které může libovolně vytvářet
-    - může vytvořit libovolný počet projektů
-    - může se příhlásit do existujícího **projektu**
-    - může vytvářet libovolný počet **aktivit**
-- **Tag**: jméno
-    - obsahuje seznam **aktivit**, které jsou spojené daným **tagem**.
-    - Obsahuje ID uživatele, který daný **tag** vytvořil
-- **Project**: jméno
-    - Obsahuje ID uživatele, který daný **projekt** vytvořil
-    - Obsahuje **seznam** přihlášených uživatelů
-    - Obsahuje **seznam** **aktivit** spojené s daným projektem
-- **Activity**: popis, začátek, konec
-    - Obsahuje ID uživatele, který daný **projekt** vytvořil
-    - Obsahuje ID projektu, ke kterému může být **aktivita** přiřazena
-    - Obsahuje ID tagu, ke kterému může být **aktivita** přiřazena
-- **ProjectAssign**: vazební entita mezi entitami **User** a **Project**
-
-### Testy
-
-- Vytvořili jsme testy na DBContext pro jednotlivé entity
-
+## **Stage 1**
+- Design of data model and entities, implement DB context, DAL and DAL tests.
+- Create Figma wireframes
+- Score: 20/20
 ### Wireframe
 
-- odkaz: [WireFrame s Flow sekcí](https://www.figma.com/file/rNclgcEzhsTbxAy5JjYLmt/prototype_2?node-id=0%3A1&t=8RDA6lxnLNI0J51D-0) , [WireFrame - pouze okna](https://www.figma.com/file/CR9VOebRYVmv749cf4yPlV/prototype-1?node-id=0%3A1&t=VXJItfW64tPG6yvp-0)
-    - poznámka: Pro zakliknutí Kalendáře, Projektu, Tagů nebo Aktivit se musí použijte double-click na myši.
+- source: [WireFrame with Flow section](https://www.figma.com/file/rNclgcEzhsTbxAy5JjYLmt/prototype_2?node-id=0%3A1&t=8RDA6lxnLNI0J51D-0) , [WireFrame - only windows](https://www.figma.com/file/CR9VOebRYVmv749cf4yPlV/prototype-1?node-id=0%3A1&t=VXJItfW64tPG6yvp-0)
 
-###
+## **Stage 2**
+- Implementation of BL layer
+- Implementation of models and model mappers
+- Implementation of Repository and UnitOfWork in DAL layer
+- Implementation of facades
+- Facades tests
+- Score: 29/30
 
-## **Fáze 2**
+## **Stage 3**
+- Implementation of GUI using MAUI - View and View Models
+- Made necessary changes in BL and DAL
+- Score: 50/50
 
-- Oprava výhrad z první fáze
+# Development best practices
 
-### Modely, Model mappery
-
-- Dle wireframů rozhodnutí, které atributy chceme uchovávat v modelech
-- Namapování entit z datové vrstvy do modelů na byznysové vrstvě
-
-### Fasády
-
-- Vytvoření bázové fasády pro zajištění CRUD operací nad databází
-- Zjištění byznysových požadavků
-- Filtrování aktivit podle data, projektu, tagu atd.
-- Kontrola konfliktních aktivit
-- Získaní tagů podle ID uživatele
-- Zajištění napojení přihlášení do projektu pro detail projektu a detail uživatele
-
-### Testy fasád
-
-- Otestování funkčnosti jednotlivých byznysových požadavků
-
-
-## **Fáze 3**
-
-- In progress
-
-# Vývoj
-
-- Vývoj na branchi Dev
-
-- nové změny implemetujte z nejnovější verze Dev
-    - Vytvořit novou branch dle doporučení níže
-
-## Doporučení
-
-### **Testy**
-
-- testy implementovat na branchi: test/*
-
-### **Nové funkcionality**
-
-- branch: feature/*
-
-### **Bugfix**
-
-- branch: fix/*
-
-### **Konec nové změny**
-
-- Pull request z nové branch do Dev
-
-### **Konec fáze projektu**
-
-- Provést Pull Request do branch Main
-- Codereview
+- Development on `dev` branch
+- test on `test/*` branches
+- new features on `feature/*` branches
+- bugfixes on `fix/*` branches
